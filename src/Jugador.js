@@ -1,17 +1,21 @@
 var estadoCaminando = 1;
 var estadoSaltando = 2;
 var estadoImpactado = 3;
+var estadoMontado = 4;
 
 var Jugador = cc.Class.extend({
     estado: estadoCaminando,
     animacion:null,
     aSaltar:null,
     aCaminar:null,
+    aMontado:null,
     gameLayer:null,
     sprite:null,
     shape:null,
     body:null,
     vidas:3,
+    bombas:0,
+    arma:null,
     ctor:function (gameLayer, posicion) {
         this.gameLayer = gameLayer;
 
@@ -65,6 +69,18 @@ var Jugador = cc.Class.extend({
             new cc.RepeatForever(new cc.Animate(animacionSaltar));
 
         this.aSaltar.retain();
+
+        var framesAnimacionMontar = [];
+        for (var i = 1; i <= 4; i++) {
+            var str = "jugador_montar" + i + ".png";
+            var frame = cc.spriteFrameCache.getSpriteFrame(str);
+            framesAnimacionMontar.push(frame);
+        }
+        var animacionMontar = new cc.Animation(framesAnimacionMontar, 0.2);
+        this.aMontado  =
+            new cc.RepeatForever(new cc.Animate(animacionMontar));
+
+        this.aMontado.retain();
 
         var framesAnimacionImpactado = [];
         for (var i = 1; i <= 4; i++) {
@@ -130,6 +146,15 @@ var Jugador = cc.Class.extend({
     },
     finAnimacionImpactado: function() {
         if (this.estado == estadoImpactado) {
+            this.estado = estadoCaminando;
+        }
+    }, montar: function(){
+        if(this.estado == estadoCaminando){
+            this.estado = estadoMontado;
+            //codigo
+        }
+    }, desmontar: function(){
+        if(this.estado == estadoMontado){
             this.estado = estadoCaminando;
         }
     }
