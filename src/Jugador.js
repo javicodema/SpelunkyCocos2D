@@ -15,7 +15,10 @@ var Jugador = cc.Class.extend({
     body:null,
     vidas:3,
     bombas:0,
+    llaves:0,
     arma:null,
+    bonificadorSalto:1,
+    bonificadorVelocidad:1,
     ctor:function (gameLayer, posicion) {
         this.gameLayer = gameLayer;
 
@@ -102,7 +105,7 @@ var Jugador = cc.Class.extend({
         // solo salta si está caminando
         if(this.estado == estadoCaminando){
             this.estado = estadoSaltando;
-            this.body.applyImpulse(cp.v(0, 1800), cp.v(0, 0));
+            this.body.applyImpulse(cp.v(0, 1800*this.bonificadorSalto), cp.v(0, 0));
         }
     }
     ,actualizar: function (){

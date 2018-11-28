@@ -1,5 +1,6 @@
 var tipoSuelo = 1;
 var tipoJugador = 2;
+var tipoEnemigo = 3;
 
 
 var GameLayer = cc.Layer.extend({
@@ -20,13 +21,15 @@ var GameLayer = cc.Layer.extend({
         this.addChild(this.depuracion, 10);
 
         this.jugador = new Jugador(this, cc.p(50,150));
-        this.cargarMapa();
+        this.cargarMapa(); //habria que meter el mapa como parametro
         this.scheduleUpdate();
 
         // Zona de escuchadores de colisiones
 // Colisión Suelo y Jugador
         this.space.addCollisionHandler(tipoSuelo, tipoJugador,
             null, null, this.collisionSueloConJugador.bind(this), this.finCollisionSueloConJugador.bind(this));
+        this.space.addCollisionHandler(tipoJugador, tipoEnemigo,
+            null, null, this.collisionEnemigoConJugador.bind(this), this.finCollisionEnemigoConJugador.bind(this));
 
 
 
@@ -94,6 +97,11 @@ var GameLayer = cc.Layer.extend({
 
 
 
+    },collisionEnemigoConJugador: function (arbiter, space) {
+        //a rellenar
+    },
+    finCollisionEnemigoConJugador:function (arbiter, space) {
+        //a rellenar
     },
     collisionSueloConJugador: function (arbiter, space) {
         this.jugador.tocaSuelo();
