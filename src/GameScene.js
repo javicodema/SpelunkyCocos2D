@@ -12,6 +12,8 @@ var GameLayer = cc.Layer.extend({
         this._super();
         var size = cc.winSize;
 
+        //Zona de cache
+        cc.spriteFrameCache.addSpriteFrames(res.jugador_caminar_plist);
 
         // Inicializar Space
         this.space = new cp.Space();
@@ -21,7 +23,7 @@ var GameLayer = cc.Layer.extend({
         this.addChild(this.depuracion, 10);
 
         this.jugador = new Jugador(this, cc.p(50,150));
-        this.cargarMapa(); //habria que meter el mapa como parametro
+        this.cargarMapa(res.mapa_prueba_tmx); //habria que meter el mapa como parametro
         this.scheduleUpdate();
 
         // Zona de escuchadores de colisiones
@@ -39,10 +41,7 @@ var GameLayer = cc.Layer.extend({
 
         this.jugador.actualizar();
         this.space.step(dt);
-        // Mover la capa hacia atras(scroll)
-        var posicionXJugador = this.jugador.body.p.x - 100;
-        var posicionYJugador = this.jugador.body.p.y - 100;
-        this.setPosition(cc.p( -posicionXJugador, -posicionYJugador));
+
 
         // Controlar el angulo (son radianes) max y min.
         if ( this.jugador.body.a > 0.44 ){
@@ -51,17 +50,47 @@ var GameLayer = cc.Layer.extend({
         if ( this.jugador.body.a < -0.44){
             this.jugador.body.a = -0.44;
         }
-        // controlar la velocidad X , max y min
-        if (this.jugador.body.vx < 250){
-            this.jugador.body.applyImpulse(cp.v(300, 0), cp.v(0, 0));
+
+
+        //Leer controles jugador
+        var capaControles = this.getParent().getChildByTag(idCapaControles);
+        controles = capaControles.teclas_pulsadas;
+
+        //Control de salto
+        if( controles.saltar ){
+            this.jugador.saltar();
         }
-        if (this.jugador.body.vx > 400){
-            this.jugador.body.vx = 400;
+        //Controles de movimiento
+        if( controles.mov_derecho ){
+            this.jugador.body.vx = this.jugador.velocidad;
         }
-        // controlar la velocidad Y , max
-        if (this.jugador.body.vy > 450){
-            this.jugador.body.vy = 450;
+        else if( controles.mov_izquierdo){
+            this.jugador.body.vx = -this.jugador.velocidad;
         }
+        else{
+            this.jugador.body.vx = 0;
+        }
+        //Controles de camara
+        var offsetCamara_x = 0
+        var offsetCamara_y = 0;
+        if( controles.mirar_izquierda ){
+            offsetCamara_x = -100;
+        }
+        else if( controles.mirar_derecha){
+            offsetCamara_x = 100;
+        }
+        if( controles.mirar_arriba){
+            offsetCamara_y = 100;
+        }
+        else if( controles.mirar_abajo){
+            offsetCamara_y = -100;
+        }
+
+
+        // Mover la capa hacia atras(scroll)
+        var posicionXJugador = this.jugador.body.p.x - 400 + offsetCamara_x;
+        var posicionYJugador = this.jugador.body.p.y - 50 + offsetCamara_y;
+        this.setPosition(cc.p( -posicionXJugador, -posicionYJugador));
 
     },cargarMapa:function (mapa) {
         this.mapa = new cc.TMXTiledMap(mapa);
@@ -78,7 +107,10 @@ var GameLayer = cc.Layer.extend({
         // formas estáticas de Chipmunk ( SegmentShape ).
         for (var i = 0; i < suelosArray.length; i++) {
             var suelo = suelosArray[i];
-            var puntos = suelo.polylinePoints;
+
+            //El mapa de pruebas usa polygonPoints, cambiar con mapa definitivo
+            //var puntos = suelo.polylinePoints;
+            var puntos = suelo.polygonPoints;
             for(var j = 0; j < puntos.length - 1; j++){
                 var bodySuelo = new cp.StaticBody();
 

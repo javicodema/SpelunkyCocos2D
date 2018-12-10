@@ -19,6 +19,8 @@ var Jugador = cc.Class.extend({
     arma:null,
     bonificadorSalto:1,
     bonificadorVelocidad:1,
+    velocidad: 300,
+    potenciaSalto:1000,
     ctor:function (gameLayer, posicion) {
         this.gameLayer = gameLayer;
 
@@ -49,12 +51,12 @@ var Jugador = cc.Class.extend({
 
         // Crear animación
         var framesAnimacion = [];
-        for (var i = 1; i <= 4; i++) {
+        for (var i = 1; i <= 5; i++) {
             var str = "jugador_caminar" + i + ".png";
             var frame = cc.spriteFrameCache.getSpriteFrame(str);
             framesAnimacion.push(frame);
         }
-        var animacion = new cc.Animation(framesAnimacion, 0.2);
+        var animacion = new cc.Animation(framesAnimacion, 0.1);
         var actionAnimacionBucle =
             new cc.RepeatForever(new cc.Animate(animacion));
 
@@ -99,13 +101,14 @@ var Jugador = cc.Class.extend({
 
         // ejecutar la animación
         this.sprite.runAction(actionAnimacionBucle);
-        this.body.applyImpulse(cp.v(300, 0), cp.v(0, 0));
+
+        //this.body.applyImpulse(cp.v(300, 0), cp.v(0, 0));
     },
     saltar: function(){
         // solo salta si está caminando
         if(this.estado == estadoCaminando){
             this.estado = estadoSaltando;
-            this.body.applyImpulse(cp.v(0, 1800*this.bonificadorSalto), cp.v(0, 0));
+            this.body.applyImpulse(cp.v(0, this.potenciaSalto), cp.v(0, 0));
         }
     }
     ,actualizar: function (){

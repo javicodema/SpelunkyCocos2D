@@ -3,9 +3,12 @@ var ControlesLayer = cc.Layer.extend({
     etiquetaBombas:null,
     etiquetaPuntos:null,
     etiquetaLlaves:null,
+    tecladas_pulsadas: null,
     ctor:function () {
         this._super();
         var size = cc.winSize;
+
+        this.teclas_pulsadas = []
 
         this.etiquetaPuntos = new cc.LabelTTF("Puntos: 0", "Helvetica", 20);
         this.etiquetaPuntos.setPosition(cc.p(size.width - 90, size.height - 20));
@@ -32,6 +35,17 @@ var ControlesLayer = cc.Layer.extend({
         cc.eventManager.addListener({
             event: cc.EventListener.MOUSE,
             onMouseDown: this.procesarMouseDown.bind(this)
+        }, this);
+
+        cc.eventManager.addListener({
+            event:cc.EventListener.KEYBOARD,
+            onKeyPressed: this.procesarPulsacionesTeclado.bind(this)
+
+        }, this)
+
+        cc.eventManager.addListener({
+            event:cc.EventListener.KEYBOARD,
+            onKeyReleased: this.procesarSoltarPulsacionTeclado.bind(this)
         }, this)
 
         this.scheduleUpdate();
@@ -39,6 +53,88 @@ var ControlesLayer = cc.Layer.extend({
     },
     update:function (dt) {
 
+    },
+    procesarPulsacionesTeclado:function(key, event){
+        switch(key){
+            case(37):
+                //Flecha Izquierda
+                this.teclas_pulsadas.mirar_izquierda = true;
+                break;
+            case(38):
+                //Flecha Arriba
+                this.teclas_pulsadas.mirar_arriba = true;
+                break;
+            case(39):
+                //Flecha Derecha
+                this.teclas_pulsadas.mirar_derecha = true;
+                break;
+            case(40):
+                //Flecha abajo
+                this.teclas_pulsadas.mirar_abajo = true;
+                break;
+
+            case(65):
+                //A
+                this.teclas_pulsadas.mov_izquierdo = true;
+                break;
+            case(87):
+                //W
+                break;
+            case(68):
+                //D
+                this.teclas_pulsadas.mov_derecho = true;
+                break;
+            case(83):
+                //S
+                break;
+
+            case(32):
+                //Espacio
+                this.teclas_pulsadas.saltar = true;
+                break;
+
+        }
+    },
+    procesarSoltarPulsacionTeclado:function(key, event){
+        switch(key){
+            case(37):
+                //Flecha Izquierda
+                this.teclas_pulsadas.mirar_izquierda = false;
+                break;
+            case(38):
+                //Flecha Arriba
+                this.teclas_pulsadas.mirar_arriba = false;
+                break;
+            case(39):
+                //Flecha Derecha
+                this.teclas_pulsadas.mirar_derecha = false;
+                break;
+            case(40):
+                //Flecha abajo
+                this.teclas_pulsadas.mirar_abajo = false;
+                break;
+
+            case(65):
+                //A
+                this.teclas_pulsadas.mov_izquierdo = false;
+                break;
+            case(87):
+                //W
+                break;
+            case(68):
+                //D
+                this.teclas_pulsadas.mov_derecho = false;
+                break;
+            case(83):
+                //S
+                break;
+
+            case(32):
+                //Espacio
+                this.teclas_pulsadas.saltar = false;
+                break;
+
+        }
     },
     procesarMouseDown:function(event) {
 
