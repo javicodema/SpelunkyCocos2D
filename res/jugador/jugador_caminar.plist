@@ -13,9 +13,9 @@
 				<key>rotated</key>
 				<false/>
 				<key>sourceColorRect</key>
-				<string>{{5,9},{19,21}}</string>
+				<string>{{3,3},{19,21}}</string>
 				<key>sourceSize</key>
-				<string>{35,36}</string>
+				<string>{26,26}</string>
 			</dict>
 
 			<key>jugador_caminar2.png</key>
@@ -27,9 +27,9 @@
 				<key>rotated</key>
 				<false/>
 				<key>sourceColorRect</key>
-				<string>{{6,8},{18,22}}</string>
+				<string>{{1,1},{18,22}}</string>
 				<key>sourceSize</key>
-				<string>{35,36}</string>
+				<string>{21,24}</string>
 			</dict>
 
 			<key>jugador_caminar3.png</key>
@@ -41,9 +41,9 @@
 				<key>rotated</key>
 				<false/>
 				<key>sourceColorRect</key>
-				<string>{{7,8},{18,22}}</string>
+				<string>{{0,2},{18,22}}</string>
 				<key>sourceSize</key>
-				<string>{35,36}</string>
+				<string>{18,25}</string>
 			</dict>
 
 			<key>jugador_caminar4.png</key>
@@ -55,9 +55,9 @@
 				<key>rotated</key>
 				<false/>
 				<key>sourceColorRect</key>
-				<string>{{8,7},{17,22}}</string>
+				<string>{{1,2},{17,22}}</string>
 				<key>sourceSize</key>
-				<string>{35,36}</string>
+				<string>{18,25}</string>
 			</dict>
 
 			<key>jugador_caminar5.png</key>
@@ -69,9 +69,9 @@
 				<key>rotated</key>
 				<false/>
 				<key>sourceColorRect</key>
-				<string>{{6,6},{18,22}}</string>
+				<string>{{1,2},{18,22}}</string>
 				<key>sourceSize</key>
-				<string>{35,36}</string>
+				<string>{20,26}</string>
 			</dict>
 
 		</dict>

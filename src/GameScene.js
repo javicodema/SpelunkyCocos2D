@@ -80,7 +80,7 @@ var GameLayer = cc.Layer.extend({
             offsetCamara_x = 100;
         }
         if( controles.mirar_arriba){
-            offsetCamara_y = 100;
+            offsetCamara_y = 20;
         }
         else if( controles.mirar_abajo){
             offsetCamara_y = -100;
