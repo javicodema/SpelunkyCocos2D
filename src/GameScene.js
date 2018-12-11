@@ -17,11 +17,13 @@ var GameLayer = cc.Layer.extend({
         cc.spriteFrameCache.addSpriteFrames(res.jugador_agachado_plist);
         cc.spriteFrameCache.addSpriteFrames(res.jugador_salto_bajando_plist);
         cc.spriteFrameCache.addSpriteFrames(res.jugador_salto_subiendo_plist);
+        cc.spriteFrameCache.addSpriteFrames(res.jugador_mov_escalera_plist);
+        cc.spriteFrameCache.addSpriteFrames(res.jugador_impactado_plist);
         cc.spriteFrameCache.addSpriteFrames(res.jugador_idle_plist);
 
         // Inicializar Space
         this.space = new cp.Space();
-        this.space.gravity = cp.v(0, -450);
+        this.space.gravity = cp.v(0, -500);
         // Depuración
         this.depuracion = new cc.PhysicsDebugNode(this.space);
         this.addChild(this.depuracion, 10);
@@ -64,20 +66,25 @@ var GameLayer = cc.Layer.extend({
         }
 
         //Controles de movimiento
-        if( controles.agachado ){
-            this.jugador.agachado();
+        if( controles.abajo ){
+            if( this.jugador.estado == estadoTrepando ){
+                //Trepar hacia abajo
+            }
+            else {
+                this.jugador.agachado();
+            }
+        }
+        if( controles.arriba ){
+            if( this.jugador.estado == estadoTrepando ){
+                //Trepar hacia arriba
+            }
         }
 
-        console.log(this.jugador.body.vx)
         if( controles.mov_derecho ){
-            this.jugador.body.vx = this.jugador.velocidad
-            if(this.jugador.estado == estadoAgachado)
-                this.jugador.body.vx += this.jugador.bonificadorVelocidad;
+            this.jugador.moverDerecha();
         }
         else if( controles.mov_izquierdo){
-            this.jugador.body.vx = -this.jugador.velocidad
-            if(this.jugador.estado == estadoAgachado)
-                this.jugador.body.vx -= this.jugador.bonificadorVelocidad;
+            this.jugador.moverIzquierda();
         }
         else{
             this.jugador.body.vx = 0;
@@ -161,7 +168,17 @@ var GameLayer = cc.Layer.extend({
         this.jugador.tocaSuelo();
     },
     finCollisionSueloConJugador:function (arbiter, space) {
+
+        //Si deja el suelo sin haber saltado (Ej: Caerse) no tiene doble salto.
+        if( this.jugador.estado != estadoSaltando ) {
+            this.jugador.saltosAcutales++
+
+            //Evitar efecto de tobogan al dejar el suelo.
+            this.jugador.body.vx = 0;
+            this.jugador.body.vy = 0;
+        }
         this.jugador.estado = estadoSaltando;
+
     }
 });
 
