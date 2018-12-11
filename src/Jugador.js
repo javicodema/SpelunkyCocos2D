@@ -3,6 +3,7 @@ var estadoSaltando = 2;
 var estadoImpactado = 3;
 var estadoMontado = 4;
 var estadoIdle = 5;
+var estadoAgachado = 6;
 
 var Jugador = cc.Class.extend({
     estado: estadoCaminando,
@@ -24,9 +25,13 @@ var Jugador = cc.Class.extend({
     spriteSaltoBajando: null,
     spriteSaltoSubiendo: null,
     bonificadorSalto:1,
-    bonificadorVelocidad:1,
+    bonificadorVelocidad:300,
     velocidad: 300,
     potenciaSalto:1000,
+    maxSaltos: 2,
+    saltosAcutales: 0,
+    retardoSalto: 300,
+    ultimoSalto: 0,
     ctor:function (gameLayer, posicion) {
         this.gameLayer = gameLayer;
 
@@ -94,6 +99,18 @@ var Jugador = cc.Class.extend({
 
         this.aMontado.retain();
 
+        var framesAnimacionAgachado = [];
+        for (var i = 1; i <= 2; i++) {
+            var str = "jugador_agachado" + i + ".png";
+            var frame = cc.spriteFrameCache.getSpriteFrame(str);
+            framesAnimacionAgachado.push(frame);
+        }
+        var animacionAgachado = new cc.Animation(framesAnimacionAgachado, 0.2);
+        this.aAgachado  =
+            new cc.RepeatForever(new cc.Animate(animacionAgachado));
+        this.aAgachado.retain();
+
+
         var framesAnimacionImpactado = [];
         for (var i = 1; i <= 4; i++) {
             var str = "jugador_impactado" + i + ".png";
@@ -123,8 +140,10 @@ var Jugador = cc.Class.extend({
     },
     saltar: function(){
         // solo salta si está caminando o idle
-        if( (this.estado == estadoCaminando || this.estado == estadoIdle )&& this.estado != estadoSaltando){
+        if( Date.now() - this.ultimoSalto > this.retardoSalto && this.saltosAcutales++ < this.maxSaltos){
+            this.ultimoSalto = Date.now();
             this.estado = estadoSaltando;
+            this.body.vy = 0;
             this.body.applyImpulse(cp.v(0, this.potenciaSalto), cp.v(0, 0));
         }
     }
@@ -172,6 +191,13 @@ var Jugador = cc.Class.extend({
                     this.sprite.runAction(this.animacion);
                 }
                 break;
+            case estadoAgachado:
+                if (this.animacion != this.aAgachado){
+                    this.animacion = this.aAgachado
+                    this.sprite.stopAllActions();
+                    this.sprite.runAction(this.animacion);
+                }
+                break;
             case estadoIdle:
                 if (this.animacion != this.aIdle){
                     this.animacion = this.aIdle
@@ -181,7 +207,8 @@ var Jugador = cc.Class.extend({
                 break;
         }
     },
-    tocaSuelo: function () {
+    tocaSuelo: function() {
+        this.saltosAcutales=0
         if (this.estado != estadoCaminando || this.estado != estadoIdle) {
             if( this.body.vx == 0){
                 this.estado = estadoIdle;
@@ -194,6 +221,11 @@ var Jugador = cc.Class.extend({
     impactado: function(){
         if(this.estado != estadoImpactado){
             this.estado = estadoImpactado;
+        }
+    },
+    agachado: function(){
+        if(this.estado != estadoAgachado){
+            this.estado = estadoAgachado;
         }
     },
     finAnimacionImpactado: function() {
