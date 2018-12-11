@@ -238,7 +238,6 @@ var Jugador = cc.Class.extend({
     },
     tocaSuelo: function() {
         this.saltosAcutales=0
-        console.log(this.body.vx)
         if (this.estado != estadoCaminando || this.estado != estadoIdle) {
             if( this.body.vx > -1 && this.body.vx < 1){
                 this.estado = estadoIdle;

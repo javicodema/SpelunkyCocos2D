@@ -167,11 +167,17 @@ var GameLayer = cc.Layer.extend({
         this.jugador.tocaSuelo();
     },
     finCollisionSueloConJugador:function (arbiter, space) {
+
         //Si deja el suelo sin haber saltado (Ej: Caerse) no tiene doble salto.
         if( this.jugador.estado != estadoSaltando ) {
             this.jugador.saltosAcutales++
+
+            //Evitar efecto de tobogan al dejar el suelo.
+            this.jugador.body.vx = 0;
+            this.jugador.body.vy = 0;
         }
         this.jugador.estado = estadoSaltando;
+
     }
 });
 
