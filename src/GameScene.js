@@ -21,7 +21,7 @@ var GameLayer = cc.Layer.extend({
 
         // Inicializar Space
         this.space = new cp.Space();
-        this.space.gravity = cp.v(0, -450);
+        this.space.gravity = cp.v(0, -500);
         // Depuración
         this.depuracion = new cc.PhysicsDebugNode(this.space);
         this.addChild(this.depuracion, 10);
@@ -68,16 +68,11 @@ var GameLayer = cc.Layer.extend({
             this.jugador.agachado();
         }
 
-        console.log(this.jugador.body.vx)
         if( controles.mov_derecho ){
-            this.jugador.body.vx = this.jugador.velocidad
-            if(this.jugador.estado == estadoAgachado)
-                this.jugador.body.vx += this.jugador.bonificadorVelocidad;
+            this.jugador.moverDerecha();
         }
         else if( controles.mov_izquierdo){
-            this.jugador.body.vx = -this.jugador.velocidad
-            if(this.jugador.estado == estadoAgachado)
-                this.jugador.body.vx -= this.jugador.bonificadorVelocidad;
+            this.jugador.moverIzquierda();
         }
         else{
             this.jugador.body.vx = 0;

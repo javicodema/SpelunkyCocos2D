@@ -228,6 +228,16 @@ var Jugador = cc.Class.extend({
             this.estado = estadoAgachado;
         }
     },
+    moverIzquierda: function(){
+        this.body.vx = -this.velocidad
+        if(this.estado == estadoAgachado)
+            this.body.vx -= this.bonificadorVelocidad;
+    },
+    moverDerecha: function(){
+        this.body.vx = this.velocidad
+        if(this.estado == estadoAgachado)
+            this.body.vx += this.bonificadorVelocidad;
+    },
     finAnimacionImpactado: function() {
         if (this.estado == estadoImpactado) {
             this.estado = estadoCaminando;
