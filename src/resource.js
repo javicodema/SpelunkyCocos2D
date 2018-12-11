@@ -13,6 +13,8 @@ var res = {
     jugador_salto_subiendo_plist : "res/jugador/jugador_salto_subiendo.plist",
     jugador_mov_escalera_png : "res/jugador/jugador_mov_escalera.png",
     jugador_mov_escalera_plist : "res/jugador/jugador_mov_escalera.plist",
+    jugador_impactado_png : "res/jugador/jugador_impactado.png",
+    jugador_impactado_plist : "res/jugador/jugador_impactado.plist",
     jugador_idle_png : "res/jugador/jugador_idle.png",
     jugador_idle_plist : "res/jugador/jugador_idle.plist",
 

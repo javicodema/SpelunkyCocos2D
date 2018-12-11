@@ -4,32 +4,32 @@
 	<dict>
 		<key>frames</key>
 		<dict>
-			<key>jugador_mov_escalera1.png</key>
+			<key>jugador_impactado1.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{20,0},{19,24}}</string>
+				<string>{{26,0},{23,26}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
 				<false/>
 				<key>sourceColorRect</key>
-				<string>{{0,0},{19,24}}</string>
+				<string>{{0,1},{23,26}}</string>
 				<key>sourceSize</key>
-				<string>{19,25}</string>
+				<string>{23,27}</string>
 			</dict>
 
-			<key>jugador_mov_escalera2.png</key>
+			<key>jugador_impactado2.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{0,0},{19,24}}</string>
+				<string>{{0,0},{25,25}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
 				<false/>
 				<key>sourceColorRect</key>
-				<string>{{1,1},{19,24}}</string>
+				<string>{{0,1},{25,25}}</string>
 				<key>sourceSize</key>
-				<string>{20,25}</string>
+				<string>{25,26}</string>
 			</dict>
 
 		</dict>
@@ -41,7 +41,7 @@
 			<key>size</key>
 			<string>{64,32}</string>
 			<key>textureFileName</key>
-			<string>jugador_mov_escalera.png</string>
+			<string>jugador_impactado.png</string>
 			</dict>
 		</dict>
 </plist>

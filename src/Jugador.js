@@ -124,12 +124,12 @@ var Jugador = cc.Class.extend({
         this.aMovEscalera.retain();
 
         var framesAnimacionImpactado = [];
-        for (var i = 1; i <= 4; i++) {
+        for (var i = 1; i <= 2; i++) {
             var str = "jugador_impactado" + i + ".png";
             var frame = cc.spriteFrameCache.getSpriteFrame(str);
             framesAnimacionImpactado.push(frame);
         }
-        var animacionImpactado = new cc.Animation(framesAnimacionImpactado, 0.2);
+        var animacionImpactado = new cc.Animation(framesAnimacionImpactado, 0.5);
         this.aImpactado =
             new cc.Repeat( new cc.Animate(animacionImpactado) , 2  );
         this.aImpactado.retain();

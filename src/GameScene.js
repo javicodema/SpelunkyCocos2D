@@ -18,6 +18,7 @@ var GameLayer = cc.Layer.extend({
         cc.spriteFrameCache.addSpriteFrames(res.jugador_salto_bajando_plist);
         cc.spriteFrameCache.addSpriteFrames(res.jugador_salto_subiendo_plist);
         cc.spriteFrameCache.addSpriteFrames(res.jugador_mov_escalera_plist);
+        cc.spriteFrameCache.addSpriteFrames(res.jugador_impactado_plist);
         cc.spriteFrameCache.addSpriteFrames(res.jugador_idle_plist);
 
         // Inicializar Space
