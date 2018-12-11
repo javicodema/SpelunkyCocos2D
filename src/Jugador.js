@@ -4,6 +4,7 @@ var estadoImpactado = 3;
 var estadoMontado = 4;
 var estadoIdle = 5;
 var estadoAgachado = 6;
+var estadoTrepando = 7;
 
 var Jugador = cc.Class.extend({
     estado: estadoCaminando,
@@ -14,6 +15,7 @@ var Jugador = cc.Class.extend({
     aIdle: null,
     aMontado:null,
     aAgachado: null,
+    aMovEscalera: null,
     gameLayer:null,
     sprite:null,
     shape:null,
@@ -110,6 +112,16 @@ var Jugador = cc.Class.extend({
             new cc.RepeatForever(new cc.Animate(animacionAgachado));
         this.aAgachado.retain();
 
+        var framesAnimacionMovEscalera = [];
+        for (var i = 1; i <= 2; i++) {
+            var str = "jugador_mov_escalera" + i + ".png";
+            var frame = cc.spriteFrameCache.getSpriteFrame(str);
+            framesAnimacionMovEscalera.push(frame);
+        }
+        var animacionMovEscalera = new cc.Animation(framesAnimacionMovEscalera, 0.2);
+        this.aMovEscalera  =
+            new cc.RepeatForever(new cc.Animate(animacionMovEscalera));
+        this.aMovEscalera.retain();
 
         var framesAnimacionImpactado = [];
         for (var i = 1; i <= 4; i++) {
@@ -198,6 +210,23 @@ var Jugador = cc.Class.extend({
                     this.sprite.runAction(this.animacion);
                 }
                 break;
+            case estadoTrepando:
+                if (this.animacion != this.aMovEscalera){
+                    this.animacion = this.aMovEscalera
+                    this.sprite.stopAllActions();
+                }
+
+                if( Math.abs(this.body.vy) > 1 && this.aniacionTreparActiva != false) {
+                    //Esta parado
+                    this.sprite.runAction(this.animacion);
+                    this.animacionTreparActiva = true;
+
+                }else {
+                    //bajando o subiendo
+                    this.sprite.stopAllActions();
+                    this.animacionTreparActiva = false;
+                }
+                break;
             case estadoIdle:
                 if (this.animacion != this.aIdle){
                     this.animacion = this.aIdle
@@ -209,8 +238,9 @@ var Jugador = cc.Class.extend({
     },
     tocaSuelo: function() {
         this.saltosAcutales=0
+        console.log(this.body.vx)
         if (this.estado != estadoCaminando || this.estado != estadoIdle) {
-            if( this.body.vx == 0){
+            if( this.body.vx > -1 && this.body.vx < 1){
                 this.estado = estadoIdle;
             }
             else{
@@ -218,6 +248,12 @@ var Jugador = cc.Class.extend({
             }
         }
     },
+    trepar: function() {
+        if(this.estado != estadoAgachado){
+            this.estado = estadoTrepando;
+        }
+    }
+    ,
     impactado: function(){
         if(this.estado != estadoImpactado){
             this.estado = estadoImpactado;

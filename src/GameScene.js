@@ -17,6 +17,7 @@ var GameLayer = cc.Layer.extend({
         cc.spriteFrameCache.addSpriteFrames(res.jugador_agachado_plist);
         cc.spriteFrameCache.addSpriteFrames(res.jugador_salto_bajando_plist);
         cc.spriteFrameCache.addSpriteFrames(res.jugador_salto_subiendo_plist);
+        cc.spriteFrameCache.addSpriteFrames(res.jugador_mov_escalera_plist);
         cc.spriteFrameCache.addSpriteFrames(res.jugador_idle_plist);
 
         // Inicializar Space
@@ -64,8 +65,18 @@ var GameLayer = cc.Layer.extend({
         }
 
         //Controles de movimiento
-        if( controles.agachado ){
-            this.jugador.agachado();
+        if( controles.abajo ){
+            if( this.jugador.estado == estadoTrepando ){
+                //Trepar hacia abajo
+            }
+            else {
+                this.jugador.agachado();
+            }
+        }
+        if( controles.arriba ){
+            if( this.jugador.estado == estadoTrepando ){
+                //Trepar hacia arriba
+            }
         }
 
         if( controles.mov_derecho ){
@@ -156,6 +167,10 @@ var GameLayer = cc.Layer.extend({
         this.jugador.tocaSuelo();
     },
     finCollisionSueloConJugador:function (arbiter, space) {
+        //Si deja el suelo sin haber saltado (Ej: Caerse) no tiene doble salto.
+        if( this.jugador.estado != estadoSaltando ) {
+            this.jugador.saltosAcutales++
+        }
         this.jugador.estado = estadoSaltando;
     }
 });
