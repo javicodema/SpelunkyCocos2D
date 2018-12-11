@@ -14,10 +14,13 @@ var GameLayer = cc.Layer.extend({
 
         //Zona de cache
         cc.spriteFrameCache.addSpriteFrames(res.jugador_caminar_plist);
+        cc.spriteFrameCache.addSpriteFrames(res.jugador_salto_bajando_plist);
+        cc.spriteFrameCache.addSpriteFrames(res.jugador_salto_subiendo_plist);
+        cc.spriteFrameCache.addSpriteFrames(res.jugador_idle_plist);
 
         // Inicializar Space
         this.space = new cp.Space();
-        this.space.gravity = cp.v(0, -350);
+        this.space.gravity = cp.v(0, -450);
         // Depuración
         this.depuracion = new cc.PhysicsDebugNode(this.space);
         this.addChild(this.depuracion, 10);
@@ -27,13 +30,11 @@ var GameLayer = cc.Layer.extend({
         this.scheduleUpdate();
 
         // Zona de escuchadores de colisiones
-// Colisión Suelo y Jugador
+    // Colisión Suelo y Jugador
         this.space.addCollisionHandler(tipoSuelo, tipoJugador,
             null, null, this.collisionSueloConJugador.bind(this), this.finCollisionSueloConJugador.bind(this));
         this.space.addCollisionHandler(tipoJugador, tipoEnemigo,
             null, null, this.collisionEnemigoConJugador.bind(this), this.finCollisionEnemigoConJugador.bind(this));
-
-
 
         return true;
     },

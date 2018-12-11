@@ -2,13 +2,17 @@ var estadoCaminando = 1;
 var estadoSaltando = 2;
 var estadoImpactado = 3;
 var estadoMontado = 4;
+var estadoIdle = 5;
 
 var Jugador = cc.Class.extend({
     estado: estadoCaminando,
     animacion:null,
-    aSaltar:null,
+    aSaltarBajando:null,
+    aSaltarSubiendo:null,
     aCaminar:null,
+    aIdle: null,
     aMontado:null,
+    aAgachado: null,
     gameLayer:null,
     sprite:null,
     shape:null,
@@ -17,6 +21,8 @@ var Jugador = cc.Class.extend({
     bombas:0,
     llaves:0,
     arma:null,
+    spriteSaltoBajando: null,
+    spriteSaltoSubiendo: null,
     bonificadorSalto:1,
     bonificadorVelocidad:1,
     velocidad: 300,
@@ -30,6 +36,7 @@ var Jugador = cc.Class.extend({
         this.body = new cp.Body(5, cp.momentForBox(1,
             this.sprite.getContentSize().width,
             this.sprite.getContentSize().height));
+
         this.body.setPos(posicion);
         //body.w_limit = 0.02;
         this.body.setAngle(0);
@@ -63,17 +70,17 @@ var Jugador = cc.Class.extend({
         this.aCaminar = actionAnimacionBucle;
         this.aCaminar.retain();
 
-        var framesAnimacionSaltar = [];
-        for (var i = 1; i <= 4; i++) {
-            var str = "jugador_saltar" + i + ".png";
-            var frame = cc.spriteFrameCache.getSpriteFrame(str);
-            framesAnimacionSaltar.push(frame);
-        }
-        var animacionSaltar = new cc.Animation(framesAnimacionSaltar, 0.2);
-        this.aSaltar  =
-            new cc.RepeatForever(new cc.Animate(animacionSaltar));
+        var framesAnimacionSaltarBajando = [];
+        framesAnimacionSaltarBajando.push(cc.spriteFrameCache.getSpriteFrame("jugador_salto_bajando.png"));
+        var animacionSaltarBajando = new cc.Animation(framesAnimacionSaltarBajando, 0.2);
+        this.aSaltarBajando = new cc.RepeatForever(new cc.Animate(animacionSaltarBajando));
+        this.aSaltarBajando.retain();
 
-        this.aSaltar.retain();
+        var framesAnimacionSaltarSubiendo = [];
+        framesAnimacionSaltarSubiendo.push(cc.spriteFrameCache.getSpriteFrame("jugador_salto_subiendo.png"));
+        var animacionSaltarSubiendo = new cc.Animation(framesAnimacionSaltarSubiendo, 0.2);
+        this.aSaltarSubiendo  = new cc.RepeatForever(new cc.Animate(animacionSaltarSubiendo));
+        this.aSaltarSubiendo.retain();
 
         var framesAnimacionMontar = [];
         for (var i = 1; i <= 4; i++) {
@@ -99,19 +106,37 @@ var Jugador = cc.Class.extend({
         this.aImpactado.retain();
 
 
+        var framesAnimacionIdle= [];
+        for (var i = 1; i <= 2; i++) {
+            var str = "jugador_idle" + i + ".png";
+            var frame = cc.spriteFrameCache.getSpriteFrame(str);
+            framesAnimacionIdle.push(frame);
+        }
+        var animacionIdle = new cc.Animation(framesAnimacionIdle, 0.2);
+        this.aIdle  =
+            new cc.RepeatForever(new cc.Animate(animacionIdle));
+        this.aIdle.retain();
+
+
         // ejecutar la animación
         this.sprite.runAction(actionAnimacionBucle);
-
-        //this.body.applyImpulse(cp.v(300, 0), cp.v(0, 0));
     },
     saltar: function(){
-        // solo salta si está caminando
-        if(this.estado == estadoCaminando){
+        // solo salta si está caminando o idle
+        if( (this.estado == estadoCaminando || this.estado == estadoIdle )&& this.estado != estadoSaltando){
             this.estado = estadoSaltando;
             this.body.applyImpulse(cp.v(0, this.potenciaSalto), cp.v(0, 0));
         }
     }
     ,actualizar: function (){
+        //Cambiar la orientación del PJ
+        if( this.body.vx > 0 ) {
+            this.sprite.scaleX = 1;
+        }
+        else if ( this.body.vx < 0 ){
+            this.sprite.scaleX = -1
+        }
+
         switch ( this.estado ){
             case estadoImpactado:
                 if (this.animacion != this.aImpactado){
@@ -125,15 +150,31 @@ var Jugador = cc.Class.extend({
                 }
                 break;
             case estadoSaltando:
-                if (this.animacion != this.aSaltar){
-                    this.animacion = this.aSaltar;
-                    this.sprite.stopAllActions();
-                    this.sprite.runAction(this.animacion);
+                if( this.body.vy > 0 ){
+                    if (this.animacion != this.aSaltarSubiendo){
+                        this.animacion = this.aSaltarSubiendo
+                        this.sprite.stopAllActions();
+                        this.sprite.runAction(this.animacion);
+                    }
+                }
+                if( this.body.vy < 0 ){
+                    if (this.animacion != this.aSaltarBajando){
+                        this.animacion = this.aSaltarBajando
+                        this.sprite.stopAllActions();
+                        this.sprite.runAction(this.animacion);
+                    }
                 }
                 break;
             case estadoCaminando:
                 if (this.animacion != this.aCaminar){
-                    this.animacion = this.aCaminar;
+                    this.animacion = this.aCaminar
+                    this.sprite.stopAllActions();
+                    this.sprite.runAction(this.animacion);
+                }
+                break;
+            case estadoIdle:
+                if (this.animacion != this.aIdle){
+                    this.animacion = this.aIdle
                     this.sprite.stopAllActions();
                     this.sprite.runAction(this.animacion);
                 }
@@ -141,8 +182,13 @@ var Jugador = cc.Class.extend({
         }
     },
     tocaSuelo: function () {
-        if (this.estado != estadoCaminando) {
-            this.estado = estadoCaminando;
+        if (this.estado != estadoCaminando || this.estado != estadoIdle) {
+            if( this.body.vx == 0){
+                this.estado = estadoIdle;
+            }
+            else{
+                this.estado = estadoCaminando;
+            }
         }
     },
     impactado: function(){
