@@ -69,6 +69,7 @@ var ControlesLayer = cc.Layer.extend({
                 break;
             case(40):
                 //Flecha abajo
+                this.teclas_pulsadas.agachado = true;
                 break;
 
             case(65):
@@ -115,7 +116,7 @@ var ControlesLayer = cc.Layer.extend({
                 this.teclas_pulsadas.mov_izquierdo = false;
                 break;
             case(38):
-                //Flecha Arriba
+                //Flecha arriba
                 break;
             case(39):
                 //Flecha Derecha
@@ -123,6 +124,7 @@ var ControlesLayer = cc.Layer.extend({
                 break;
             case(40):
                 //Flecha abajo
+                this.teclas_pulsadas.agachado = false;
                 break;
 
             case(65):

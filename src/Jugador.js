@@ -3,6 +3,7 @@ var estadoSaltando = 2;
 var estadoImpactado = 3;
 var estadoMontado = 4;
 var estadoIdle = 5;
+var estadoAgachado = 6;
 
 var Jugador = cc.Class.extend({
     estado: estadoCaminando,
@@ -24,7 +25,7 @@ var Jugador = cc.Class.extend({
     spriteSaltoBajando: null,
     spriteSaltoSubiendo: null,
     bonificadorSalto:1,
-    bonificadorVelocidad:1,
+    bonificadorVelocidad:300,
     velocidad: 300,
     potenciaSalto:1000,
     maxSaltos: 2,
@@ -97,6 +98,18 @@ var Jugador = cc.Class.extend({
             new cc.RepeatForever(new cc.Animate(animacionMontar));
 
         this.aMontado.retain();
+
+        var framesAnimacionAgachado = [];
+        for (var i = 1; i <= 2; i++) {
+            var str = "jugador_agachado" + i + ".png";
+            var frame = cc.spriteFrameCache.getSpriteFrame(str);
+            framesAnimacionAgachado.push(frame);
+        }
+        var animacionAgachado = new cc.Animation(framesAnimacionAgachado, 0.2);
+        this.aAgachado  =
+            new cc.RepeatForever(new cc.Animate(animacionAgachado));
+        this.aAgachado.retain();
+
 
         var framesAnimacionImpactado = [];
         for (var i = 1; i <= 4; i++) {
@@ -178,6 +191,13 @@ var Jugador = cc.Class.extend({
                     this.sprite.runAction(this.animacion);
                 }
                 break;
+            case estadoAgachado:
+                if (this.animacion != this.aAgachado){
+                    this.animacion = this.aAgachado
+                    this.sprite.stopAllActions();
+                    this.sprite.runAction(this.animacion);
+                }
+                break;
             case estadoIdle:
                 if (this.animacion != this.aIdle){
                     this.animacion = this.aIdle
@@ -201,6 +221,11 @@ var Jugador = cc.Class.extend({
     impactado: function(){
         if(this.estado != estadoImpactado){
             this.estado = estadoImpactado;
+        }
+    },
+    agachado: function(){
+        if(this.estado != estadoAgachado){
+            this.estado = estadoAgachado;
         }
     },
     finAnimacionImpactado: function() {

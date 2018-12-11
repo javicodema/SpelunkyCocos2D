@@ -14,6 +14,7 @@ var GameLayer = cc.Layer.extend({
 
         //Zona de cache
         cc.spriteFrameCache.addSpriteFrames(res.jugador_caminar_plist);
+        cc.spriteFrameCache.addSpriteFrames(res.jugador_agachado_plist);
         cc.spriteFrameCache.addSpriteFrames(res.jugador_salto_bajando_plist);
         cc.spriteFrameCache.addSpriteFrames(res.jugador_salto_subiendo_plist);
         cc.spriteFrameCache.addSpriteFrames(res.jugador_idle_plist);
@@ -61,12 +62,22 @@ var GameLayer = cc.Layer.extend({
         if( controles.saltar ){
             this.jugador.saltar();
         }
+
         //Controles de movimiento
+        if( controles.agachado ){
+            this.jugador.agachado();
+        }
+
+        console.log(this.jugador.body.vx)
         if( controles.mov_derecho ){
-            this.jugador.body.vx = this.jugador.velocidad;
+            this.jugador.body.vx = this.jugador.velocidad
+            if(this.jugador.estado == estadoAgachado)
+                this.jugador.body.vx += this.jugador.bonificadorVelocidad;
         }
         else if( controles.mov_izquierdo){
-            this.jugador.body.vx = -this.jugador.velocidad;
+            this.jugador.body.vx = -this.jugador.velocidad
+            if(this.jugador.estado == estadoAgachado)
+                this.jugador.body.vx -= this.jugador.bonificadorVelocidad;
         }
         else{
             this.jugador.body.vx = 0;
