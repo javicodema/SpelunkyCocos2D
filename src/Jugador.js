@@ -27,6 +27,10 @@ var Jugador = cc.Class.extend({
     bonificadorVelocidad:1,
     velocidad: 300,
     potenciaSalto:1000,
+    maxSaltos: 2,
+    saltosAcutales: 0,
+    retardoSalto: 300,
+    ultimoSalto: 0,
     ctor:function (gameLayer, posicion) {
         this.gameLayer = gameLayer;
 
@@ -123,8 +127,10 @@ var Jugador = cc.Class.extend({
     },
     saltar: function(){
         // solo salta si está caminando o idle
-        if( (this.estado == estadoCaminando || this.estado == estadoIdle )&& this.estado != estadoSaltando){
+        if( Date.now() - this.ultimoSalto > this.retardoSalto && this.saltosAcutales++ < this.maxSaltos){
+            this.ultimoSalto = Date.now();
             this.estado = estadoSaltando;
+            this.body.vy = 0;
             this.body.applyImpulse(cp.v(0, this.potenciaSalto), cp.v(0, 0));
         }
     }
@@ -181,7 +187,8 @@ var Jugador = cc.Class.extend({
                 break;
         }
     },
-    tocaSuelo: function () {
+    tocaSuelo: function() {
+        this.saltosAcutales=0
         if (this.estado != estadoCaminando || this.estado != estadoIdle) {
             if( this.body.vx == 0){
                 this.estado = estadoIdle;

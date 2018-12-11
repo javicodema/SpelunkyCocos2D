@@ -71,6 +71,13 @@ var GameLayer = cc.Layer.extend({
         else{
             this.jugador.body.vx = 0;
         }
+        //Controles acciones
+        if(controles.lanzar_objeto){
+
+        }
+        if(controles.ataque) {
+
+        }
         //Controles de camara
         var offsetCamara_x = 0
         var offsetCamara_y = 0;
@@ -85,6 +92,10 @@ var GameLayer = cc.Layer.extend({
         }
         else if( controles.mirar_abajo){
             offsetCamara_y = -100;
+        }
+        //Control pausa
+        if( controles.pausa ){
+
         }
 
 
@@ -123,7 +134,6 @@ var GameLayer = cc.Layer.extend({
                     10);
                 shapeSuelo.setCollisionType(tipoSuelo);
                 this.space.addStaticShape(shapeSuelo);
-
             }
         }
 

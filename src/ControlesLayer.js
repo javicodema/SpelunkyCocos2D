@@ -58,39 +58,52 @@ var ControlesLayer = cc.Layer.extend({
         switch(key){
             case(37):
                 //Flecha Izquierda
-                this.teclas_pulsadas.mirar_izquierda = true;
+                this.teclas_pulsadas.mov_izquierdo = true;
                 break;
             case(38):
                 //Flecha Arriba
-                this.teclas_pulsadas.mirar_arriba = true;
                 break;
             case(39):
                 //Flecha Derecha
-                this.teclas_pulsadas.mirar_derecha = true;
+                this.teclas_pulsadas.mov_derecho = true;
                 break;
             case(40):
                 //Flecha abajo
-                this.teclas_pulsadas.mirar_abajo = true;
                 break;
 
             case(65):
                 //A
-                this.teclas_pulsadas.mov_izquierdo = true;
+                this.teclas_pulsadas.mirar_izquierda = true;
                 break;
             case(87):
                 //W
+                this.teclas_pulsadas.mirar_arriba = true;
                 break;
             case(68):
                 //D
-                this.teclas_pulsadas.mov_derecho = true;
+                this.teclas_pulsadas.mirar_derecha = true;
                 break;
             case(83):
                 //S
+                this.teclas_pulsadas.mirar_abajo = true;
                 break;
 
             case(32):
                 //Espacio
                 this.teclas_pulsadas.saltar = true;
+                break;
+            case(88):
+                //X
+                this.teclas_pulsadas.ataque = true;
+                break;
+            case(90):
+                //Z
+                this.teclas_pulsadas.lanzar_objeto = true;
+                break;
+
+            case(80):
+                //P
+                this.teclas_pulsadas.pausa = true;
                 break;
 
         }
@@ -99,41 +112,53 @@ var ControlesLayer = cc.Layer.extend({
         switch(key){
             case(37):
                 //Flecha Izquierda
-                this.teclas_pulsadas.mirar_izquierda = false;
+                this.teclas_pulsadas.mov_izquierdo = false;
                 break;
             case(38):
                 //Flecha Arriba
-                this.teclas_pulsadas.mirar_arriba = false;
                 break;
             case(39):
                 //Flecha Derecha
-                this.teclas_pulsadas.mirar_derecha = false;
+                this.teclas_pulsadas.mov_derecho = false;
                 break;
             case(40):
                 //Flecha abajo
-                this.teclas_pulsadas.mirar_abajo = false;
                 break;
 
             case(65):
                 //A
-                this.teclas_pulsadas.mov_izquierdo = false;
+                this.teclas_pulsadas.mirar_izquierda = false;
                 break;
             case(87):
                 //W
+                this.teclas_pulsadas.mirar_arriba = false;
                 break;
             case(68):
                 //D
-                this.teclas_pulsadas.mov_derecho = false;
+                this.teclas_pulsadas.mirar_derecha = false;
                 break;
             case(83):
                 //S
+                this.teclas_pulsadas.mirar_abajo = false;
                 break;
 
             case(32):
                 //Espacio
                 this.teclas_pulsadas.saltar = false;
                 break;
+            case(88):
+                //X
+                this.teclas_pulsadas.ataque = false;
+                break;
+            case(90):
+                //Z
+                this.teclas_pulsadas.lanzar_objeto = false;
+                break;
 
+            case(80):
+                //P
+                this.teclas_pulsadas.pausa = false;
+                break;
         }
     },
     procesarMouseDown:function(event) {
