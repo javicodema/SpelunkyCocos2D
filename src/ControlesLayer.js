@@ -16,17 +16,17 @@ var ControlesLayer = cc.Layer.extend({
         this.addChild(this.etiquetaPuntos);
 
         this.etiquetaVidas = new cc.LabelTTF("Vidas: 3", "Helvetica", 20);
-        this.etiquetaVidas.setPosition(cc.p(10, size.height - 20));
+        this.etiquetaVidas.setPosition(cc.p(70, size.height - 20));
         this.etiquetaVidas.fillStyle = new cc.Color(255, 255, 255, 0);
         this.addChild(this.etiquetaVidas);
 
         this.etiquetaBombas = new cc.LabelTTF("Bombas: 0", "Helvetica", 20);
-        this.etiquetaBombas.setPosition(cc.p(90, size.height - 20));
+        this.etiquetaBombas.setPosition(cc.p(180, size.height - 20));
         this.etiquetaBombas.fillStyle = new cc.Color(255, 255, 255, 0);
         this.addChild(this.etiquetaBombas);
 
         this.etiquetaLlaves = new cc.LabelTTF("Llaves: 0", "Helvetica", 20);
-        this.etiquetaLlaves.setPosition(cc.p(10, size.height - 50));
+        this.etiquetaLlaves.setPosition(cc.p(80, size.height - 50));
         this.etiquetaLlaves.fillStyle = new cc.Color(255, 255, 255, 0);
         this.addChild(this.etiquetaLlaves);
 
