@@ -17,10 +17,15 @@ var res = {
     jugador_impactado_plist : "res/jugador/jugador_impactado.plist",
     jugador_idle_png : "res/jugador/jugador_idle.png",
     jugador_idle_plist : "res/jugador/jugador_idle.plist",
+    animacion_cuervo_png: "res/enemigoPatrulla/animacion_cuervo.png",
+    animacion_cuervo_plist: "res/enemigoPatrulla/animacion_cuervo.plist",
 
     //De aquí abajo son de prueba
     tiles32_png: "res/mapas/tiles32.png",
+    tileset_1: "res/mapas/tileset.png",
+    tileset_2: "res/mapas/tileset2.png",
     mapa_prueba_tmx: "res/mapas/mapa1.tmx",
+    mapa_1_tmx:"res/mapas/mapaTiled1.tmx"
 };
 
 var g_resources = [];

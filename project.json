@@ -15,6 +15,9 @@
         "src/app.js",
         "src/ControlesLayer.js",
         "src/Jugador.js",
-        "src/GameScene.js"
+        "src/GameScene.js",
+        "src/EnemigoPatrulla.js",
+        "src/EnemigoTirador.js",
+        "src/EnemigoPerseguidor.js"
     ]
 }

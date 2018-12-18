@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.2.0" orientation="orthogonal" renderorder="right-down" width="169" height="20" tilewidth="32" tileheight="32" infinite="0" backgroundcolor="#4edbd1" nextlayerid="26" nextobjectid="77">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="169" height="20" tilewidth="32" tileheight="32" backgroundcolor="#4edbd1" nextobjectid="77">
  <tileset firstgid="1" name="tiles32" tilewidth="32" tileheight="32" tilecount="98" columns="14">
   <image source="tiles32.png" width="448" height="224"/>
  </tileset>
- <layer id="18" name="patronesFondo" width="169" height="20">
+ <layer name="patronesFondo" width="169" height="20">
   <data encoding="base64" compression="zlib">
    eJztw0ENAAAMA6EzVf/W5mIvSFg1VVVVVVVVVVVVVVVV1YcHF0C74w==
   </data>
  </layer>
- <layer id="19" name="patronesTerreno" width="169" height="20">
+ <layer name="patronesTerreno" width="169" height="20">
   <data encoding="base64" compression="zlib">
    eJztmd0OgyAMRsl+st0ti9ne/1EnMWQNoUAFoeB3kl7MRa3lrFVnDAAAAAAAAAAAADTyXOOWCAB6Yf38rvFOBNDPi8Qs5PoJR3UQm3cPM5+jEj/P7KiW9bbrFVufj9k8nQWpn2d0VFNPSvk5kqd0FlD8uSD1s7Wj10DOrZ/hNPkpWS/NnvrXQpH62NvR3vn49329yO2fI3jq+7l437dwNNTDud5n+6S2GjpCXvTKY8+80+hp6FpaO8r1cO4Y2mro4PqWljxG9DT2W6P960hHQzk4Yo5qqaEjVsuL+d8j3xt8LumfmjxNzQLKUY5yOXDnDW3X4GnpXB0hWtc4ZxZQjnA0tq7cebntmn7rSyC/GcLWuNUz4J7/Lmtco+T9FXfeWD60hjnhI9m39D3c6FFau9S+e/LoVQOJo6V1Lj3eYubtobVrV6vutY7j4gewLja8
   </data>
  </layer>
- <objectgroup id="4" name="Suelos">
+ <objectgroup name="suelos">
   <object id="7" x="0.750901" y="576.191">
    <polygon points="0,0 127.403,-0.2503 287.595,-160.443 351.171,-160.443 351.171,63.326 0,63.8266"/>
   </object>
@@ -36,7 +36,7 @@
    <polygon points="0,0 -0.640738,-63.4331 -352.406,-64.7146 -512.591,-224.258 -544.307,-224.579 -544.307,-0.961107"/>
   </object>
  </objectgroup>
- <objectgroup id="5" name="Monedas">
+ <objectgroup name="Monedas">
   <object id="21" x="308.012" y="335.097" width="28.9746" height="27.7148"/>
   <object id="26" x="699.798" y="401.864" width="28.9746" height="27.7148"/>
   <object id="27" x="815.697" y="506.425" width="28.9746" height="27.7148"/>
@@ -58,13 +58,13 @@
   <object id="46" x="3915.97" y="462.333" width="28.9746" height="27.7148"/>
   <object id="47" x="4121.32" y="391.786" width="28.9746" height="27.7148"/>
  </objectgroup>
- <objectgroup id="25" name="Pinchos">
+ <objectgroup name="Pinchos">
   <object id="68" x="1540.34" y="532.951" width="40" height="40"/>
   <object id="72" x="2118.71" y="435.232" width="40" height="40"/>
   <object id="74" x="2839.3" y="436.821" width="40" height="40"/>
   <object id="76" x="4092.97" y="530.568" width="40" height="40"/>
  </objectgroup>
- <objectgroup id="23" name="Enemigos">
+ <objectgroup name="patrullas">
   <object id="53" x="2626.03" y="413.116" width="40" height="40"/>
   <object id="54" x="3237.26" y="198.114" width="40" height="40"/>
   <object id="55" x="4137.16" y="523.117" width="40" height="40"/>
