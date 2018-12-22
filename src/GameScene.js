@@ -48,6 +48,11 @@ var GameLayer = cc.Layer.extend({
         this.jugador.actualizar();
         this.space.step(dt);
 
+        var i = 0;
+        for(i=0;i<this.enemigos.length;i++){
+            this.enemigos[i].verJugador(this.jugador.body.p.x,this.jugador.body.p.y);
+        }
+
 
         // Controlar el angulo (son radianes) max y min.
         if ( this.jugador.body.a > 0.44 ){
@@ -159,7 +164,7 @@ var GameLayer = cc.Layer.extend({
 
             }
         }
-
+/*
         var grupoEnemigos = this.mapa.getObjectGroup("patrullas");
         var enemigosArray = grupoEnemigos.getObjects();
         for (var i = 0; i < enemigosArray.length; i++) {
@@ -177,7 +182,7 @@ var GameLayer = cc.Layer.extend({
 
             this.enemigos.push(enemigo);
         }
-
+*/
         grupoEnemigos = this.mapa.getObjectGroup("perseguidores");
         enemigosArray = grupoEnemigos.getObjects();
         for (var i = 0; i < enemigosArray.length; i++) {

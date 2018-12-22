@@ -101,6 +101,37 @@ var EnemigoPerseguidor = cc.Class.extend({
     },
     noSueloIzquierda: function(){
         this.orientacion = 1;
+    },
+    verJugador: function(x,y){
+        if(this.orientacion==1){
+            if ((this.body.p.y + 50) > y && (this.body.p.y - 50) < y){
+                if((this.body.p.x - 20) < x) {
+                    console.log("hit1");
+                    this.orientacion = -1;
+                    this.body.vx = 100;
+                }
+                else{
+                    console.log("hit2");
+                    this.body.vx=-100;
+                }
+            }
+            else{
+                this.body.vx=0;
+            }
+        }else{
+            if ((this.body.p.y + 50) > y && (this.body.p.y - 50) < y){
+                if((this.body.p.x - 20) > x) {
+                    this.orientacion = 1;
+                    this.body.vx = -100;
+                }
+                else{
+                    this.body.vx=100;
+                }
+            }
+            else{
+                this.body.vx=0;
+            }
+        }
     }
 
 
