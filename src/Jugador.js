@@ -264,14 +264,24 @@ var Jugador = cc.Class.extend({
         }
     },
     moverIzquierda: function(){
-        this.body.vx = -this.velocidad
-        if(this.estado == estadoAgachado)
-            this.body.vx -= this.bonificadorVelocidad;
+        if( this.estado==estadoAgachado && Math.abs(this.body.vx) < this.velocidad + this.bonificadorVelocidad ){
+            //Bonus de velocidad agachado
+            this.body.applyImpulse(cp.v( -( this.velocidad+this.bonificadorVelocidad - this.body.vx ) , 0), cp.v(0, 0));
+        }
+
+        else if(Math.abs(this.body.vx) < this.velocidad ){
+            this.body.applyImpulse(cp.v( -( this.velocidad - this.body.vx)  , 0), cp.v(0, 0));
+        }
     },
     moverDerecha: function(){
-        this.body.vx = this.velocidad
-        if(this.estado == estadoAgachado)
-            this.body.vx += this.bonificadorVelocidad;
+        if( this.estado==estadoAgachado && Math.abs(this.body.vx) < this.velocidad + this.bonificadorVelocidad ){
+            //Bonus de velocidad agachado
+            this.body.applyImpulse(cp.v(  this.velocidad+this.bonificadorVelocidad - this.body.vx  , 0), cp.v(0, 0));
+        }
+
+        else if(Math.abs(this.body.vx) < this.velocidad ){
+            this.body.applyImpulse(cp.v(  this.velocidad - this.body.vx  , 0), cp.v(0, 0));
+        }
     },
     finAnimacionImpactado: function() {
         if (this.estado == estadoImpactado) {

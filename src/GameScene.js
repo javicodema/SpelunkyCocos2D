@@ -1,12 +1,15 @@
 var tipoSuelo = 1;
 var tipoJugador = 2;
 var tipoEnemigo = 3;
-
+var tipoEnemigoDerecha = 4;
+var tipoEnemigoIzquierda = 5;
+var tipoDisparo = 6;
 
 var GameLayer = cc.Layer.extend({
     space:null,
     mapa: null,
     mapaAncho: null,
+    enemigos:[],
     jugador: null,
     ctor:function () {
         this._super();
@@ -20,6 +23,7 @@ var GameLayer = cc.Layer.extend({
         cc.spriteFrameCache.addSpriteFrames(res.jugador_mov_escalera_plist);
         cc.spriteFrameCache.addSpriteFrames(res.jugador_impactado_plist);
         cc.spriteFrameCache.addSpriteFrames(res.jugador_idle_plist);
+        cc.spriteFrameCache.addSpriteFrames(res.animacion_cuervo_plist);
 
         // Inicializar Space
         this.space = new cp.Space();
@@ -28,8 +32,7 @@ var GameLayer = cc.Layer.extend({
         this.depuracion = new cc.PhysicsDebugNode(this.space);
         this.addChild(this.depuracion, 10);
 
-        this.jugador = new Jugador(this, cc.p(50,150));
-        this.cargarMapa(res.mapa_prueba_tmx); //habria que meter el mapa como parametro
+        this.cargarMapa(res.mapa_1_tmx); //habria que meter el mapa como parametro
         this.scheduleUpdate();
 
         // Zona de escuchadores de colisiones
@@ -45,6 +48,11 @@ var GameLayer = cc.Layer.extend({
 
         this.jugador.actualizar();
         this.space.step(dt);
+
+        var i = 0;
+        for(i=0;i<this.enemigos.length;i++){
+            this.enemigos[i].actualizar(this.jugador.body.p.x,this.jugador.body.p.y);
+        }
 
 
         // Controlar el angulo (son radianes) max y min.
@@ -129,18 +137,20 @@ var GameLayer = cc.Layer.extend({
         // Ancho del mapa
         this.mapaAncho = this.mapa.getContentSize().width;
 
+        var jugadores = this.mapa.getObjectGroup("jugador");
+        var jugadorArray = jugadores.getObjects();
+        this.jugador = new Jugador(this,
+                cc.p(jugadorArray[0]["x"],jugadorArray[0]["y"]));
+
         // Solicitar los objeto dentro de la capa Suelos
-        var grupoSuelos = this.mapa.getObjectGroup("Suelos");
+        var grupoSuelos = this.mapa.getObjectGroup("suelos");
         var suelosArray = grupoSuelos.getObjects();
 
         // Los objetos de la capa suelos se transforman a
         // formas estáticas de Chipmunk ( SegmentShape ).
         for (var i = 0; i < suelosArray.length; i++) {
             var suelo = suelosArray[i];
-
-            //El mapa de pruebas usa polygonPoints, cambiar con mapa definitivo
-            //var puntos = suelo.polylinePoints;
-            var puntos = suelo.polygonPoints;
+            var puntos = suelo.polylinePoints;
             for(var j = 0; j < puntos.length - 1; j++){
                 var bodySuelo = new cp.StaticBody();
 
@@ -152,7 +162,36 @@ var GameLayer = cc.Layer.extend({
                     10);
                 shapeSuelo.setCollisionType(tipoSuelo);
                 this.space.addStaticShape(shapeSuelo);
+
             }
+        }
+
+
+        var grupoEnemigos = this.mapa.getObjectGroup("patrullas");
+        var enemigosArray = grupoEnemigos.getObjects();
+        for (var i = 0; i < enemigosArray.length; i++) {
+            var enemigo = new EnemigoPatrulla(this,
+                cc.p(enemigosArray[i]["x"],enemigosArray[i]["y"]));
+
+            this.enemigos.push(enemigo);
+        }
+/*
+        grupoEnemigos = this.mapa.getObjectGroup("disparadores");
+        enemigosArray = grupoEnemigos.getObjects();
+        for (var i = 0; i < enemigosArray.length; i++) {
+            var enemigo = new EnemigoTirador(this,
+                cc.p(enemigosArray[i]["x"],enemigosArray[i]["y"]));
+
+            this.enemigos.push(enemigo);
+        }
+*/
+        grupoEnemigos = this.mapa.getObjectGroup("perseguidores");
+        enemigosArray = grupoEnemigos.getObjects();
+        for (var i = 0; i < enemigosArray.length; i++) {
+            var enemigo = new EnemigoPerseguidor(this,
+                cc.p(enemigosArray[i]["x"],enemigosArray[i]["y"]));
+
+            this.enemigos.push(enemigo);
         }
 
 
