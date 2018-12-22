@@ -72,35 +72,38 @@ var EnemigoTirador = cc.Class.extend({
             null, null, null, this.noSueloDerecha.bind(this));
 
     },
-    actualizar: function(){
-
-        if ( this.body.vx < 0.005 && this.body.vx > -0.005){
-            this.orientacion = this.orientacion *-1;
-        }
-
-        if ( this.orientacion > 0){
-            this.sprite.flippedX = true; // Invertir Sprite
-            if (this.body.vx < 100){
-                this.body.applyImpulse(cp.v(300, 0), cp.v(0, 0));
-            } else { // vx mayor más de 100
-                this.body.vx = 100;
-            }
-        }
-
-        if ( this.orientacion < 0) {
-            this.sprite.flippedX = false; // No invertir Sprite
-            if (this.body.vx > -100){
-                this.body.applyImpulse(cp.v(-300, 0), cp.v(0, 0));
-            } else { // vx nunca menor que -100
-                this.body.vx = -100; //limitado
-            }
-        }
-    },
     noSueloDerecha : function(){
         this.orientacion = -1;
     },
     noSueloIzquierda: function(){
         this.orientacion = 1;
+    },
+    actualizar: function(x,y){
+        if((Math.abs(this.body.p.x - x)) < 350){
+            if(this.orientacion==1){
+                this.sprite.flippedX = false;
+                if ((this.body.p.y + 50) > y && (this.body.p.y - 50) < y){
+                    if((this.body.p.x - 20) < x) {
+                        this.sprite.flippedX = true;
+                        this.orientacion = -1;
+                    }
+                    else{
+                    }
+                }
+            }else{
+                this.sprite.flippedX = true;
+                if ((this.body.p.y + 50) > y && (this.body.p.y - 50) < y){
+                    if((this.body.p.x - 20) > x) {
+                        this.sprite.flippedX = false;
+                        this.orientacion = 1;
+                    }
+                    else{
+                    }
+                }
+
+            }
+        }
+
     }
 
 

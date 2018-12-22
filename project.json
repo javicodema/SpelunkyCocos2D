@@ -18,6 +18,7 @@
         "src/GameScene.js",
         "src/EnemigoPatrulla.js",
         "src/EnemigoTirador.js",
-        "src/EnemigoPerseguidor.js"
+        "src/EnemigoPerseguidor.js",
+        "src/Disparo.js"
     ]
 }

@@ -11,7 +11,6 @@ var EnemigoPatrulla = cc.Class.extend({
         // Cuerpo estática , no le afectan las fuerzas
         // Cuerpo dinámico, SI le afectan las fuerzas
         this.body = new cp.Body(5,Infinity);
-        this.body.vx=10;
         this.body.setPos(posicion);
         this.body.setAngle(0);
         this.sprite.setBody(this.body);

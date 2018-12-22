@@ -1,4 +1,4 @@
-var EnemigoPerseguidor = cc.Class.extend({
+var Disparo = cc.Class.extend({
     gameLayer:null,
     orientacion:1,
     sprite:null,
@@ -65,57 +65,10 @@ var EnemigoPerseguidor = cc.Class.extend({
         // ejecutar la animación
         this.sprite.runAction(actionAnimacionBucle);
 
-        gameLayer.space.addCollisionHandler(tipoSuelo, tipoEnemigoIzquierda,
-            null, null, null, this.noSueloIzquierda.bind(this));
-
-        gameLayer.space.addCollisionHandler(tipoSuelo, tipoEnemigoDerecha,
-            null, null, null, this.noSueloDerecha.bind(this));
-
     },
-    noSueloDerecha : function(){
-        this.orientacion = -1;
-    },
-    noSueloIzquierda: function(){
-        this.orientacion = 1;
-    },
-    actualizar: function(x,y){
-        if((Math.abs(this.body.p.x - x)) < 350){
-            if(this.orientacion==1){
-                this.sprite.flippedX = false;
-                if ((this.body.p.y + 50) > y && (this.body.p.y - 50) < y){
-                    if((this.body.p.x - 20) < x) {
-                        this.sprite.flippedX = true;
-                        this.orientacion = -1;
-                        this.body.vx = 100;
-                    }
-                    else{
-                        this.body.vx=-100;
-                    }
-                }else{
-                    this.body.vx=0;
-                }
-            }else{
-                this.sprite.flippedX = true;
-                if ((this.body.p.y + 50) > y && (this.body.p.y - 50) < y){
-                    if((this.body.p.x - 20) > x) {
-                        this.sprite.flippedX = false;
-                        this.orientacion = 1;
-                        this.body.vx = -100;
-                    }
-                    else{
-                        this.body.vx=100;
-                    }
-                }else{
-                    this.body.vx=0;
-                }
-
-            }
-        }else{
-            this.body.vx=0;
-        }
+    actualizar: function(){
 
     }
-
 
 
 });

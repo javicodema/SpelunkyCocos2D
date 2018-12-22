@@ -3,6 +3,7 @@ var tipoJugador = 2;
 var tipoEnemigo = 3;
 var tipoEnemigoDerecha = 4;
 var tipoEnemigoIzquierda = 5;
+var tipoDisparo = 6;
 
 var GameLayer = cc.Layer.extend({
     space:null,
@@ -50,7 +51,7 @@ var GameLayer = cc.Layer.extend({
 
         var i = 0;
         for(i=0;i<this.enemigos.length;i++){
-            this.enemigos[i].verJugador(this.jugador.body.p.x,this.jugador.body.p.y);
+            this.enemigos[i].actualizar(this.jugador.body.p.x,this.jugador.body.p.y);
         }
 
 
@@ -164,7 +165,7 @@ var GameLayer = cc.Layer.extend({
 
             }
         }
-/*
+
         var grupoEnemigos = this.mapa.getObjectGroup("patrullas");
         var enemigosArray = grupoEnemigos.getObjects();
         for (var i = 0; i < enemigosArray.length; i++) {
@@ -173,7 +174,7 @@ var GameLayer = cc.Layer.extend({
 
             this.enemigos.push(enemigo);
         }
-
+/*
         grupoEnemigos = this.mapa.getObjectGroup("disparadores");
         enemigosArray = grupoEnemigos.getObjects();
         for (var i = 0; i < enemigosArray.length; i++) {
