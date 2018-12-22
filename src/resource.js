@@ -20,7 +20,7 @@ var res = {
 
     //De aquí abajo son de prueba
     tiles32_png: "res/mapas/tiles32.png",
-    mapa_prueba_tmx: "res/mapas/mapa1.tmx",
+    mapa_prueba_tmx: "res/mapas/mapa1.tmx"
 };
 
 var g_resources = [];
