@@ -2,6 +2,7 @@ var EnemigoTirador = cc.Class.extend({
     gameLayer: null,
     orientacion: 1,
     sprite: null,
+    vidas:1,
     shape: null,
     delayDisparo: 50,
     ctor: function (gameLayer, posicion) {
@@ -16,8 +17,6 @@ var EnemigoTirador = cc.Class.extend({
         this.body.setAngle(0);
         this.sprite.setBody(this.body);
         // Se añade el cuerpo al espacio
-        gameLayer.space.addBody(this.body);
-
         // forma
         this.shape = new cp.BoxShape(this.body,
             this.sprite.getContentSize().width,
@@ -27,9 +26,22 @@ var EnemigoTirador = cc.Class.extend({
         gameLayer.space.addShape(this.shape);
 
 
+
+        gameLayer.space.addBody(this.body);
+
+
+
+
         var mitadAncho = this.sprite.getContentSize().width / 2;
         var mitadAlto = this.sprite.getContentSize().height / 2;
-// más pequeño
+
+        this.shapeArriba = new cp.PolyShape(this.body,
+            [ -mitadAncho, mitadAlto, mitadAncho, mitadAlto] ,
+            cp.v(0,0) );
+
+      //this.shapeArriba.setSensor(true);
+        this.shapeArriba.setCollisionType(tipoEnemigoArriba);
+        gameLayer.space.addShape(this.shapeArriba);
 
         this.shapeIzquierda = new cp.PolyShape(this.body,
             [-mitadAncho, 0, -mitadAncho, -mitadAlto - 10],
@@ -37,7 +49,6 @@ var EnemigoTirador = cc.Class.extend({
 
         this.shapeIzquierda.setSensor(true);
         this.shapeIzquierda.setCollisionType(tipoEnemigoIzquierda);
-// agregar forma dinamica
         gameLayer.space.addShape(this.shapeIzquierda);
 
         this.shapeDercha = new cp.PolyShape(this.body,
@@ -46,7 +57,6 @@ var EnemigoTirador = cc.Class.extend({
 
         this.shapeDercha.setSensor(true);
         this.shapeDercha.setCollisionType(tipoEnemigoDerecha);
-// agregar forma dinamica
         gameLayer.space.addShape(this.shapeDercha);
 
 
@@ -104,6 +114,7 @@ var EnemigoTirador = cc.Class.extend({
                 }
             }
         }
+        
     }
 
 

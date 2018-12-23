@@ -1,6 +1,7 @@
 var EnemigoPatrulla = cc.Class.extend({
     gameLayer:null,
     orientacion:1,
+    vidas:1,
     sprite:null,
     shape:null,
     ctor:function (gameLayer, posicion) {
@@ -28,7 +29,14 @@ var EnemigoPatrulla = cc.Class.extend({
 
         var mitadAncho = this.sprite.getContentSize().width/2;
         var mitadAlto = this.sprite.getContentSize().height/2;
-// más pequeño
+
+        this.shapeArriba = new cp.PolyShape(this.body,
+            [ -mitadAncho, mitadAlto, mitadAncho, mitadAlto] ,
+            cp.v(0,0) );
+
+        this.shapeArriba.setSensor(true);
+        this.shapeArriba.setCollisionType(tipoEnemigoArriba);
+        gameLayer.space.addShape(this.shapeArriba);
 
         this.shapeIzquierda = new cp.PolyShape(this.body,
             [ -mitadAncho, 0, -mitadAncho, -mitadAlto - 10] ,

@@ -4,7 +4,7 @@ var tipoEnemigo = 3;
 var tipoEnemigoDerecha = 4;
 var tipoEnemigoIzquierda = 5;
 var tipoDisparo = 6;
-var tipoDisparoJugador = 7;
+var tipoEnemigoArriba = 8;
 
 var GameLayer = cc.Layer.extend({
     space:null,
@@ -49,7 +49,10 @@ var GameLayer = cc.Layer.extend({
             null, null, this.collisionDisparoConJugador.bind(this), null);
         this.space.addCollisionHandler(tipoSuelo, tipoDisparo,
             null, null, this.collisionDisparoConSuelos.bind(this), null);
-
+        this.space.addCollisionHandler(tipoEnemigo, tipoDisparo,
+            null, null, this.collisionDisparoConEnemigo.bind(this), null);
+        this.space.addCollisionHandler(tipoJugador, tipoEnemigoArriba,
+            null, null, this.jugadorSalto.bind(this), null);
 
         return true;
     },
@@ -73,7 +76,7 @@ var GameLayer = cc.Layer.extend({
                     this.disparos[j].body.shapeList[0] == shape) {
                     this.space.removeShape(shape);
                     this.space.removeBody(shape.getBody());
-                    this.removeChild(this.disparos[j]);
+                    this.disparos[j].sprite.removeFromParent();
                     this.disparos.splice(j, 1);
                 }
             }
@@ -82,19 +85,20 @@ var GameLayer = cc.Layer.extend({
                     this.enemigos[j].body.shapeList[0] == shape) {
                     this.space.removeShape(shape);
                     this.space.removeBody(shape.getBody());
-                    this.removeChild(this.enemigos[j]);
+                    this.enemigos[j].sprite.removeFromParent();
                     this.enemigos.splice(j, 1);
 
                 }
             }
             for (var j = 0; j < this.tiradores.length; j++) {
                 if (this.tiradores[j] != null &&
-                    this.tiradores[j].body.shapeList[0] == shape) {
-                    this.space.removeShape(shape);
+                    (this.tiradores[j].body.shapeList[0] == shape ||
+                        this.tiradores[j].body.shapeList[1] == shape)) {
+                    this.space.removeShape(this.tiradores[j].body.shapeList[0]);
+                    this.space.removeShape(this.tiradores[j].body.shapeList[1]);
                     this.space.removeBody(shape.getBody());
-                    this.removeChild(this.tiradores[j]);
+                    this.tiradores[j].sprite.removeFromParent();
                     this.tiradores.splice(j, 1);
-
                 }
             }
         }
@@ -109,10 +113,10 @@ var GameLayer = cc.Layer.extend({
             if(this.tiradores[i].actualizar(this.jugador.body.p.x,this.jugador.body.p.y)){
                if(this.tiradores[i].orientacion==1){
                    var disparo =  new Disparo(this,
-                       cc.p(this.tiradores[i].body.p.x-20,this.tiradores[i].body.p.y),this.tiradores[i].orientacion);
+                       cc.p(this.tiradores[i].body.p.x-30,this.tiradores[i].body.p.y),this.tiradores[i].orientacion);
                } else{
                    var disparo =  new Disparo(this,
-                       cc.p(this.tiradores[i].body.p.x+20,this.tiradores[i].body.p.y),this.tiradores[i].orientacion);
+                       cc.p(this.tiradores[i].body.p.x+30,this.tiradores[i].body.p.y),this.tiradores[i].orientacion);
                }
 
               this.disparos.push(disparo);
@@ -273,6 +277,7 @@ var GameLayer = cc.Layer.extend({
     },
     collisionDisparoConEnemigo:function (arbiter, space) {
         var shapes = arbiter.getShapes();
+        this.formasEliminar.push(shapes[0]);
         this.formasEliminar.push(shapes[1]);
     },
     collisionDisparoConSuelos:function (arbiter, space) {
@@ -295,6 +300,10 @@ var GameLayer = cc.Layer.extend({
         }
         this.jugador.estado = estadoSaltando;
 
+    },jugadorSalto:function(arbiter,space){
+        console.log("hey, play the game");
+        var shapes = arbiter.getShapes();
+        this.formasEliminar.push(shapes[1]);
     }
 });
 
