@@ -19,6 +19,7 @@ var res = {
     jugador_idle_plist : "res/jugador/jugador_idle.plist",
     animacion_cuervo_png: "res/enemigoPatrulla/animacion_cuervo.png",
     animacion_cuervo_plist: "res/enemigoPatrulla/animacion_cuervo.plist",
+    disparo_png:"res/disparo_jugador2.png",
 
     //De aquí abajo son de prueba
     tiles32_png: "res/mapas/tiles32.png",

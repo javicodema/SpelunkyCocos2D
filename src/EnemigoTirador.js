@@ -1,16 +1,17 @@
 var EnemigoTirador = cc.Class.extend({
-    gameLayer:null,
-    orientacion:1,
-    sprite:null,
-    shape:null,
-    ctor:function (gameLayer, posicion) {
+    gameLayer: null,
+    orientacion: 1,
+    sprite: null,
+    shape: null,
+    delayDisparo: 50,
+    ctor: function (gameLayer, posicion) {
         this.gameLayer = gameLayer;
 
         // Crear Sprite - Cuerpo y forma
         this.sprite = new cc.PhysicsSprite("#cuervo1.png");
         // Cuerpo estática , no le afectan las fuerzas
         // Cuerpo dinámico, SI le afectan las fuerzas
-        this.body = new cp.Body(5,Infinity);
+        this.body = new cp.Body(5, Infinity);
         this.body.setPos(posicion);
         this.body.setAngle(0);
         this.sprite.setBody(this.body);
@@ -26,13 +27,13 @@ var EnemigoTirador = cc.Class.extend({
         gameLayer.space.addShape(this.shape);
 
 
-        var mitadAncho = this.sprite.getContentSize().width/2;
-        var mitadAlto = this.sprite.getContentSize().height/2;
+        var mitadAncho = this.sprite.getContentSize().width / 2;
+        var mitadAlto = this.sprite.getContentSize().height / 2;
 // más pequeño
 
         this.shapeIzquierda = new cp.PolyShape(this.body,
-            [ -mitadAncho, 0, -mitadAncho, -mitadAlto - 10] ,
-            cp.v(0,0) );
+            [-mitadAncho, 0, -mitadAncho, -mitadAlto - 10],
+            cp.v(0, 0));
 
         this.shapeIzquierda.setSensor(true);
         this.shapeIzquierda.setCollisionType(tipoEnemigoIzquierda);
@@ -40,8 +41,8 @@ var EnemigoTirador = cc.Class.extend({
         gameLayer.space.addShape(this.shapeIzquierda);
 
         this.shapeDercha = new cp.PolyShape(this.body,
-            [ mitadAncho, 0, mitadAncho, -mitadAlto - 10] ,
-            cp.v(0,0) );
+            [mitadAncho, 0, mitadAncho, -mitadAlto - 10],
+            cp.v(0, 0));
 
         this.shapeDercha.setSensor(true);
         this.shapeDercha.setCollisionType(tipoEnemigoDerecha);
@@ -50,7 +51,7 @@ var EnemigoTirador = cc.Class.extend({
 
 
         // añadir sprite a la capa
-        gameLayer.addChild(this.sprite,10);
+        gameLayer.addChild(this.sprite, 10);
 
         // Crear animaciones
         var framesAnimacion = [];
@@ -72,40 +73,38 @@ var EnemigoTirador = cc.Class.extend({
             null, null, null, this.noSueloDerecha.bind(this));
 
     },
-    noSueloDerecha : function(){
+    noSueloDerecha: function () {
         this.orientacion = -1;
     },
-    noSueloIzquierda: function(){
+    noSueloIzquierda: function () {
         this.orientacion = 1;
     },
-    actualizar: function(x,y){
-        if((Math.abs(this.body.p.x - x)) < 350){
-            if(this.orientacion==1){
+    actualizar: function (x, y) {
+        this.delayDisparo--;
+        if (this.delayDisparo <= 0 && (Math.abs(this.body.p.x - x)) < 350) {
+            if (this.orientacion == 1) {
                 this.sprite.flippedX = false;
-                if ((this.body.p.y + 50) > y && (this.body.p.y - 50) < y){
-                    if((this.body.p.x - 20) < x) {
+                if ((this.body.p.y + 50) > y && (this.body.p.y - 50) < y) {
+                    if ((this.body.p.x - 20) < x) {
                         this.sprite.flippedX = true;
                         this.orientacion = -1;
                     }
-                    else{
-                    }
+                    this.delayDisparo = 50;
+                    return true;
                 }
-            }else{
+            } else {
                 this.sprite.flippedX = true;
-                if ((this.body.p.y + 50) > y && (this.body.p.y - 50) < y){
-                    if((this.body.p.x - 20) > x) {
+                if ((this.body.p.y + 50) > y && (this.body.p.y - 50) < y) {
+                    if ((this.body.p.x - 20) > x) {
                         this.sprite.flippedX = false;
                         this.orientacion = 1;
                     }
-                    else{
-                    }
+                    this.delayDisparo = 50;
+                    return true;
                 }
-
             }
         }
-
     }
-
 
 
 });

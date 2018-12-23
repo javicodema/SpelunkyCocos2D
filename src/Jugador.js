@@ -257,6 +257,7 @@ var Jugador = cc.Class.extend({
         if(this.estado != estadoImpactado){
             this.estado = estadoImpactado;
         }
+        this.vidas--;
     },
     agachado: function(){
         if(this.estado != estadoAgachado){
