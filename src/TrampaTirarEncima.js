@@ -7,6 +7,7 @@ var TrampaTirarEncima = cc.Class.extend({
     triggerShape:null,
     activo: false,
     finAccion: false,
+    causo_herida: false,
     ctor:function (gameLayer, posicion, trigger) {
         this.gameLayer = gameLayer;
 
@@ -59,6 +60,7 @@ var TrampaTirarEncima = cc.Class.extend({
     },
     activar: function(){
         this.gameLayer.space.addBody(this.body);
+        console.log("activa")
     },
     desactivar: function(){
         this.gameLayer.space.removeBody(this.body);
@@ -67,6 +69,7 @@ var TrampaTirarEncima = cc.Class.extend({
         var b = new cp.Body(Infinity, Infinity);
         b.nodeIdleTime = Infinity;
         this.body = b;
+        console.log("fuera")
     }
 
 });

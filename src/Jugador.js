@@ -236,6 +236,9 @@ var Jugador = cc.Class.extend({
                 break;
         }
     },
+    recibeHerida(){
+        this.vidas--;
+    },
     tocaSuelo: function() {
         this.saltosAcutales=0
         if (this.estado != estadoCaminando || this.estado != estadoIdle) {
