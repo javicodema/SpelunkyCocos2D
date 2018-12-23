@@ -43,10 +43,10 @@ var Jugador = cc.Class.extend({
         this.body = new cp.Body(5, cp.momentForBox(1,
             this.sprite.getContentSize().width,
             this.sprite.getContentSize().height));
-
         this.body.setPos(posicion);
         //body.w_limit = 0.02;
         this.body.setAngle(0);
+        this.body.mass = 1;
         this.sprite.setBody(this.body);
 
         // Se añade el cuerpo al espacio

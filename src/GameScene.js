@@ -4,6 +4,8 @@ var tipoEnemigo = 3;
 var tipoEnemigoDerecha = 4;
 var tipoEnemigoIzquierda = 5;
 var tipoDisparo = 6;
+var tipoTrampaTirarEncima = 7;
+var tipoTriggerTirarEncima = 8;
 
 var GameLayer = cc.Layer.extend({
     space:null,
@@ -36,11 +38,18 @@ var GameLayer = cc.Layer.extend({
         this.scheduleUpdate();
 
         // Zona de escuchadores de colisiones
-    // Colisión Suelo y Jugador
+        // Colisión Suelo y Jugador
         this.space.addCollisionHandler(tipoSuelo, tipoJugador,
             null, null, this.collisionSueloConJugador.bind(this), this.finCollisionSueloConJugador.bind(this));
         this.space.addCollisionHandler(tipoJugador, tipoEnemigo,
             null, null, this.collisionEnemigoConJugador.bind(this), this.finCollisionEnemigoConJugador.bind(this));
+
+        //Colisiones de la trampa de tirar encima
+        this.space.addCollisionHandler(tipoJugador, tipoTriggerTirarEncima,
+            this.collisionTriggerTirarEncima.bind(this), null, null, null);
+
+        this.space.addCollisionHandler(tipoSuelo, tipoTrampaTirarEncima,
+            this.collisionTrampaTirarEncimaSuelo.bind(this), null, null, null);
 
         return true;
     },
@@ -195,8 +204,19 @@ var GameLayer = cc.Layer.extend({
         }
 
 
+        //Trampas tirar encima
+        var grupoTrampasTirar = this.mapa.getObjectGroup("trampasTirarEncima");
+        var grupoTriggersTirar = this.mapa.getObjectGroup("triggersTirarEncima");
+        var trampasArray = grupoTrampasTirar.getObjects();
+        var triggersArray = grupoTriggersTirar.getObjects();
+        for (var i = 0; i < trampasArray.length; i++) {
+            var numero = trampasArray[i].name.substring(2);
+            var trigger = triggersArray.find( tr => tr.name == 'ttg'+ numero)
+            var trampaTirarEncima = new TrampaTirarEncima( this,  cc.p(trampasArray[i]["x"],trampasArray[i]["y"]), trigger );
 
-
+            //Buscar el trigger correspondiente
+            //this.enemigos.push(enemigo);
+        }
     },collisionEnemigoConJugador: function (arbiter, space) {
         //a rellenar
     },
@@ -218,6 +238,24 @@ var GameLayer = cc.Layer.extend({
         }
         this.jugador.estado = estadoSaltando;
 
+    },
+    collisionTriggerTirarEncima: function(arbitrer, space){
+        triggerActivado = arbitrer.body_b.userData;
+        if( !triggerActivado.activo ) {
+            space.addPostStepCallback(() => {
+                triggerActivado.activar();
+            })
+        }
+        triggerActivado.activo = true;
+
+    },collisionTrampaTirarEncimaSuelo: function(arbitrer, space){
+        trampaCaida = arbitrer.body_b.userData;
+        if( trampaCaida.activo && !trampaCaida.finAccion ) {
+            space.addPostStepCallback( ()=>{
+                trampaCaida.desactivar();
+            } )
+        }
+        trampaCaida.finAccion = true;
     }
 });
 
