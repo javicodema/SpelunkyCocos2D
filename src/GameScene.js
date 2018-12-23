@@ -231,6 +231,7 @@ var GameLayer = cc.Layer.extend({
             }
         }
 
+
         var grupoEnemigos = this.mapa.getObjectGroup("patrullas");
         var enemigosArray = grupoEnemigos.getObjects();
   /*      for (var i = 0; i < enemigosArray.length; i++) {
