@@ -30,6 +30,7 @@ var ControlesLayer = cc.Layer.extend({
         this.etiquetaLlaves.fillStyle = new cc.Color(255, 255, 255, 0);
         this.addChild(this.etiquetaLlaves);
 
+
         // Registrar Mouse Down
         cc.eventManager.addListener({
             event: cc.EventListener.MOUSE,
@@ -51,6 +52,7 @@ var ControlesLayer = cc.Layer.extend({
         return true;
     },
     update:function (dt) {
+
     },
     procesarPulsacionesTeclado:function(key, event){
         switch(key){

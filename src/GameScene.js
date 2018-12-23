@@ -47,10 +47,9 @@ var GameLayer = cc.Layer.extend({
         //Colisiones de la trampa de tirar encima
         this.space.addCollisionHandler(tipoJugador, tipoTriggerTirarEncima,
             this.collisionTriggerTirarEncima.bind(this), null, null, null);
+
         this.space.addCollisionHandler(tipoSuelo, tipoTrampaTirarEncima,
             this.collisionTrampaTirarEncimaSuelo.bind(this), null, null, null);
-        this.space.addCollisionHandler(tipoJugador, tipoTrampaTirarEncima,
-            this.collisionTrampaTirarEncimaJugador.bind(this), null, null, null);
 
         return true;
     },
@@ -242,7 +241,6 @@ var GameLayer = cc.Layer.extend({
     },
     collisionTriggerTirarEncima: function(arbitrer, space){
         triggerActivado = arbitrer.body_b.userData;
-
         if( !triggerActivado.activo ) {
             space.addPostStepCallback(() => {
                 triggerActivado.activar();
@@ -252,27 +250,12 @@ var GameLayer = cc.Layer.extend({
 
     },collisionTrampaTirarEncimaSuelo: function(arbitrer, space){
         trampaCaida = arbitrer.body_b.userData;
-        if( trampaCaida === undefined ){
-            return;
-        }
         if( trampaCaida.activo && !trampaCaida.finAccion ) {
             space.addPostStepCallback( ()=>{
                 trampaCaida.desactivar();
             } )
         }
         trampaCaida.finAccion = true;
-    },collisionTrampaTirarEncimaJugador:function(arbitrer, space){
-        trampaCaida = arbitrer.body_b.userData;
-        if( trampaCaida === undefined ){
-            return;
-        }
-        if( !trampaCaida.causo_herida && !trampaCaida.finAccion ) {
-            var capaControles = this.getParent().getChildByTag(idCapaControles);
-            this.jugador.recibeHerida();
-            capaControles.actualizarVida( this.jugador.vidas );
-        }
-        trampaCaida.causo_herida= true;
-
     }
 });
 
@@ -288,7 +271,6 @@ var GameScene = cc.Scene.extend({
 
         var controlesLayer = new ControlesLayer();
         this.addChild(controlesLayer, 0, idCapaControles);
-        controlesLayer.jugador = layer.jugdor;
 
     }
 });
