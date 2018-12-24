@@ -4,12 +4,17 @@ var tipoEnemigo = 3;
 var tipoEnemigoDerecha = 4;
 var tipoEnemigoIzquierda = 5;
 var tipoDisparo = 6;
+var tipoJugAbajo = 7;
+var tipoEnemigoArriba = 8;
 
 var GameLayer = cc.Layer.extend({
     space:null,
     mapa: null,
     mapaAncho: null,
     enemigos:[],
+    tiradores:[],
+    disparos:[],
+    formasEliminar:[],
     jugador: null,
     ctor:function () {
         this._super();
@@ -41,17 +46,88 @@ var GameLayer = cc.Layer.extend({
             null, null, this.collisionSueloConJugador.bind(this), this.finCollisionSueloConJugador.bind(this));
         this.space.addCollisionHandler(tipoJugador, tipoEnemigo,
             null, null, this.collisionEnemigoConJugador.bind(this), this.finCollisionEnemigoConJugador.bind(this));
+        this.space.addCollisionHandler(tipoJugador, tipoDisparo,
+            null, null, this.collisionDisparoConJugador.bind(this), null);
+        this.space.addCollisionHandler(tipoSuelo, tipoDisparo,
+            null, null, this.collisionDisparoConSuelos.bind(this), null);
+        this.space.addCollisionHandler(tipoEnemigo, tipoDisparo,
+            null, null, this.collisionDisparoConEnemigo.bind(this), null);
+        this.space.addCollisionHandler(tipoJugAbajo, tipoEnemigoArriba,
+            null, null, this.jugadorSalto.bind(this), null);
+        this.space.addCollisionHandler(tipoSuelo, tipoEnemigoIzquierda,
+            null, null, null, this.noSueloIzquierda.bind(this));
+        this.space.addCollisionHandler(tipoSuelo, tipoEnemigoDerecha,
+            null, null, null, this.noSueloDerecha.bind(this));
 
         return true;
     },
     update:function (dt) {
+        var capaControles =
+            this.getParent().getChildByTag(idCapaControles);
+        capaControles.actualizarVida(this.jugador.vidas);
 
         this.jugador.actualizar();
         this.space.step(dt);
+        for (var j = 0; j < this.disparos.length; j++) {
+            this.disparos[j].body.vy=0;
+        }
 
+
+        for(var i = 0; i < this.formasEliminar.length; i++) {
+            var shape = this.formasEliminar[i];
+
+            for (var j = 0; j < this.disparos.length; j++) {
+                if (this.disparos[j] != null &&
+                    this.disparos[j].body.shapeList[0] == shape) {
+                    this.space.removeShape(shape);
+                    this.space.removeBody(shape.getBody());
+                    this.disparos[j].sprite.removeFromParent();
+                    this.disparos.splice(j, 1);
+                }
+            }
+            for (var j = 0; j < this.enemigos.length; j++) {
+                if (this.enemigos[j] != null &&
+                    (this.enemigos[j].body.shapeList[0] == shape ||
+                        this.enemigos[j].body.shapeList[1] == shape)){
+                    this.space.removeShape(this.enemigos[j].body.shapeList[0]);
+                    this.space.removeShape(this.enemigos[j].body.shapeList[1]);
+                    this.space.removeBody(shape.getBody());
+                    this.enemigos[j].sprite.removeFromParent();
+                    this.enemigos.splice(j, 1);
+
+                }
+            }
+            for (var j = 0; j < this.tiradores.length; j++) {
+                if (this.tiradores[j] != null &&
+                    (this.tiradores[j].body.shapeList[0] == shape ||
+                        this.tiradores[j].body.shapeList[1] == shape)) {
+                    this.space.removeShape(this.tiradores[j].body.shapeList[0]);
+                    this.space.removeShape(this.tiradores[j].body.shapeList[1]);
+                    this.space.removeBody(shape.getBody());
+                    this.tiradores[j].sprite.removeFromParent();
+                    this.tiradores.splice(j, 1);
+                }
+            }
+        }
+        this.formasEliminar = [];
         var i = 0;
         for(i=0;i<this.enemigos.length;i++){
             this.enemigos[i].actualizar(this.jugador.body.p.x,this.jugador.body.p.y);
+        }
+
+        i = 0;
+        for(i=0;i<this.tiradores.length;i++){
+            if(this.tiradores[i].actualizar(this.jugador.body.p.x,this.jugador.body.p.y)){
+               if(this.tiradores[i].orientacion==1){
+                   var disparo =  new Disparo(this,
+                       cc.p(this.tiradores[i].body.p.x-30,this.tiradores[i].body.p.y),this.tiradores[i].orientacion);
+               } else{
+                   var disparo =  new Disparo(this,
+                       cc.p(this.tiradores[i].body.p.x+30,this.tiradores[i].body.p.y),this.tiradores[i].orientacion);
+               }
+
+              this.disparos.push(disparo);
+            }
         }
 
 
@@ -175,16 +251,16 @@ var GameLayer = cc.Layer.extend({
 
             this.enemigos.push(enemigo);
         }
-/*
+
         grupoEnemigos = this.mapa.getObjectGroup("disparadores");
         enemigosArray = grupoEnemigos.getObjects();
         for (var i = 0; i < enemigosArray.length; i++) {
             var enemigo = new EnemigoTirador(this,
                 cc.p(enemigosArray[i]["x"],enemigosArray[i]["y"]));
 
-            this.enemigos.push(enemigo);
+            this.tiradores.push(enemigo);
         }
-*/
+
         grupoEnemigos = this.mapa.getObjectGroup("perseguidores");
         enemigosArray = grupoEnemigos.getObjects();
         for (var i = 0; i < enemigosArray.length; i++) {
@@ -195,13 +271,26 @@ var GameLayer = cc.Layer.extend({
         }
 
 
-
-
     },collisionEnemigoConJugador: function (arbiter, space) {
         //a rellenar
     },
     finCollisionEnemigoConJugador:function (arbiter, space) {
-        //a rellenar
+        this.jugador.impactado();
+    },
+    collisionDisparoConJugador: function (arbiter, space) {
+        var shapes = arbiter.getShapes();
+        this.formasEliminar.push(shapes[1]);
+        this.jugador.impactado();
+    },
+    collisionDisparoConEnemigo:function (arbiter, space) {
+        var shapes = arbiter.getShapes();
+        this.formasEliminar.push(shapes[0]);
+        this.formasEliminar.push(shapes[1]);
+    },
+    collisionDisparoConSuelos:function (arbiter, space) {
+        var shapes = arbiter.getShapes();
+        this.formasEliminar.push(shapes[0]);
+        this.formasEliminar.push(shapes[1]);
     },
     collisionSueloConJugador: function (arbiter, space) {
         this.jugador.tocaSuelo();
@@ -218,6 +307,35 @@ var GameLayer = cc.Layer.extend({
         }
         this.jugador.estado = estadoSaltando;
 
+    },jugadorSalto:function(arbiter,space){
+        var shapes = arbiter.getShapes();
+        this.formasEliminar.push(shapes[1]);
+    },
+    noSueloDerecha : function(arbiter, space){
+        var shapes = arbiter.getShapes();
+        for (var j = 0; j < this.enemigos.length; j++) {
+            if(this.enemigos[j].body.shapeList[3]==shapes[1]){
+                this.enemigos[j].orientacion=-1;
+            }
+        }
+        for (var j = 0; j < this.tiradores.length; j++) {
+            if(this.tiradores[j].body.shapeList[3]==shapes[1]){
+                this.tiradores[j].orientacion=-1;
+            }
+        }
+    },
+    noSueloIzquierda: function(arbiter, space){
+        var shapes = arbiter.getShapes();
+        for (var j = 0; j < this.enemigos.length; j++) {
+            if(this.enemigos[j].body.shapeList[2]==shapes[1]){
+                this.enemigos[j].orientacion=1;
+            }
+        }
+        for (var j = 0; j < this.tiradores.length; j++) {
+            if(this.tiradores[j].body.shapeList[2]==shapes[1]){
+                this.tiradores[j].orientacion=1;
+            }
+        }
     }
 });
 

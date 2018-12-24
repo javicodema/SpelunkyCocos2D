@@ -1,8 +1,10 @@
 var EnemigoPatrulla = cc.Class.extend({
     gameLayer:null,
     orientacion:1,
+    vidas:1,
     sprite:null,
     shape:null,
+    name:null,
     ctor:function (gameLayer, posicion) {
         this.gameLayer = gameLayer;
 
@@ -16,7 +18,7 @@ var EnemigoPatrulla = cc.Class.extend({
         this.sprite.setBody(this.body);
         // Se añade el cuerpo al espacio
         gameLayer.space.addBody(this.body);
-
+        this.name = this.body.p.y;
         // forma
         this.shape = new cp.BoxShape(this.body,
             this.sprite.getContentSize().width,
@@ -28,8 +30,14 @@ var EnemigoPatrulla = cc.Class.extend({
 
         var mitadAncho = this.sprite.getContentSize().width/2;
         var mitadAlto = this.sprite.getContentSize().height/2;
-// más pequeño
 
+        this.shapeArriba = new cp.PolyShape(this.body,
+            [ -mitadAncho, mitadAlto, mitadAncho, mitadAlto] ,
+            cp.v(0,0) );
+
+        //this.shapeArriba.setSensor(true);
+        this.shapeArriba.setCollisionType(tipoEnemigoArriba);
+        gameLayer.space.addShape(this.shapeArriba);
         this.shapeIzquierda = new cp.PolyShape(this.body,
             [ -mitadAncho, 0, -mitadAncho, -mitadAlto - 10] ,
             cp.v(0,0) );
@@ -65,12 +73,6 @@ var EnemigoPatrulla = cc.Class.extend({
         // ejecutar la animación
         this.sprite.runAction(actionAnimacionBucle);
 
-        gameLayer.space.addCollisionHandler(tipoSuelo, tipoEnemigoIzquierda,
-            null, null, null, this.noSueloIzquierda.bind(this));
-
-        gameLayer.space.addCollisionHandler(tipoSuelo, tipoEnemigoDerecha,
-            null, null, null, this.noSueloDerecha.bind(this));
-
     },
     actualizar: function(){
 
@@ -95,12 +97,6 @@ var EnemigoPatrulla = cc.Class.extend({
                 this.body.vx = -100; //limitado
             }
         }
-    },
-    noSueloDerecha : function(){
-        this.orientacion = -1;
-    },
-    noSueloIzquierda: function(){
-        this.orientacion = 1;
     }
 
 
