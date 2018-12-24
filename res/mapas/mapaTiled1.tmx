@@ -21,12 +21,12 @@
    eJzt2rEJAAAIA0G3cv/NbGxtReEOfoK0iYBd2QEAAAAAAAAAMPOxuMUePxT4wwFL
   </data>
  </layer>
- <objectgroup id="4" name="llaves" visible="0">
+ <objectgroup id="4" name="llaves">
   <object id="1" x="403" y="376" width="30" height="30"/>
   <object id="4" x="1457" y="497" width="30" height="30"/>
   <object id="5" x="466" y="1204" width="30" height="30"/>
  </objectgroup>
- <objectgroup id="5" name="suelos" visible="0">
+ <objectgroup id="5" name="suelos">
   <object id="6" x="28.5" y="34.5">
    <polyline points="0,0 0,404 2.5,701 66.5,702.5 66,769.5 0,768.5 3,1052.5 35,1053 34.5,1063 98.5,1064 99,1053 162,1053.5 162,1279.5 131,1279.5 131.5,1083 2.5,1083.5 4,1149.5 99.5,1150 99.5,1182 2.5,1182.5 1.5,1532.5 228,1534 228,1561.5 612,1560.5 612,1534 1058.5,1534 1058.5,1561.5 1252,1560.5 1252,1533 1348,1533 1348,1469 1474.5,1470.5 1474,1533 1541,1533.5 1541,733.5 1411,734 1410.5,767 1251.5,767 1251.5,731.5 1380.5,733 1380.5,604 1539,604.5 1539.5,447 1314.5,446 1315.5,671 1283.5,670.5 1284,411 1348,412.5 1349,348 1475,350 1475,413.5 1539.5,414 1540.5,0 1218,-0.5 1218.5,190.5 1123.5,190 1124.5,-1.5 0.5,-0.5"/>
   </object>
@@ -94,12 +94,12 @@
    <polyline points="0,0 1.33333,163.333 34,163.333 34,193.333 65.3333,194.667 66.6667,227.333 98,226.667 97.3333,320.667 129.333,324 133.333,353.333 253.333,355.333 253.333,193.333 287.333,192.667 288,0 223.333,1.33333 223.333,24.6667 128,25.3333 129.333,2 0.666667,-0.666667"/>
   </object>
  </objectgroup>
- <objectgroup id="6" name="agua" visible="0">
+ <objectgroup id="6" name="agua">
   <object id="31" x="64.1818" y="1087.73">
    <polyline points="0,0 -0.181818,9 62.4545,10.0909 62.8182,-0.0909091 0.0909091,0.0909091"/>
   </object>
  </objectgroup>
- <objectgroup id="7" name="lava" visible="0">
+ <objectgroup id="7" name="lava">
   <object id="32" x="256.75" y="1582">
    <polyline points="0,0 0.5,12.25 383.5,12.5 383,-0.5 0.25,-0.5"/>
   </object>
@@ -110,7 +110,7 @@
    <polyline points="0,0 -0.125,9.625 93.75,9.25 94.125,-0.375 0,0"/>
   </object>
  </objectgroup>
- <objectgroup id="8" name="trampasRalentizar" visible="0" offsetx="-4.36364" offsety="0.0909091">
+ <objectgroup id="8" name="trampasRalentizar" offsetx="-4.36364" offsety="0.0909091">
   <object id="35" x="607.875" y="498.625" width="32.375" height="13.25"/>
   <object id="36" x="323.869" y="626.364" width="32.375" height="13.25"/>
   <object id="38" x="291.688" y="626.25" width="32.375" height="13.25"/>
@@ -132,7 +132,7 @@
   <object id="54" x="1507.88" y="1554.44" width="32.375" height="13.25"/>
   <object id="55" x="1540.5" y="1554.44" width="32.375" height="13.25"/>
  </objectgroup>
- <objectgroup id="9" name="opcionales" visible="0">
+ <objectgroup id="9" name="opcionales">
   <object id="56" x="1338.25" y="122" width="20" height="20"/>
   <object id="57" x="1381" y="101.5" width="20" height="20"/>
   <object id="58" x="1414" y="101.25" width="20" height="20"/>
@@ -153,10 +153,10 @@
   <object id="73" x="1238" y="945" width="20" height="20"/>
   <object id="74" x="1270" y="944" width="20" height="20"/>
  </objectgroup>
- <objectgroup id="10" name="armas" visible="0">
+ <objectgroup id="10" name="armas">
   <object id="75" x="1432" y="346" width="20" height="20"/>
  </objectgroup>
- <objectgroup id="11" name="bombas" visible="0">
+ <objectgroup id="11" name="bombas">
   <object id="76" x="149" y="1050" width="20" height="20"/>
   <object id="77" x="115" y="634" width="20" height="20"/>
   <object id="78" x="1119" y="622" width="20" height="20"/>
@@ -164,10 +164,10 @@
   <object id="80" x="1461" y="1270" width="20" height="20"/>
   <object id="81" x="983" y="1337" width="20" height="20"/>
  </objectgroup>
- <objectgroup id="12" name="monturas" visible="0">
+ <objectgroup id="12" name="monturas">
   <object id="82" x="1157" y="949" width="20" height="20"/>
  </objectgroup>
- <objectgroup id="13" name="patrullas" visible="0">
+ <objectgroup id="13" name="patrullas">
   <object id="83" x="1061" y="503" width="20" height="20"/>
   <object id="84" x="828" y="260" width="20" height="20"/>
   <object id="85" x="439" y="185" width="20" height="20"/>

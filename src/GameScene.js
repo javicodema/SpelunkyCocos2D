@@ -47,9 +47,12 @@ var GameLayer = cc.Layer.extend({
         //Colisiones de la trampa de tirar encima
         this.space.addCollisionHandler(tipoJugador, tipoTriggerTirarEncima,
             this.collisionTriggerTirarEncima.bind(this), null, null, null);
-
         this.space.addCollisionHandler(tipoSuelo, tipoTrampaTirarEncima,
             this.collisionTrampaTirarEncimaSuelo.bind(this), null, null, null);
+
+        this.space.addCollisionHandler(tipoJugador, tipoTrampaTirarEncima,
+            null, null, this.collisionTrampaTirarEncimaJugador.bind(this), null);
+
 
         return true;
     },
@@ -168,7 +171,9 @@ var GameLayer = cc.Layer.extend({
                         parseInt(suelo.y) - parseInt(puntos[j].y)),
                     cp.v(parseInt(suelo.x) + parseInt(puntos[j + 1].x),
                         parseInt(suelo.y) - parseInt(puntos[j + 1].y)),
-                    10);
+                    3);
+                shapeSuelo.setElasticity(0.5);
+                shapeSuelo.setFriction(1);
                 shapeSuelo.setCollisionType(tipoSuelo);
                 this.space.addStaticShape(shapeSuelo);
 
@@ -241,6 +246,9 @@ var GameLayer = cc.Layer.extend({
     },
     collisionTriggerTirarEncima: function(arbitrer, space){
         triggerActivado = arbitrer.body_b.userData;
+        if( triggerActivado === undefined ){
+            return;
+        }
         if( !triggerActivado.activo ) {
             space.addPostStepCallback(() => {
                 triggerActivado.activar();
@@ -250,12 +258,33 @@ var GameLayer = cc.Layer.extend({
 
     },collisionTrampaTirarEncimaSuelo: function(arbitrer, space){
         trampaCaida = arbitrer.body_b.userData;
+        if( trampaCaida === undefined ){
+            return;
+        }
+        console.log(trampaCaida)
         if( trampaCaida.activo && !trampaCaida.finAccion ) {
             space.addPostStepCallback( ()=>{
+                //Algunas veces dice que desactivar no es una function??
                 trampaCaida.desactivar();
             } )
         }
         trampaCaida.finAccion = true;
+    },collisionTrampaTirarEncimaJugador:function(arbitrer, space){
+        trampaCaida = arbitrer.body_b.userData;
+        jugador = arbitrer.body_a.userData;
+        if( trampaCaida === undefined ){
+            return;
+        }
+        if( !trampaCaida.causo_herida && !trampaCaida.finAccion && trampaCaida.activo) {
+            var capaControles = this.getParent().getChildByTag(idCapaControles);
+            //Mover el jugador atras para evitar problemas de atravesar suelos.
+            jugador.body.p.x += jugador.body.vx>0?-30:30;
+
+            jugador.recibeHerida();
+            capaControles.actualizarVida( this.jugador.vidas );
+        }
+        trampaCaida.causo_herida = true;
+
     }
 });
 

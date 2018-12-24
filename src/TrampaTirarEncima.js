@@ -7,6 +7,7 @@ var TrampaTirarEncima = cc.Class.extend({
     triggerShape:null,
     activo: false,
     finAccion: false,
+    causo_herida: false,
     ctor:function (gameLayer, posicion, trigger) {
         this.gameLayer = gameLayer;
 

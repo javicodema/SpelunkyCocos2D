@@ -27,7 +27,7 @@ var Jugador = cc.Class.extend({
     spriteSaltoBajando: null,
     spriteSaltoSubiendo: null,
     bonificadorSalto:1,
-    bonificadorVelocidad:300,
+    bonificadorVelocidad:100,
     velocidad: 300,
     potenciaSalto:1000,
     maxSaltos: 2,
@@ -51,6 +51,8 @@ var Jugador = cc.Class.extend({
 
         // Se añade el cuerpo al espacio
         gameLayer.space.addBody(this.body);
+
+        this.body.userData = this;
 
         // forma 16px más pequeña que la imagen original
         this.shape = new cp.BoxShape(this.body,
@@ -158,6 +160,9 @@ var Jugador = cc.Class.extend({
             this.body.vy = 0;
             this.body.applyImpulse(cp.v(0, this.potenciaSalto), cp.v(0, 0));
         }
+    },
+    recibeHerida: function() {
+        this.vidas--;
     }
     ,actualizar: function (){
         //Cambiar la orientación del PJ
