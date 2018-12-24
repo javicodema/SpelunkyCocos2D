@@ -34,10 +34,9 @@ var EnemigoPatrulla = cc.Class.extend({
             [ -mitadAncho, mitadAlto, mitadAncho, mitadAlto] ,
             cp.v(0,0) );
 
-        this.shapeArriba.setSensor(true);
+        //this.shapeArriba.setSensor(true);
         this.shapeArriba.setCollisionType(tipoEnemigoArriba);
         gameLayer.space.addShape(this.shapeArriba);
-
         this.shapeIzquierda = new cp.PolyShape(this.body,
             [ -mitadAncho, 0, -mitadAncho, -mitadAlto - 10] ,
             cp.v(0,0) );

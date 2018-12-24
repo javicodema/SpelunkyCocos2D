@@ -55,8 +55,9 @@ var EnemigoPerseguidor = cc.Class.extend({
             [ -mitadAncho, mitadAlto, mitadAncho, mitadAlto] ,
             cp.v(0,0) );
 
-        this.shapeArriba.setSensor(true);
+        //this.shapeArriba.setSensor(true);
         this.shapeArriba.setCollisionType(tipoEnemigoArriba);
+        gameLayer.space.addShape(this.shapeArriba);
 // agregar forma dinamica
         gameLayer.space.addShape(this.shapeArriba);
 

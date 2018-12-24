@@ -4,6 +4,7 @@ var tipoEnemigo = 3;
 var tipoEnemigoDerecha = 4;
 var tipoEnemigoIzquierda = 5;
 var tipoDisparo = 6;
+var tipoJugAbajo = 7;
 var tipoEnemigoArriba = 8;
 
 var GameLayer = cc.Layer.extend({
@@ -51,7 +52,7 @@ var GameLayer = cc.Layer.extend({
             null, null, this.collisionDisparoConSuelos.bind(this), null);
         this.space.addCollisionHandler(tipoEnemigo, tipoDisparo,
             null, null, this.collisionDisparoConEnemigo.bind(this), null);
-        this.space.addCollisionHandler(tipoJugador, tipoEnemigoArriba,
+        this.space.addCollisionHandler(tipoJugAbajo, tipoEnemigoArriba,
             null, null, this.jugadorSalto.bind(this), null);
 
         return true;
@@ -82,8 +83,10 @@ var GameLayer = cc.Layer.extend({
             }
             for (var j = 0; j < this.enemigos.length; j++) {
                 if (this.enemigos[j] != null &&
-                    this.enemigos[j].body.shapeList[0] == shape) {
-                    this.space.removeShape(shape);
+                    (this.enemigos[j].body.shapeList[0] == shape ||
+                        this.enemigos[j].body.shapeList[1] == shape)){
+                    this.space.removeShape(this.enemigos[j].body.shapeList[0]);
+                    this.space.removeShape(this.enemigos[j].body.shapeList[1]);
                     this.space.removeBody(shape.getBody());
                     this.enemigos[j].sprite.removeFromParent();
                     this.enemigos.splice(j, 1);
@@ -238,13 +241,13 @@ var GameLayer = cc.Layer.extend({
 
         var grupoEnemigos = this.mapa.getObjectGroup("patrullas");
         var enemigosArray = grupoEnemigos.getObjects();
-  /*      for (var i = 0; i < enemigosArray.length; i++) {
+        for (var i = 0; i < enemigosArray.length; i++) {
             var enemigo = new EnemigoPatrulla(this,
                 cc.p(enemigosArray[i]["x"],enemigosArray[i]["y"]));
 
             this.enemigos.push(enemigo);
         }
-*/
+/*
         grupoEnemigos = this.mapa.getObjectGroup("disparadores");
         enemigosArray = grupoEnemigos.getObjects();
         for (var i = 0; i < enemigosArray.length; i++) {
@@ -301,7 +304,6 @@ var GameLayer = cc.Layer.extend({
         this.jugador.estado = estadoSaltando;
 
     },jugadorSalto:function(arbiter,space){
-        console.log("hey, play the game");
         var shapes = arbiter.getShapes();
         this.formasEliminar.push(shapes[1]);
     }
