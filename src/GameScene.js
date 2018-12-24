@@ -54,6 +54,10 @@ var GameLayer = cc.Layer.extend({
             null, null, this.collisionDisparoConEnemigo.bind(this), null);
         this.space.addCollisionHandler(tipoJugAbajo, tipoEnemigoArriba,
             null, null, this.jugadorSalto.bind(this), null);
+        this.space.addCollisionHandler(tipoSuelo, tipoEnemigoIzquierda,
+            null, null, null, this.noSueloIzquierda.bind(this));
+        this.space.addCollisionHandler(tipoSuelo, tipoEnemigoDerecha,
+            null, null, null, this.noSueloDerecha.bind(this));
 
         return true;
     },
@@ -247,7 +251,7 @@ var GameLayer = cc.Layer.extend({
 
             this.enemigos.push(enemigo);
         }
-/*
+
         grupoEnemigos = this.mapa.getObjectGroup("disparadores");
         enemigosArray = grupoEnemigos.getObjects();
         for (var i = 0; i < enemigosArray.length; i++) {
@@ -256,7 +260,7 @@ var GameLayer = cc.Layer.extend({
 
             this.tiradores.push(enemigo);
         }
-/*
+
         grupoEnemigos = this.mapa.getObjectGroup("perseguidores");
         enemigosArray = grupoEnemigos.getObjects();
         for (var i = 0; i < enemigosArray.length; i++) {
@@ -265,13 +269,13 @@ var GameLayer = cc.Layer.extend({
 
             this.enemigos.push(enemigo);
         }
-*/
+
 
     },collisionEnemigoConJugador: function (arbiter, space) {
         //a rellenar
     },
     finCollisionEnemigoConJugador:function (arbiter, space) {
-        //a rellenar
+        this.jugador.impactado();
     },
     collisionDisparoConJugador: function (arbiter, space) {
         var shapes = arbiter.getShapes();
@@ -306,6 +310,32 @@ var GameLayer = cc.Layer.extend({
     },jugadorSalto:function(arbiter,space){
         var shapes = arbiter.getShapes();
         this.formasEliminar.push(shapes[1]);
+    },
+    noSueloDerecha : function(arbiter, space){
+        var shapes = arbiter.getShapes();
+        for (var j = 0; j < this.enemigos.length; j++) {
+            if(this.enemigos[j].body.shapeList[3]==shapes[1]){
+                this.enemigos[j].orientacion=-1;
+            }
+        }
+        for (var j = 0; j < this.tiradores.length; j++) {
+            if(this.tiradores[j].body.shapeList[3]==shapes[1]){
+                this.tiradores[j].orientacion=-1;
+            }
+        }
+    },
+    noSueloIzquierda: function(arbiter, space){
+        var shapes = arbiter.getShapes();
+        for (var j = 0; j < this.enemigos.length; j++) {
+            if(this.enemigos[j].body.shapeList[2]==shapes[1]){
+                this.enemigos[j].orientacion=1;
+            }
+        }
+        for (var j = 0; j < this.tiradores.length; j++) {
+            if(this.tiradores[j].body.shapeList[2]==shapes[1]){
+                this.tiradores[j].orientacion=1;
+            }
+        }
     }
 });
 

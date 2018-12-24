@@ -114,7 +114,6 @@ var EnemigoTirador = cc.Class.extend({
                 }
             }
         }
-
     }
 
 
