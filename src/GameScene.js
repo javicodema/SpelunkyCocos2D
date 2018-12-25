@@ -6,6 +6,10 @@ var tipoEnemigoIzquierda = 5;
 var tipoDisparo = 6;
 var tipoTrampaTirarEncima = 7;
 var tipoTriggerTirarEncima = 8;
+var tipoTrampaDisparo = 9;
+var tipoTriggerDisparo = 10;
+var tipoEscalera = 11;
+var tipoTrampaCaer = 12;
 
 var GameLayer = cc.Layer.extend({
     space:null,
@@ -49,17 +53,28 @@ var GameLayer = cc.Layer.extend({
             this.collisionTriggerTirarEncima.bind(this), null, null, null);
         this.space.addCollisionHandler(tipoSuelo, tipoTrampaTirarEncima,
             this.collisionTrampaTirarEncimaSuelo.bind(this), null, null, null);
-
         this.space.addCollisionHandler(tipoJugador, tipoTrampaTirarEncima,
             null, null, this.collisionTrampaTirarEncimaJugador.bind(this), null);
+
+        this.space.addCollisionHandler(tipoJugador, tipoEscalera,
+            null, null, this.collisionEscaleraJugador.bind(this), this.finCollisionEscaleraJugador.bind(this));
+
+        //Colisiones de la trampa de caida
+        this.space.addCollisionHandler(tipoJugador, tipoTrampaCaer,
+            this.collisionTrampaCaerJugador.bind(this), null, null, this.finCollisionSueloConJugador.bind(this));
+
+        //Colisiones de la trampa de disparo
+        this.space.addCollisionHandler(tipoJugador, tipoTriggerDisparo,
+            this.collisionTrampaDisparoJugador.bind(this), null, null, null);
 
 
         return true;
     },
     update:function (dt) {
 
-        this.jugador.actualizar();
+
         this.space.step(dt);
+        this.jugador.actualizar();
 
         var i = 0;
         for(i=0;i<this.enemigos.length;i++){
@@ -74,6 +89,7 @@ var GameLayer = cc.Layer.extend({
         if ( this.jugador.body.a < -0.44){
             this.jugador.body.a = -0.44;
         }
+        this.jugador.body.a = 0;
 
 
         //Leer controles jugador
@@ -88,7 +104,7 @@ var GameLayer = cc.Layer.extend({
         //Controles de movimiento
         if( controles.abajo ){
             if( this.jugador.estado == estadoTrepando ){
-                //Trepar hacia abajo
+                this.jugador.treparAbajo();
             }
             else {
                 this.jugador.agachado();
@@ -96,7 +112,7 @@ var GameLayer = cc.Layer.extend({
         }
         if( controles.arriba ){
             if( this.jugador.estado == estadoTrepando ){
-                //Trepar hacia arriba
+                this.jugador.treparArriba();
             }
         }
 
@@ -181,6 +197,24 @@ var GameLayer = cc.Layer.extend({
         }
 
 
+        // Solicitar los objeto dentro de la capa Suelos
+        var grupoEscaleras = this.mapa.getObjectGroup("escaleras");
+        var escalerasArray = grupoEscaleras.getObjects();
+        // Los objetos de la capa suelos se transforman a
+        // formas estáticas de Chipmunk ( SegmentShape ).
+        for (var i = 0; i < escalerasArray.length; i++) {
+            var escalera = escalerasArray[i];
+            var bodyEscalera = new cp.Body(1000,1);
+            bodyEscalera.setPos( cc.p(escalera['x']+escalera['width']/2, escalera['y']+escalera['height']/2) )
+            var escaleraShape = new cp.BoxShape(bodyEscalera,escalera['width'], escalera['height']);
+            escaleraShape.setCollisionType( tipoEscalera );
+            escaleraShape.setElasticity(0.5);
+            escaleraShape.setFriction(1);
+            this.space.addShape( escaleraShape );
+        }
+
+
+
         var grupoEnemigos = this.mapa.getObjectGroup("patrullas");
         var enemigosArray = grupoEnemigos.getObjects();
         for (var i = 0; i < enemigosArray.length; i++) {
@@ -218,9 +252,24 @@ var GameLayer = cc.Layer.extend({
             var numero = trampasArray[i].name.substring(2);
             var trigger = triggersArray.find( tr => tr.name == 'ttg'+ numero)
             var trampaTirarEncima = new TrampaTirarEncima( this,  cc.p(trampasArray[i]["x"],trampasArray[i]["y"]), trigger );
+        }
 
-            //Buscar el trigger correspondiente
-            //this.enemigos.push(enemigo);
+        //Trampas disparo
+        var grupoTrampasDisparo = this.mapa.getObjectGroup("trampasDisparo");
+        var grupoTriggersDisparo = this.mapa.getObjectGroup("triggersDisparo");
+        var trampasArray = grupoTrampasDisparo.getObjects();
+        var triggersArray = grupoTriggersDisparo.getObjects();
+        for (var i = 0; i < trampasArray.length; i++) {
+            var numero = trampasArray[i].name.substring(2);
+            var trigger = triggersArray.find( tr => tr.name == 'tgd'+ numero)
+            var trampaDisparo= new TrampaDisparo( this,  cc.p(trampasArray[i]["x"],trampasArray[i]["y"]), trigger );
+        }
+
+        //Trampas caer
+        var grupoTrampasCaer = this.mapa.getObjectGroup("trampasCaer");
+        var trampasArray = grupoTrampasCaer.getObjects();
+        for (var i = 0; i < trampasArray.length; i++) {
+            var trampaCaer= new TrampaCaer( this,  cc.p(trampasArray[i]["x"],trampasArray[i]["y"]));
         }
     },collisionEnemigoConJugador: function (arbiter, space) {
         //a rellenar
@@ -246,9 +295,14 @@ var GameLayer = cc.Layer.extend({
     },
     collisionTriggerTirarEncima: function(arbitrer, space){
         triggerActivado = arbitrer.body_b.userData;
+        a = arbitrer.body_a.userData;
         if( triggerActivado === undefined ){
             return;
         }
+        if( !triggerActivado instanceof TrampaTirarEncima){
+            trampaTirarEncima = a
+        }
+
         if( !triggerActivado.activo ) {
             space.addPostStepCallback(() => {
                 triggerActivado.activar();
@@ -257,18 +311,17 @@ var GameLayer = cc.Layer.extend({
         triggerActivado.activo = true;
 
     },collisionTrampaTirarEncimaSuelo: function(arbitrer, space){
-        trampaCaida = arbitrer.body_b.userData;
-        if( trampaCaida === undefined ){
-            return;
+        trampaTirarEncima = arbitrer.body_b.userData;
+        a = arbitrer.body_a.userData;
+        if( !trampaTirarEncima  instanceof TrampaTirarEncima){
+            trampaTirarEncima  = a
         }
-        console.log(trampaCaida)
-        if( trampaCaida.activo && !trampaCaida.finAccion ) {
+        if( trampaTirarEncima .activo && !trampaTirarEncima .finAccion ) {
             space.addPostStepCallback( ()=>{
-                //Algunas veces dice que desactivar no es una function??
-                trampaCaida.desactivar();
+                trampaTirarEncima.desactivar();
             } )
         }
-        trampaCaida.finAccion = true;
+        trampaTirarEncima.finAccion = true;
     },collisionTrampaTirarEncimaJugador:function(arbitrer, space){
         trampaCaida = arbitrer.body_b.userData;
         jugador = arbitrer.body_a.userData;
@@ -285,7 +338,39 @@ var GameLayer = cc.Layer.extend({
         }
         trampaCaida.causo_herida = true;
 
-    }
+    },collisionEscaleraJugador: function(arbitrer, space){
+        this.jugador.trepar();
+    },finCollisionEscaleraJugador: function(arbitrer, space){
+        this.jugador.finTrepar();
+    },collisionTrampaCaerJugador: function(arbitrer, space){
+        trampaCaida = arbitrer.body_b.userData;
+        a = arbitrer.body_a.userData;
+        if( !trampaCaida  instanceof TrampaCaer){
+            trampaCaida  = a
+        }
+        if(!trampaCaida.activa){
+            space.addPostStepCallback( () => {
+                trampaCaida.activar();
+             } )
+        }
+        trampaCaida.activa = true;
+        this.collisionSueloConJugador(arbitrer, space);
+    },
+    collisionTrampaDisparoJugador: function(arbitrer, space){
+        trampaDisparo = arbitrer.body_b.userData;
+        a = arbitrer.body_a.userData;
+        if( !trampaDisparo  instanceof TrampaDisparo){
+            trampaDisparo  = a
+        }
+
+        if(!trampaDisparo.activa){
+            space.addPostStepCallback( () => {
+                trampaDisparo.activar();
+            } )
+        }
+        trampaDisparo.activa = true;
+
+    },
 });
 
 var idCapaJuego = 1;

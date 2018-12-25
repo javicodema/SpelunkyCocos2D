@@ -27,8 +27,9 @@ var Jugador = cc.Class.extend({
     spriteSaltoBajando: null,
     spriteSaltoSubiendo: null,
     bonificadorSalto:1,
-    bonificadorVelocidad:100,
+    bonificadorVelocidad:200,
     velocidad: 300,
+    velocidadTrepando:500,
     potenciaSalto:1000,
     maxSaltos: 2,
     saltosAcutales: 0,
@@ -62,7 +63,7 @@ var Jugador = cc.Class.extend({
         // forma dinamica1
         gameLayer.space.addShape(this.shape);
         // añadir sprite a la capa
-        gameLayer.addChild(this.sprite,10);
+        gameLayer.addChild(this.sprite,99);
 
 
         // Crear animación
@@ -253,11 +254,16 @@ var Jugador = cc.Class.extend({
         }
     },
     trepar: function() {
-        if(this.estado != estadoAgachado){
+        if(this.estado != estadoTrepando){
             this.estado = estadoTrepando;
         }
     }
     ,
+    finTrepar: function() {
+        if(this.estado == estadoTrepando){
+            this.estado = estadoCaminando;
+        }
+    },
     impactado: function(){
         if(this.estado != estadoImpactado){
             this.estado = estadoImpactado;
@@ -279,13 +285,27 @@ var Jugador = cc.Class.extend({
         }
     },
     moverDerecha: function(){
-        if( this.estado==estadoAgachado && Math.abs(this.body.vx) < this.velocidad + this.bonificadorVelocidad ){
+        if( this.estado==estadoAgachado && Math.abs(this.body.vx) > this.velocidad + this.bonificadorVelocidad ){
             //Bonus de velocidad agachado
             this.body.applyImpulse(cp.v(  this.velocidad+this.bonificadorVelocidad - this.body.vx  , 0), cp.v(0, 0));
         }
 
         else if(Math.abs(this.body.vx) < this.velocidad ){
             this.body.applyImpulse(cp.v(  this.velocidad - this.body.vx  , 0), cp.v(0, 0));
+        }
+    },
+    treparArriba: function(){
+        this.body.vy = 0;
+        if( Math.abs(this.body.vy) < this.velocidadTrepando){
+            //Bonus de velocidad agachado
+            this.body.applyImpulse(cp.v(0, this.velocidadTrepando - this.body.vy  ), cp.v(0, 0));
+        }
+    },
+    treparAbajo: function(){
+        this.body.vy = 0;
+        if( Math.abs(this.body.vy) < this.velocidadTrepando){
+            //Bonus de velocidad agachado
+            this.body.applyImpulse(cp.v(0, -this.velocidadTrepando - this.body.vy  ), cp.v(0, 0));
         }
     },
     finAnimacionImpactado: function() {

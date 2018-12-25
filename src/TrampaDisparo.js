@@ -1,4 +1,4 @@
-var TrampaTirarEncima = cc.Class.extend({
+var TrampaDisparo = cc.Class.extend({
     orientacion:1,
     sprite:null,
     shape:null,
@@ -30,9 +30,9 @@ var TrampaTirarEncima = cc.Class.extend({
         this.shape = new cp.BoxShape(this.body,
             this.sprite.getContentSize().width,
             this.sprite.getContentSize().height);
-       this.shape.setCollisionType(tipoTrampaTirarEncima);
+        this.shape.setCollisionType(tipoTrampaDisparo);
         // forma dinamica1
-        gameLayer.space.addShape(this.shape);
+        //gameLayer.space.addStaticShape(this.shape);
         // añadir sprite a la capa
         gameLayer.addChild(this.sprite,10);
 
@@ -50,7 +50,8 @@ var TrampaTirarEncima = cc.Class.extend({
             trigger['width'],
             trigger['height']);
 
-        this.triggerShape.setCollisionType(tipoTriggerTirarEncima);
+        this.triggerShape.setCollisionType(tipoTriggerDisparo);
+
         // forma dinamica1
         gameLayer.space.addStaticShape(this.triggerShape);
 
@@ -59,12 +60,10 @@ var TrampaTirarEncima = cc.Class.extend({
 
     },
     activar: function(){
-        this.gameLayer.space.addBody(this.body);
         this.gameLayer.space.removeStaticShape(this.triggerShape);
     },
     desactivar: function(){
-        this.gameLayer.space.removeBody(this.body);
-        this.gameLayer.space.removeShape( this.shape );
+
     }
 
 });
