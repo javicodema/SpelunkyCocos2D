@@ -21,6 +21,11 @@ var res = {
     animacion_cuervo_plist: "res/enemigoPatrulla/animacion_cuervo.plist",
     disparo_png:"res/disparo_jugador2.png",
 
+    //Trampas
+    trampa_caer: "res/trampas/trampa_caer.png",
+    trampa_tirar_encima: "res/trampas/trampa_tirar_encima.png",
+    trampa_disparo: "res/trampas/trampa_disparo.png",
+
     //De aquí abajo son de prueba
     tiles32_png: "res/mapas/tiles32.png",
     tileset_1: "res/mapas/tileset.png",

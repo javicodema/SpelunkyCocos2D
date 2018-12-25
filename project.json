@@ -19,6 +19,9 @@
         "src/EnemigoPatrulla.js",
         "src/EnemigoTirador.js",
         "src/EnemigoPerseguidor.js",
-        "src/Disparo.js"
+        "src/Disparo.js",
+        "src/TrampaTirarEncima.js",
+        "src/TrampaDisparo.js",
+        "src/TrampaCaer.js"
     ]
 }

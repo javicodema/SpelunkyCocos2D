@@ -28,8 +28,9 @@ var Jugador = cc.Class.extend({
     spriteSaltoBajando: null,
     spriteSaltoSubiendo: null,
     bonificadorSalto:1,
-    bonificadorVelocidad:300,
+    bonificadorVelocidad:200,
     velocidad: 300,
+    velocidadTrepando:500,
     potenciaSalto:1000,
     maxSaltos: 2,
     saltosAcutales: 0,
@@ -44,14 +45,16 @@ var Jugador = cc.Class.extend({
         this.body = new cp.Body(5, cp.momentForBox(1,
             this.sprite.getContentSize().width,
             this.sprite.getContentSize().height));
-
         this.body.setPos(posicion);
         //body.w_limit = 0.02;
         this.body.setAngle(0);
+        this.body.mass = 1;
         this.sprite.setBody(this.body);
 
         // Se añade el cuerpo al espacio
         gameLayer.space.addBody(this.body);
+
+        this.body.userData = this;
 
         // forma 16px más pequeña que la imagen original
         this.shape = new cp.BoxShape(this.body,
@@ -61,7 +64,7 @@ var Jugador = cc.Class.extend({
         // forma dinamica1
         gameLayer.space.addShape(this.shape);
         // añadir sprite a la capa
-        gameLayer.addChild(this.sprite,10);
+        gameLayer.addChild(this.sprite,99);
 
 
         // Crear animación
@@ -169,6 +172,9 @@ var Jugador = cc.Class.extend({
             this.body.vy = 0;
             this.body.applyImpulse(cp.v(0, this.potenciaSalto), cp.v(0, 0));
         }
+    },
+    recibeHerida: function() {
+        this.vidas--;
     }
     ,actualizar: function (){
         //Cambiar la orientación del PJ
@@ -259,11 +265,16 @@ var Jugador = cc.Class.extend({
         }
     },
     trepar: function() {
-        if(this.estado != estadoAgachado){
+        if(this.estado != estadoTrepando){
             this.estado = estadoTrepando;
         }
     }
     ,
+    finTrepar: function() {
+        if(this.estado == estadoTrepando){
+            this.estado = estadoCaminando;
+        }
+    },
     impactado: function(){
         if(this.estado != estadoImpactado){
             this.estado = estadoImpactado;
@@ -286,13 +297,27 @@ var Jugador = cc.Class.extend({
         }
     },
     moverDerecha: function(){
-        if( this.estado==estadoAgachado && Math.abs(this.body.vx) < this.velocidad + this.bonificadorVelocidad ){
+        if( this.estado==estadoAgachado && Math.abs(this.body.vx) > this.velocidad + this.bonificadorVelocidad ){
             //Bonus de velocidad agachado
             this.body.applyImpulse(cp.v(  this.velocidad+this.bonificadorVelocidad - this.body.vx  , 0), cp.v(0, 0));
         }
 
         else if(Math.abs(this.body.vx) < this.velocidad ){
             this.body.applyImpulse(cp.v(  this.velocidad - this.body.vx  , 0), cp.v(0, 0));
+        }
+    },
+    treparArriba: function(){
+        this.body.vy = 0;
+        if( Math.abs(this.body.vy) < this.velocidadTrepando){
+            //Bonus de velocidad agachado
+            this.body.applyImpulse(cp.v(0, this.velocidadTrepando - this.body.vy  ), cp.v(0, 0));
+        }
+    },
+    treparAbajo: function(){
+        this.body.vy = 0;
+        if( Math.abs(this.body.vy) < this.velocidadTrepando){
+            //Bonus de velocidad agachado
+            this.body.applyImpulse(cp.v(0, -this.velocidadTrepando - this.body.vy  ), cp.v(0, 0));
         }
     },
     finAnimacionImpactado: function() {
