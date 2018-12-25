@@ -1,6 +1,7 @@
 var EnemigoPerseguidor = cc.Class.extend({
     gameLayer:null,
     orientacion:1,
+    vidas:1,
     sprite:null,
     shape:null,
     ctor:function (gameLayer, posicion) {
@@ -28,7 +29,12 @@ var EnemigoPerseguidor = cc.Class.extend({
 
         var mitadAncho = this.sprite.getContentSize().width/2;
         var mitadAlto = this.sprite.getContentSize().height/2;
-// más pequeño
+        this.shapeArriba = new cp.PolyShape(this.body,
+            [ -mitadAncho, mitadAlto, mitadAncho, mitadAlto] ,
+            cp.v(0,0) );
+
+        //this.shapeArriba.setSensor(true);
+        this.shapeArriba.setCollisionType(tipoEnemigoArriba);
 
         this.shapeIzquierda = new cp.PolyShape(this.body,
             [ -mitadAncho, 0, -mitadAncho, -mitadAlto - 10] ,
@@ -49,7 +55,8 @@ var EnemigoPerseguidor = cc.Class.extend({
         gameLayer.space.addShape(this.shapeDercha);
 
 
-        // añadir sprite a la capa
+        gameLayer.space.addShape(this.shapeArriba);
+
         gameLayer.addChild(this.sprite,10);
 
         // Crear animaciones
@@ -70,6 +77,7 @@ var EnemigoPerseguidor = cc.Class.extend({
 
         gameLayer.space.addCollisionHandler(tipoSuelo, tipoEnemigoDerecha,
             null, null, null, this.noSueloDerecha.bind(this));
+
 
     },
     noSueloDerecha : function(){

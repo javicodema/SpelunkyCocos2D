@@ -8,6 +8,7 @@ var estadoTrepando = 7;
 
 var Jugador = cc.Class.extend({
     estado: estadoCaminando,
+    shapeAbajo:null,
     animacion:null,
     aSaltarBajando:null,
     aSaltarSubiendo:null,
@@ -148,6 +149,16 @@ var Jugador = cc.Class.extend({
         this.aIdle  =
             new cc.RepeatForever(new cc.Animate(animacionIdle));
         this.aIdle.retain();
+        var mitadAncho = this.sprite.getContentSize().width/2;
+        var mitadAlto = this.sprite.getContentSize().height/2;
+
+        this.shapeAbajo = new cp.PolyShape(this.body,
+            [ -mitadAncho, -mitadAlto, mitadAncho, -mitadAlto] ,
+            cp.v(0,0) );
+
+        //this.shapeAbajo.setSensor(true);
+        this.shapeAbajo.setCollisionType(tipoJugAbajo);
+        gameLayer.space.addShape(this.shapeAbajo);
 
 
         // ejecutar la animación
@@ -268,6 +279,7 @@ var Jugador = cc.Class.extend({
         if(this.estado != estadoImpactado){
             this.estado = estadoImpactado;
         }
+        this.vidas--;
     },
     agachado: function(){
         if(this.estado != estadoAgachado){

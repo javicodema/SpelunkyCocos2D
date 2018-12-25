@@ -41,13 +41,13 @@ var TrampaCaer = cc.Class.extend({
         setTimeout(  () => {
             this.gameLayer.space.addPostStepCallback( () => {
                 this.gameLayer.space.addBody( this.body );
+                this.gameLayer.space.removeShape(( this.shape ));
             } )
         } ,this.retardoCaida );
 
         setTimeout(  () => {
             this.gameLayer.space.addPostStepCallback( () => {
                 this.gameLayer.space.removeBody(( this.body ));
-                this.gameLayer.space.removeShape(( this.shape ));
                 this.gameLayer.removeChild( this.sprite )
             } )
         } ,2000 );
