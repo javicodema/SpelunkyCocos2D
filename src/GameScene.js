@@ -95,7 +95,6 @@ var GameLayer = cc.Layer.extend({
 
         this.space.step(dt);
         this.jugador.actualizar();
-        this.space.step(dt);
         for (var j = 0; j < this.disparos.length; j++) {
             this.disparos[j].body.vy=0;
         }
@@ -413,7 +412,6 @@ var GameLayer = cc.Layer.extend({
                 this.tiradores[j].orientacion=1;
             }
         }
-    }
     },
     collisionTriggerTirarEncima: function(arbitrer, space){
         triggerActivado = arbitrer.body_b.userData;
@@ -453,7 +451,7 @@ var GameLayer = cc.Layer.extend({
         if( !trampaCaida.causo_herida && !trampaCaida.finAccion && trampaCaida.activo) {
             var capaControles = this.getParent().getChildByTag(idCapaControles);
             //Mover el jugador atras para evitar problemas de atravesar suelos.
-            jugador.body.p.x += jugador.body.vx>0?-30:30;
+            jugador.body.p.x += jugador.sprite.scaleX>0?-20:20;
 
             jugador.recibeHerida();
             capaControles.actualizarVida( this.jugador.vidas );
