@@ -4,12 +4,12 @@ var tipoEnemigo = 3;
 var tipoEnemigoDerecha = 4;
 var tipoEnemigoIzquierda = 5;
 var tipoDisparo = 6;
-var tipoTrampaTirarEncima = 7;
-var tipoTriggerTirarEncima = 8;
-var tipoTrampaDisparo = 9;
-var tipoTriggerDisparo = 10;
-var tipoEscalera = 11;
-var tipoTrampaCaer = 12;
+var tipoTrampaTirarEncima = 9;
+var tipoTriggerTirarEncima = 10;
+var tipoTrampaDisparo = 11;
+var tipoTriggerDisparo = 12;
+var tipoEscalera = 13;
+var tipoTrampaCaer = 14;
 
 var GameLayer = cc.Layer.extend({
     space:null,
