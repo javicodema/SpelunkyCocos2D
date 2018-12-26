@@ -35,6 +35,7 @@ var EnemigoPerseguidor = cc.Class.extend({
 
         //this.shapeArriba.setSensor(true);
         this.shapeArriba.setCollisionType(tipoEnemigoArriba);
+        gameLayer.space.addShape(this.shapeArriba);
 
         this.shapeIzquierda = new cp.PolyShape(this.body,
             [ -mitadAncho, 0, -mitadAncho, -mitadAlto - 10] ,
@@ -55,7 +56,7 @@ var EnemigoPerseguidor = cc.Class.extend({
         gameLayer.space.addShape(this.shapeDercha);
 
 
-        gameLayer.space.addShape(this.shapeArriba);
+
 
         gameLayer.addChild(this.sprite,10);
 

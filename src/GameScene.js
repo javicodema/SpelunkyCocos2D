@@ -64,6 +64,10 @@ var GameLayer = cc.Layer.extend({
             null, null, null, this.noSueloIzquierda.bind(this));
         this.space.addCollisionHandler(tipoSuelo, tipoEnemigoDerecha,
             null, null, null, this.noSueloDerecha.bind(this));
+        this.space.addCollisionHandler(tipoEscalera, tipoEnemigoIzquierda,
+            null, null, null, this.escaleraIzquierda.bind(this));
+        this.space.addCollisionHandler(tipoEscalera, tipoEnemigoDerecha,
+            null, null, null, this.escaleraDerecha.bind(this));
 
         //Colisiones de la trampa de tirar encima
         this.space.addCollisionHandler(tipoJugador, tipoTriggerTirarEncima,
@@ -348,7 +352,17 @@ var GameLayer = cc.Layer.extend({
             var trampaCaer= new TrampaCaer( this,  cc.p(trampasArray[i]["x"],trampasArray[i]["y"]));
         }
     },collisionEnemigoConJugador: function (arbiter, space) {
-        //a rellenar
+        var shapes = arbiter.getShapes();
+        for (var j = 0; j < this.enemigos.length; j++) {
+            if(this.enemigos[j].body.shapeList[3]==shapes[1]){
+                this.enemigos[j].vx=0;
+            }
+        }
+        for (var j = 0; j < this.tiradores.length; j++) {
+            if(this.tiradores[j].body.shapeList[3]==shapes[1]){
+                this.tiradores[j].vx=0;
+            }
+        }
     },
     finCollisionEnemigoConJugador:function (arbiter, space) {
         this.jugador.impactado();
@@ -401,6 +415,31 @@ var GameLayer = cc.Layer.extend({
         }
     },
     noSueloIzquierda: function(arbiter, space){
+        var shapes = arbiter.getShapes();
+        for (var j = 0; j < this.enemigos.length; j++) {
+            if(this.enemigos[j].body.shapeList[2]==shapes[1]){
+                this.enemigos[j].orientacion=1;
+            }
+        }
+        for (var j = 0; j < this.tiradores.length; j++) {
+            if(this.tiradores[j].body.shapeList[2]==shapes[1]){
+                this.tiradores[j].orientacion=1;
+            }
+        }
+    },escaleraDerecha : function(arbiter, space){
+        var shapes = arbiter.getShapes();
+        for (var j = 0; j < this.enemigos.length; j++) {
+            if(this.enemigos[j].body.shapeList[3]==shapes[1]){
+                this.enemigos[j].orientacion=-1;
+            }
+        }
+        for (var j = 0; j < this.tiradores.length; j++) {
+            if(this.tiradores[j].body.shapeList[3]==shapes[1]){
+                this.tiradores[j].orientacion=-1;
+            }
+        }
+    },
+    escaleraIzquierda: function(arbiter, space){
         var shapes = arbiter.getShapes();
         for (var j = 0; j < this.enemigos.length; j++) {
             if(this.enemigos[j].body.shapeList[2]==shapes[1]){

@@ -277,9 +277,9 @@ var Jugador = cc.Class.extend({
             this.estado = estadoImpactado;
         }
         this.vidas--;
-        if(this.vidas<=0){
+        /*if(this.vidas<=0){
             cc.director.runScene(new MenuScene());
-        }
+        }*/
     },
     agachado: function(){
         if(this.estado != estadoAgachado){
