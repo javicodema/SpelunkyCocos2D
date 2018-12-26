@@ -453,7 +453,7 @@ var GameLayer = cc.Layer.extend({
             //Mover el jugador atras para evitar problemas de atravesar suelos.
             jugador.body.p.x += jugador.sprite.scaleX>0?-20:20;
 
-            jugador.recibeHerida();
+            jugador.impactado();
             capaControles.actualizarVida( this.jugador.vidas );
         }
         trampaCaida.causo_herida = true;
