@@ -400,6 +400,7 @@ var GameLayer = cc.Layer.extend({
     },jugadorSalto:function(arbiter,space){
         var shapes = arbiter.getShapes();
         this.formasEliminar.push(shapes[1]);
+        this.jugador.vidas++;
     },
     noSueloDerecha : function(arbiter, space){
         var shapes = arbiter.getShapes();
