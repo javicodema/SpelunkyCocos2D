@@ -12,6 +12,7 @@ var tipoTrampaDisparo = 11;
 var tipoTriggerDisparo = 12;
 var tipoEscalera = 13;
 var tipoTrampaCaer = 14;
+var tipoLlave = 15;
 
 var GameLayer = cc.Layer.extend({
     space:null,
@@ -21,6 +22,7 @@ var GameLayer = cc.Layer.extend({
     tiradores:[],
     disparos:[],
     formasEliminar:[],
+    llaves:[],
     jugador: null,
     ctor:function () {
         this._super();
@@ -88,6 +90,9 @@ var GameLayer = cc.Layer.extend({
         this.space.addCollisionHandler(tipoJugador, tipoTriggerDisparo,
             this.collisionTrampaDisparoJugador.bind(this), null, null, null);
 
+        // Jugador y llave
+        this.space.addCollisionHandler(tipoJugador, tipoLlave,
+                null, this.collisionJugadorConLlave.bind(this), null, null);
 
         return true;
     },
@@ -106,6 +111,13 @@ var GameLayer = cc.Layer.extend({
 
         for(var i = 0; i < this.formasEliminar.length; i++) {
             var shape = this.formasEliminar[i];
+
+            for (var i = 0; i < this.llaves.length; i++) {
+               if (this.llaves[i].shape == shape) {
+                   this.llaves[i].eliminar();
+                   this.llaves.splice(i, 1);
+               }
+            }
 
             for (var j = 0; j < this.disparos.length; j++) {
                 if (this.disparos[j] != null &&
@@ -293,7 +305,7 @@ var GameLayer = cc.Layer.extend({
             this.space.addShape( escaleraShape );
         }
 
-
+        // Enemigos
 
         var grupoEnemigos = this.mapa.getObjectGroup("patrullas");
         var enemigosArray = grupoEnemigos.getObjects();
@@ -351,6 +363,15 @@ var GameLayer = cc.Layer.extend({
         for (var i = 0; i < trampasArray.length; i++) {
             var trampaCaer= new TrampaCaer( this,  cc.p(trampasArray[i]["x"],trampasArray[i]["y"]));
         }
+
+        // Llaves
+        var llaves = this.mapa.getObjectGroup("llaves");
+        var llavesArray = llaves.getObjects();
+        for (var i = 0; i < llavesArray.length; i++) {
+            var llave= new Llave( this,  cc.p(llavesArray[i]["x"],llavesArray[i]["y"]));
+            this.llaves.push(llave);
+        }
+
     },collisionEnemigoConJugador: function (arbiter, space) {
         var shapes = arbiter.getShapes();
         for (var j = 0; j < this.enemigos.length; j++) {
@@ -366,6 +387,17 @@ var GameLayer = cc.Layer.extend({
     },
     finCollisionEnemigoConJugador:function (arbiter, space) {
         this.jugador.impactado();
+    },
+    collisionJugadorConLlave:function (arbiter, space) {
+        // Marcar la llave para eliminarla
+        var shapes = arbiter.getShapes();
+        // shapes[0] es el jugador
+        this.formasEliminar.push(shapes[1]);
+
+        var capaControles = this.getParent().getChildByTag(idCapaControles);
+        this.jugador.llavesRecogidas++;
+        capaControles.actualizarLlaves(this.jugador.llavesRecogidas);
+
     },
     collisionDisparoConJugador: function (arbiter, space) {
         var shapes = arbiter.getShapes();
