@@ -29,6 +29,10 @@ var res = {
     //Recolectables
     llave: "res/recolectables/llave.png",
 
+    //Puerta
+    puerta_png: "res/puerta.png",
+    puerta_plist: "res/puerta.plist",
+
     //De aquí abajo son de prueba
     tiles32_png: "res/mapas/tiles32.png",
     tileset_1: "res/mapas/tileset.png",

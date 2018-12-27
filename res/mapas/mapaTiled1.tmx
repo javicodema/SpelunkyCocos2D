@@ -253,7 +253,7 @@
   <object id="154" x="362.711" y="156.387" width="63.5" height="31.5"/>
  </objectgroup>
  <objectgroup name="jugador">
-  <object id="132" x="242.183" y="101.352" width="30" height="30"/>
+  <object id="132" x="241.183" y="67.352" width="30" height="30"/>
  </objectgroup>
  <objectgroup name="puerta">
   <object id="133" x="1408.33" y="1440" width="63.6667" height="64"/>

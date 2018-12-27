@@ -13,9 +13,11 @@ var tipoTriggerDisparo = 12;
 var tipoEscalera = 13;
 var tipoTrampaCaer = 14;
 var tipoLlave = 15;
+var tipoPuerta = 16;
 
 var GameLayer = cc.Layer.extend({
     space:null,
+    puerta:null,
     mapa: null,
     mapaAncho: null,
     enemigos:[],
@@ -37,6 +39,7 @@ var GameLayer = cc.Layer.extend({
         cc.spriteFrameCache.addSpriteFrames(res.jugador_impactado_plist);
         cc.spriteFrameCache.addSpriteFrames(res.jugador_idle_plist);
         cc.spriteFrameCache.addSpriteFrames(res.animacion_cuervo_plist);
+        cc.spriteFrameCache.addSpriteFrames(res.puerta_plist);
 
         // Inicializar Space
         this.space = new cp.Space();
@@ -93,6 +96,10 @@ var GameLayer = cc.Layer.extend({
         // Jugador y llave
         this.space.addCollisionHandler(tipoJugador, tipoLlave,
                 null, this.collisionJugadorConLlave.bind(this), null, null);
+
+        // Jugador y puerta)
+        this.space.addCollisionHandler(tipoJugador, tipoPuerta,
+                null, this.collisionJugadorPuerta.bind(this), null, null);
 
         return true;
     },
@@ -372,6 +379,10 @@ var GameLayer = cc.Layer.extend({
             this.llaves.push(llave);
         }
 
+        // Puerta
+        var puerta = this.mapa.getObjectGroup("puerta").getObjects()[0];
+        this.puerta = new Puerta(this, cc.p(puerta["x"],puerta["y"]))
+
     },collisionEnemigoConJugador: function (arbiter, space) {
         var shapes = arbiter.getShapes();
         for (var j = 0; j < this.enemigos.length; j++) {
@@ -563,6 +574,11 @@ var GameLayer = cc.Layer.extend({
         trampaDisparo.activa = true;
 
     },
+    collisionJugadorPuerta: function(arbitrer, space){
+            if(this.jugador.llavesRecogidas>=3){
+                // Pasar de nivel
+            }
+        },
 });
 
 var idCapaJuego = 1;

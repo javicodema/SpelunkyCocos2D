@@ -9,9 +9,10 @@ ctor:function (gameLayer, posicion) {
     this.sprite = new cc.PhysicsSprite(res.llave); // conseguir sprite
     // Cuerpo estatico, no le afectan las fuerzas, gravedad, etc.
     var body = new cp.StaticBody();
+    posicion.x += this.sprite.getContentSize().width/2;
+            posicion.y += this.sprite.getContentSize().height/2;
     body.setPos(posicion);
     this.sprite.setBody(body);
-    // Los cuerpos estáticos nunca se añaden al Space
 
     // Crear forma circular
     var radio = this.sprite.getContentSize().width / 2;
@@ -20,9 +21,9 @@ ctor:function (gameLayer, posicion) {
     // Nunca setSensor(true) no genera choques es como un “fantasma”
     this.shape.setSensor(true);
     // Añadir forma estática al Space
-    gameLayer.space.addStaticShape(this.shape);
+    this.gameLayer.space.addStaticShape(this.shape);
     // Añadir sprite a la capa
-    gameLayer.addChild(this.sprite,10);
+    this.gameLayer.addChild(this.sprite,10);
 },
  eliminar: function (){
      // quita la forma
