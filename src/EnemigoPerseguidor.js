@@ -8,7 +8,7 @@ var EnemigoPerseguidor = cc.Class.extend({
         this.gameLayer = gameLayer;
 
         // Crear Sprite - Cuerpo y forma
-        this.sprite = new cc.PhysicsSprite("#cuervo1.png");
+        this.sprite = new cc.PhysicsSprite("#aguila1.png");
         // Cuerpo estática , no le afectan las fuerzas
         // Cuerpo dinámico, SI le afectan las fuerzas
         this.body = new cp.Body(5,Infinity);
@@ -56,45 +56,51 @@ var EnemigoPerseguidor = cc.Class.extend({
         gameLayer.space.addShape(this.shapeDercha);
 
 
-
-
         gameLayer.addChild(this.sprite,10);
 
+
         // Crear animaciones
-        var framesAnimacion = [];
-        for (var i = 1; i <= 8; i++) {
-            var str = "cuervo" + i + ".png";
+        var framesAnimacionIzq = [];
+        var b = 0;
+        for (var i = 0; i <= 3; i++) {
+            b = i*2 + 1;
+            var str = "aguila" + b + ".png";
             var frame = cc.spriteFrameCache.getSpriteFrame(str);
-            framesAnimacion.push(frame);
+            framesAnimacionIzq.push(frame);
         }
-        var animacion = new cc.Animation(framesAnimacion, 0.2);
-        var actionAnimacionBucle =
-            new cc.RepeatForever(new cc.Animate(animacion));
+        var framesAnimacionDer = [];
+        for (var i = 1; i <= 4; i++) {
+            b = i*2;
+            var str = "aguila" + b + ".png";
+            var frame = cc.spriteFrameCache.getSpriteFrame(str);
+            framesAnimacionDer.push(frame);
+        }
+
+        var animacionIzq = new cc.Animation(framesAnimacionIzq, 0.2);
+        this.izquierda  =
+            new cc.RepeatForever(new cc.Animate(animacionIzq));
+        this.izquierda.retain();
+
+        var animacionDer = new cc.Animation(framesAnimacionDer, 0.2);
+        this.derecha  =
+            new cc.RepeatForever(new cc.Animate(animacionDer));
+        this.derecha.retain();
+
+        this.animacion=this.izquierda;
         // ejecutar la animación
-        this.sprite.runAction(actionAnimacionBucle);
-
-        gameLayer.space.addCollisionHandler(tipoSuelo, tipoEnemigoIzquierda,
-            null, null, null, this.noSueloIzquierda.bind(this));
-
-        gameLayer.space.addCollisionHandler(tipoSuelo, tipoEnemigoDerecha,
-            null, null, null, this.noSueloDerecha.bind(this));
+        this.sprite.runAction(this.izquierda);
 
 
-    },
-    noSueloDerecha : function(){
-        this.orientacion = -1;
-    },
-    noSueloIzquierda: function(){
-        this.orientacion = 1;
     },
     actualizar: function(x,y){
         if((Math.abs(this.body.p.x - x)) < 350){
             if(this.orientacion==1){
-                this.sprite.flippedX = false;
                 if ((this.body.p.y + 50) > y && (this.body.p.y - 50) < y){
                     if((this.body.p.x - 20) < x) {
-                        this.sprite.flippedX = true;
                         this.orientacion = -1;
+                        this.animacion = this.derecha;
+                        this.sprite.stopAllActions();
+                        this.sprite.runAction(this.animacion);
                         this.body.vx = 100;
                     }
                     else{
@@ -104,11 +110,12 @@ var EnemigoPerseguidor = cc.Class.extend({
                     this.body.vx=0;
                 }
             }else{
-                this.sprite.flippedX = true;
                 if ((this.body.p.y + 50) > y && (this.body.p.y - 50) < y){
                     if((this.body.p.x - 20) > x) {
-                        this.sprite.flippedX = false;
                         this.orientacion = 1;
+                        this.animacion = this.izquierda;
+                        this.sprite.stopAllActions();
+                        this.sprite.runAction(this.animacion);
                         this.body.vx = -100;
                     }
                     else{

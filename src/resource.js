@@ -17,8 +17,12 @@ var res = {
     jugador_impactado_plist : "res/jugador/jugador_impactado.plist",
     jugador_idle_png : "res/jugador/jugador_idle.png",
     jugador_idle_plist : "res/jugador/jugador_idle.plist",
-    animacion_cuervo_png: "res/enemigoPatrulla/animacion_cuervo.png",
-    animacion_cuervo_plist: "res/enemigoPatrulla/animacion_cuervo.plist",
+    animacion_cuervo_png: "res/enemigoTirador/animacion_cuervo.png",
+    animacion_cuervo_plist: "res/enemigoTirador/animacion_cuervo.plist",
+    animacion_rana_png: "res/enemigoPatrulla/patrulla.png",
+    animacion_rana_plist: "res/enemigoPatrulla/patrulla.plist",
+    animacion_aguila_png: "res/enemigoPerseguidor/perseguidor.png",
+    animacion_aguila_plist: "res/enemigoPerseguidor/perseguidor.plist",
     disparo_png:"res/disparo_jugador2.png",
 
     //Trampas

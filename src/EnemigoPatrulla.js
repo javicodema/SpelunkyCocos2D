@@ -5,11 +5,14 @@ var EnemigoPatrulla = cc.Class.extend({
     sprite:null,
     shape:null,
     name:null,
+    animacion:null,
+    izquierda:null,
+    derecha:null,
     ctor:function (gameLayer, posicion) {
         this.gameLayer = gameLayer;
 
         // Crear Sprite - Cuerpo y forma
-        this.sprite = new cc.PhysicsSprite("#cuervo1.png");
+        this.sprite = new cc.PhysicsSprite("#rana1.png");
         // Cuerpo estática , no le afectan las fuerzas
         // Cuerpo dinámico, SI le afectan las fuerzas
         this.body = new cp.Body(5,Infinity);
@@ -61,27 +64,52 @@ var EnemigoPatrulla = cc.Class.extend({
         gameLayer.addChild(this.sprite,10);
 
         // Crear animaciones
-        var framesAnimacion = [];
-        for (var i = 1; i <= 8; i++) {
-            var str = "cuervo" + i + ".png";
+        var framesAnimacionIzq = [];
+        var b = 0;
+        for (var i = 0; i <= 2; i++) {
+            b = i*2 + 1;
+            var str = "rana" + b + ".png";
             var frame = cc.spriteFrameCache.getSpriteFrame(str);
-            framesAnimacion.push(frame);
+            framesAnimacionIzq.push(frame);
         }
-        var animacion = new cc.Animation(framesAnimacion, 0.2);
-        var actionAnimacionBucle =
-            new cc.RepeatForever(new cc.Animate(animacion));
-        // ejecutar la animación
-        this.sprite.runAction(actionAnimacionBucle);
+        var framesAnimacionDer = [];
+        for (var i = 1; i <= 3; i++) {
+            b = i*2;
+            var str = "rana" + b + ".png";
+            var frame = cc.spriteFrameCache.getSpriteFrame(str);
+            framesAnimacionDer.push(frame);
+        }
+
+        var animacionIzq = new cc.Animation(framesAnimacionIzq, 0.2);
+        this.izquierda  =
+            new cc.RepeatForever(new cc.Animate(animacionIzq));
+        this.izquierda.retain();
+
+        var animacionDer = new cc.Animation(framesAnimacionDer, 0.2);
+        this.derecha  =
+            new cc.RepeatForever(new cc.Animate(animacionDer));
+        this.derecha.retain();
+
+        this.animacion=this.izquierda;
+        this.sprite.runAction(this.derecha);
 
     },
     actualizar: function(){
 
         if ( this.body.vx < 0.005 && this.body.vx > -0.005){
             this.orientacion = this.orientacion *-1;
+            if(this.animacion==this.izquierda){
+                this.animacion = this.derecha;
+                this.sprite.stopAllActions();
+                this.sprite.runAction(this.animacion);
+            }else{
+                this.animacion = this.izquierda;
+                this.sprite.stopAllActions();
+                this.sprite.runAction(this.animacion);
+            }
         }
 
         if ( this.orientacion > 0){
-            this.sprite.flippedX = true; // Invertir Sprite
             if (this.body.vx < 100){
                 this.body.applyImpulse(cp.v(300, 0), cp.v(0, 0));
             } else { // vx mayor más de 100
@@ -90,7 +118,6 @@ var EnemigoPatrulla = cc.Class.extend({
         }
 
         if ( this.orientacion < 0) {
-            this.sprite.flippedX = false; // No invertir Sprite
             if (this.body.vx > -100){
                 this.body.applyImpulse(cp.v(-300, 0), cp.v(0, 0));
             } else { // vx nunca menor que -100

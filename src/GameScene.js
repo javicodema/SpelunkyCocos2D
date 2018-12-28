@@ -41,6 +41,8 @@ var GameLayer = cc.Layer.extend({
         cc.spriteFrameCache.addSpriteFrames(res.jugador_idle_plist);
         cc.spriteFrameCache.addSpriteFrames(res.animacion_cuervo_plist);
         cc.spriteFrameCache.addSpriteFrames(res.puerta_plist);
+        cc.spriteFrameCache.addSpriteFrames(res.animacion_rana_plist);
+        cc.spriteFrameCache.addSpriteFrames(res.animacion_aguila_plist);
 
         // Inicializar Space
         this.space = new cp.Space();
@@ -450,6 +452,9 @@ var GameLayer = cc.Layer.extend({
         for (var j = 0; j < this.enemigos.length; j++) {
             if(this.enemigos[j].body.shapeList[3]==shapes[1]){
                 this.enemigos[j].orientacion=-1;
+                this.enemigos[j].animacion = this.enemigos[j].izquierda;
+                this.enemigos[j].sprite.stopAllActions();
+                this.enemigos[j].sprite.runAction(this.enemigos[j].animacion);
             }
         }
         for (var j = 0; j < this.tiradores.length; j++) {
@@ -463,6 +468,9 @@ var GameLayer = cc.Layer.extend({
         for (var j = 0; j < this.enemigos.length; j++) {
             if(this.enemigos[j].body.shapeList[2]==shapes[1]){
                 this.enemigos[j].orientacion=1;
+                this.enemigos[j].animacion = this.enemigos[j].derecha;
+                this.enemigos[j].sprite.stopAllActions();
+                this.enemigos[j].sprite.runAction(this.enemigos[j].animacion);
             }
         }
         for (var j = 0; j < this.tiradores.length; j++) {

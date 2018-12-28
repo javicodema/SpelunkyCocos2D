@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+	<dict>
+		<key>frames</key>
+		<dict>
+			<key>aguila1.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{0,33},{35,32}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false/>
+				<key>sourceColorRect</key>
+				<string>{{3,6},{35,32}}</string>
+				<key>sourceSize</key>
+				<string>{40,41}</string>
+			</dict>
+
+			<key>aguila2.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{0,0},{35,32}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false/>
+				<key>sourceColorRect</key>
+				<string>{{2,6},{35,32}}</string>
+				<key>sourceSize</key>
+				<string>{40,41}</string>
+			</dict>
+
+			<key>aguila3.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{66,76},{28,25}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false/>
+				<key>sourceColorRect</key>
+				<string>{{7,14},{28,25}}</string>
+				<key>sourceSize</key>
+				<string>{40,41}</string>
+			</dict>
+
+			<key>aguila4.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{66,50},{28,25}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false/>
+				<key>sourceColorRect</key>
+				<string>{{5,14},{28,25}}</string>
+				<key>sourceSize</key>
+				<string>{40,41}</string>
+			</dict>
+
+			<key>aguila5.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{33,66},{32,39}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false/>
+				<key>sourceColorRect</key>
+				<string>{{5,0},{32,39}}</string>
+				<key>sourceSize</key>
+				<string>{40,41}</string>
+			</dict>
+
+			<key>aguila6.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{0,66},{32,39}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false/>
+				<key>sourceColorRect</key>
+				<string>{{3,0},{32,39}}</string>
+				<key>sourceSize</key>
+				<string>{40,41}</string>
+			</dict>
+
+			<key>aguila7.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{36,0},{31,24}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false/>
+				<key>sourceColorRect</key>
+				<string>{{6,15},{31,24}}</string>
+				<key>sourceSize</key>
+				<string>{40,41}</string>
+			</dict>
+
+			<key>aguila8.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{36,25},{31,24}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false/>
+				<key>sourceColorRect</key>
+				<string>{{3,15},{31,24}}</string>
+				<key>sourceSize</key>
+				<string>{40,41}</string>
+			</dict>
+
+		</dict>
+
+		<key>metadata</key>
+		<dict>
+			<key>format</key>
+			<integer>2</integer>
+			<key>size</key>
+			<string>{128,128}</string>
+			<key>textureFileName</key>
+			<string>perseguidor.png</string>
+			</dict>
+		</dict>
+</plist>
