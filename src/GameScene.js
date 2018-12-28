@@ -385,6 +385,16 @@ var GameLayer = cc.Layer.extend({
         for (var i = 0; i < trampasArray.length; i++) {
             var trampaRalentizar= new TrampaRalentizar( this,  cc.p(trampasArray[i]["x"],trampasArray[i]["y"]), trampasArray[i].width, trampasArray[i].height);
         }
+		// Llaves
+        var llaves = this.mapa.getObjectGroup("llaves");
+        var llavesArray = llaves.getObjects();
+        for (var i = 0; i < llavesArray.length; i++) {
+            var llave= new Llave( this,  cc.p(llavesArray[i]["x"],llavesArray[i]["y"]));
+            this.llaves.push(llave);
+		}
+		// Puerta
+        var puerta = this.mapa.getObjectGroup("puerta").getObjects()[0];
+        this.puerta = new Puerta(this, cc.p(puerta["x"],puerta["y"]))
     },collisionEnemigoConJugador: function (arbiter, space) {
         var shapes = arbiter.getShapes();
         for (var j = 0; j < this.enemigos.length; j++) {
