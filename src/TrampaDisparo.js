@@ -61,6 +61,9 @@ var TrampaDisparo = cc.Class.extend({
     },
     activar: function(){
         this.gameLayer.space.removeStaticShape(this.triggerShape);
+
+        var orientacion = this.body.p.x - this.gameLayer.jugador.body.p.x > 0?1:0;
+        var disparo = new Disparo( this.gameLayer, cc.p(this.body.p.x, this.body.p.y), orientacion  );
     },
     desactivar: function(){
 

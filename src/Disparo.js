@@ -32,8 +32,7 @@ var Disparo = cc.Class.extend({
         var mitadAlto = this.sprite.getContentSize().height/2;
 
         // añadir sprite a la capa
-        gameLayer.addChild(this.sprite,10);
-
+        gameLayer.addChild(this.sprite,90);
     }
 
 

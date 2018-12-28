@@ -12,6 +12,7 @@ var tipoTrampaDisparo = 11;
 var tipoTriggerDisparo = 12;
 var tipoEscalera = 13;
 var tipoTrampaCaer = 14;
+var tipoTrampaRalentizar = 15;
 
 var GameLayer = cc.Layer.extend({
     space:null,
@@ -347,6 +348,13 @@ var GameLayer = cc.Layer.extend({
         for (var i = 0; i < trampasArray.length; i++) {
             var trampaCaer= new TrampaCaer( this,  cc.p(trampasArray[i]["x"],trampasArray[i]["y"]));
         }
+
+        //Trampas caer
+        var grupoTrampasRalentizar = this.mapa.getObjectGroup("trampasRalentizar");
+        var trampasArray = grupoTrampasRalentizar.getObjects();
+        for (var i = 0; i < trampasArray.length; i++) {
+            var trampaRalentizar= new TrampaRalentizar( this,  cc.p(trampasArray[i]["x"],trampasArray[i]["y"]),trampasArray[i].width,trampasArray[i].height);
+        }
     },collisionEnemigoConJugador: function (arbiter, space) {
         //a rellenar
     },
@@ -453,7 +461,7 @@ var GameLayer = cc.Layer.extend({
             //Mover el jugador atras para evitar problemas de atravesar suelos.
             jugador.body.p.x += jugador.sprite.scaleX>0?-20:20;
 
-            jugador.recibeHerida();
+            jugador.impactado();
             capaControles.actualizarVida( this.jugador.vidas );
         }
         trampaCaida.causo_herida = true;

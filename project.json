@@ -22,6 +22,7 @@
         "src/Disparo.js",
         "src/TrampaTirarEncima.js",
         "src/TrampaDisparo.js",
-        "src/TrampaCaer.js"
+        "src/TrampaCaer.js",
+        "src/TrampaRalentizar.js"
     ]
 }
