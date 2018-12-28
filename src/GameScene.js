@@ -83,6 +83,11 @@ var GameLayer = cc.Layer.extend({
         this.space.addCollisionHandler(tipoJugador, tipoTrampaTirarEncima,
             null, null, this.collisionTrampaTirarEncimaJugador.bind(this), null);
 
+        //Colisiones trampa ralentizar
+        this.space.addCollisionHandler(tipoJugador, tipoTrampaRalentizar,
+            this.colisionTrampaRalentizar.bind(this), null, null, this.finColisionTrampaRalentizar.bind(this));
+
+
         this.space.addCollisionHandler(tipoJugador, tipoEscalera,
             null, null, this.collisionEscaleraJugador.bind(this), this.finCollisionEscaleraJugador.bind(this));
 
@@ -371,6 +376,13 @@ var GameLayer = cc.Layer.extend({
         for (var i = 0; i < trampasArray.length; i++) {
             var trampaCaer= new TrampaCaer( this,  cc.p(trampasArray[i]["x"],trampasArray[i]["y"]));
         }
+
+        //Trampas ralentizar
+        var grupoTrampasRalentizar = this.mapa.getObjectGroup("trampasRalentizar");
+        var trampasArray = grupoTrampasRalentizar.getObjects();
+        for (var i = 0; i < trampasArray.length; i++) {
+            var trampaRalentizar= new TrampaRalentizar( this,  cc.p(trampasArray[i]["x"],trampasArray[i]["y"]), trampasArray[i].width, trampasArray[i].height);
+        }
     },collisionEnemigoConJugador: function (arbiter, space) {
         var shapes = arbiter.getShapes();
         for (var j = 0; j < this.enemigos.length; j++) {
@@ -561,6 +573,12 @@ var GameLayer = cc.Layer.extend({
         }
         trampaDisparo.activa = true;
 
+    },
+    colisionTrampaRalentizar: function(arbitrer, space){
+        this.jugador.ralentizar(true);
+    },
+    finColisionTrampaRalentizar: function(arbitrer, space){
+        this.jugador.ralentizar(false);
     },
     collisionJugadorPuerta: function(arbitrer, space){
             if(this.jugador.llavesRecogidas>=3){

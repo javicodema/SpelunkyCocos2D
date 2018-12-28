@@ -25,6 +25,7 @@ var res = {
     trampa_caer: "res/trampas/trampa_caer.png",
     trampa_tirar_encima: "res/trampas/trampa_tirar_encima.png",
     trampa_disparo: "res/trampas/trampa_disparo.png",
+    trampa_ralentizar: "res/trampas/trampa_ralentizar.png",
 
     //Recolectables
     llave: "res/recolectables/llave.png",
