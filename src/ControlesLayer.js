@@ -25,7 +25,7 @@ var ControlesLayer = cc.Layer.extend({
         this.etiquetaBombas.fillStyle = new cc.Color(255, 255, 255, 0);
         this.addChild(this.etiquetaBombas);
 
-        this.etiquetaLlaves = new cc.LabelTTF("Llaves: 0", "Helvetica", 20);
+        this.etiquetaLlaves = new cc.LabelTTF("Llaves: 0/3", "Helvetica", 20);
         this.etiquetaLlaves.setPosition(cc.p(80, size.height - 50));
         this.etiquetaLlaves.fillStyle = new cc.Color(255, 255, 255, 0);
         this.addChild(this.etiquetaLlaves);
@@ -174,7 +174,7 @@ var ControlesLayer = cc.Layer.extend({
     }, actualizarPuntos:function(puntos){
         this.etiquetaPuntos.setString("Puntos: "+puntos);
     }, actualizarLlaves:function(llaves){
-        this.etiquetaLlaves.setString("Llaves: "+llaves);
+        this.etiquetaLlaves.setString("Llaves: "+llaves+"/3");
     }
 
 });

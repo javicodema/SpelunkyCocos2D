@@ -21,7 +21,8 @@ var Jugador = cc.Class.extend({
     sprite:null,
     shape:null,
     body:null,
-    vidas:3,
+    vidas:5,
+    llavesRecogidas:0,
     bombas:0,
     llaves:0,
     arma:null,
@@ -172,9 +173,6 @@ var Jugador = cc.Class.extend({
             this.body.vy = 0;
             this.body.applyImpulse(cp.v(0, this.potenciaSalto), cp.v(0, 0));
         }
-    },
-    recibeHerida: function() {
-        this.vidas--;
     }
     ,actualizar: function (){
         //Cambiar la orientación del PJ
@@ -280,6 +278,9 @@ var Jugador = cc.Class.extend({
             this.estado = estadoImpactado;
         }
         this.vidas--;
+        /*if(this.vidas<=0){
+            cc.director.runScene(new MenuScene());
+        }*/
     },
     agachado: function(){
         if(this.estado != estadoAgachado){

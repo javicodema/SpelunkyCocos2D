@@ -23,6 +23,7 @@
         "src/TrampaTirarEncima.js",
         "src/TrampaDisparo.js",
         "src/TrampaCaer.js",
-        "src/TrampaRalentizar.js"
+        "src/Puerta.js",
+        "src/recolectables/Llave.js"
     ]
 }
