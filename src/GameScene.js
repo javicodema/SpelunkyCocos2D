@@ -14,6 +14,7 @@ var tipoEscalera = 13;
 var tipoTrampaCaer = 14;
 var tipoLlave = 15;
 var tipoPuerta = 16;
+var tipoTrampaRalentizar = 17;
 
 var GameLayer = cc.Layer.extend({
     space:null,
@@ -81,6 +82,11 @@ var GameLayer = cc.Layer.extend({
             this.collisionTrampaTirarEncimaSuelo.bind(this), null, null, null);
         this.space.addCollisionHandler(tipoJugador, tipoTrampaTirarEncima,
             null, null, this.collisionTrampaTirarEncimaJugador.bind(this), null);
+
+        //Colisiones trampa ralentizar
+        this.space.addCollisionHandler(tipoJugador, tipoTrampaRalentizar,
+            this.colisionTrampaRalentizar.bind(this), null, null, this.finColisionTrampaRalentizar.bind(this));
+
 
         this.space.addCollisionHandler(tipoJugador, tipoEscalera,
             null, null, this.collisionEscaleraJugador.bind(this), this.finCollisionEscaleraJugador.bind(this));
@@ -371,18 +377,12 @@ var GameLayer = cc.Layer.extend({
             var trampaCaer= new TrampaCaer( this,  cc.p(trampasArray[i]["x"],trampasArray[i]["y"]));
         }
 
-        // Llaves
-        var llaves = this.mapa.getObjectGroup("llaves");
-        var llavesArray = llaves.getObjects();
-        for (var i = 0; i < llavesArray.length; i++) {
-            var llave= new Llave( this,  cc.p(llavesArray[i]["x"],llavesArray[i]["y"]));
-            this.llaves.push(llave);
+        //Trampas ralentizar
+        var grupoTrampasRalentizar = this.mapa.getObjectGroup("trampasRalentizar");
+        var trampasArray = grupoTrampasRalentizar.getObjects();
+        for (var i = 0; i < trampasArray.length; i++) {
+            var trampaRalentizar= new TrampaRalentizar( this,  cc.p(trampasArray[i]["x"],trampasArray[i]["y"]), trampasArray[i].width, trampasArray[i].height);
         }
-
-        // Puerta
-        var puerta = this.mapa.getObjectGroup("puerta").getObjects()[0];
-        this.puerta = new Puerta(this, cc.p(puerta["x"],puerta["y"]))
-
     },collisionEnemigoConJugador: function (arbiter, space) {
         var shapes = arbiter.getShapes();
         for (var j = 0; j < this.enemigos.length; j++) {
@@ -573,6 +573,12 @@ var GameLayer = cc.Layer.extend({
         }
         trampaDisparo.activa = true;
 
+    },
+    colisionTrampaRalentizar: function(arbitrer, space){
+        this.jugador.ralentizar(true);
+    },
+    finColisionTrampaRalentizar: function(arbitrer, space){
+        this.jugador.ralentizar(false);
     },
     collisionJugadorPuerta: function(arbitrer, space){
             if(this.jugador.llavesRecogidas>=3){

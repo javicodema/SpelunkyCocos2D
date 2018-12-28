@@ -12,9 +12,7 @@ var TrampaCaer = cc.Class.extend({
         // Crear Sprite - Cuerpo y forma
         this.sprite = new cc.PhysicsSprite(res.trampa_caer);
         // Cuerpo estatico, NO le afectan las fuerzas
-        this.body = new cp.Body(10000, cp.momentForBox(1,
-            this.sprite.getContentSize().width,
-            this.sprite.getContentSize().height));
+        this.body = new cp.Body(10000, cp.momentForBox(1,this.sprite.getContentSize().width,this.sprite.getContentSize().height));
 
         posicion.x += this.sprite.getContentSize().width/2;
         posicion.y += this.sprite.getContentSize().height/2;

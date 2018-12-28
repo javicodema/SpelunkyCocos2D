@@ -24,6 +24,7 @@
         "src/TrampaDisparo.js",
         "src/TrampaCaer.js",
         "src/Puerta.js",
-        "src/recolectables/Llave.js"
+        "src/recolectables/Llave.js",
+        "src/TrampaRalentizar.js"
     ]
 }

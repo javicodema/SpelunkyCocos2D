@@ -37,6 +37,8 @@ var Jugador = cc.Class.extend({
     saltosAcutales: 0,
     retardoSalto: 300,
     ultimoSalto: 0,
+    penaliacionRalentizado: 200,
+    ralentizado: false,
     ctor:function (gameLayer, posicion) {
         this.gameLayer = gameLayer;
 
@@ -333,6 +335,16 @@ var Jugador = cc.Class.extend({
     }, desmontar: function(){
         if(this.estado == estadoMontado){
             this.estado = estadoCaminando;
+        }
+    },
+    ralentizar: function(ralentizar){
+        if( !this.ralentizado && ralentizar){
+            this.ralentizado = true;
+            this.velocidad -= this.penaliacionRalentizado;
+        }
+        else if( this.ralentizado && !ralentizar ){
+            this.ralentizado = false;
+            this.velocidad += this.penaliacionRalentizado;
         }
     }
     });
