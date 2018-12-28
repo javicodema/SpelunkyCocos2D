@@ -127,10 +127,10 @@ var GameLayer = cc.Layer.extend({
         for(var i = 0; i < this.formasEliminar.length; i++) {
             var shape = this.formasEliminar[i];
 
-            for (var i = 0; i < this.llaves.length; i++) {
-               if (this.llaves[i].shape == shape) {
-                   this.llaves[i].eliminar();
-                   this.llaves.splice(i, 1);
+            for (var j = 0; j < this.llaves.length; j++) {
+               if (this.llaves[j].shape == shape) {
+                   this.llaves[j].eliminar();
+                   this.llaves.splice(j, 1);
                }
             }
 
