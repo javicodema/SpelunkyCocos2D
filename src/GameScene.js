@@ -15,6 +15,7 @@ var tipoTrampaCaer = 14;
 var tipoLlave = 15;
 var tipoPuerta = 16;
 var tipoTrampaRalentizar = 17;
+var tipoOpcional = 18;
 
 var GameLayer = cc.Layer.extend({
     space:null,
@@ -26,6 +27,7 @@ var GameLayer = cc.Layer.extend({
     disparos:[],
     formasEliminar:[],
     llaves:[],
+    opcionales:[],
     jugador: null,
     ctor:function () {
         this._super();
@@ -109,6 +111,9 @@ var GameLayer = cc.Layer.extend({
         this.space.addCollisionHandler(tipoJugador, tipoPuerta,
                 null, this.collisionJugadorPuerta.bind(this), null, null);
 
+        this.space.addCollisionHandler(tipoJugador, tipoOpcional,
+            null, this.collisionJugadorConOpcional.bind(this), null, null);
+
         return true;
     },
     update:function (dt) {
@@ -132,6 +137,13 @@ var GameLayer = cc.Layer.extend({
                    this.llaves[j].eliminar();
                    this.llaves.splice(j, 1);
                }
+            }
+
+            for (var j = 0; j < this.opcionales.length; j++) {
+                if (this.opcionales[j].shape == shape) {
+                    this.opcionales[j].eliminar();
+                    this.opcionales.splice(j, 1);
+                }
             }
 
             for (var j = 0; j < this.disparos.length; j++) {
@@ -392,6 +404,14 @@ var GameLayer = cc.Layer.extend({
             var llave= new Llave( this,  cc.p(llavesArray[i]["x"],llavesArray[i]["y"]));
             this.llaves.push(llave);
 		}
+        // Opcionales
+        var opcionales = this.mapa.getObjectGroup("opcionales");
+        var opcionalesArray = opcionales.getObjects();
+        for (var i = 0; i < opcionalesArray.length; i++) {
+            var opc= new Opcional( this,  cc.p(opcionalesArray[i]["x"],opcionalesArray[i]["y"]));
+            this.opcionales.push(opc);
+        }
+
 		// Puerta
         var puerta = this.mapa.getObjectGroup("puerta").getObjects()[0];
         this.puerta = new Puerta(this, cc.p(puerta["x"],puerta["y"]))
@@ -420,6 +440,18 @@ var GameLayer = cc.Layer.extend({
         var capaControles = this.getParent().getChildByTag(idCapaControles);
         this.jugador.llavesRecogidas++;
         capaControles.actualizarLlaves(this.jugador.llavesRecogidas);
+        this.jugador.puntuacion+=30;
+        capaControles.actualizarPuntos(this.jugador.puntuacion);
+
+    },collisionJugadorConOpcional:function (arbiter, space) {
+        // Marcar la llave para eliminarla
+        var shapes = arbiter.getShapes();
+        // shapes[0] es el jugador
+        this.formasEliminar.push(shapes[1]);
+
+        var capaControles = this.getParent().getChildByTag(idCapaControles);
+        this.jugador.puntuacion+=50;
+        capaControles.actualizarPuntos(this.jugador.puntuacion);
 
     },
     collisionDisparoConJugador: function (arbiter, space) {
@@ -431,6 +463,11 @@ var GameLayer = cc.Layer.extend({
         var shapes = arbiter.getShapes();
         this.formasEliminar.push(shapes[0]);
         this.formasEliminar.push(shapes[1]);
+
+
+        this.jugador.puntuacion+=10;
+        var capaControles = this.getParent().getChildByTag(idCapaControles);
+        capaControles.actualizarPuntos(this.jugador.puntuacion);
     },
     collisionDisparoConSuelos:function (arbiter, space) {
         var shapes = arbiter.getShapes();
@@ -456,6 +493,10 @@ var GameLayer = cc.Layer.extend({
         var shapes = arbiter.getShapes();
         this.formasEliminar.push(shapes[1]);
         this.jugador.vidas++;
+
+        this.jugador.puntuacion+=10;
+        var capaControles = this.getParent().getChildByTag(idCapaControles);
+        capaControles.actualizarPuntos(this.jugador.puntuacion);
     },
     noSueloDerecha : function(arbiter, space){
         var shapes = arbiter.getShapes();

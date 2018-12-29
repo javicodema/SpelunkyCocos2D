@@ -23,6 +23,7 @@ var Jugador = cc.Class.extend({
     body:null,
     vidas:5,
     llavesRecogidas:0,
+    puntuacion:0,
     bombas:0,
     llaves:0,
     arma:null,
