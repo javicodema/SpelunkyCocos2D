@@ -27,6 +27,7 @@ var res = {
     horse_ani_plist: "res/montura/horse.plist",
     idlehorse:"res/montura/idlehorse.png",
     disparo_png:"res/disparo_jugador2.png",
+    recolectable:"res/recolectables/recolectable.png",
 
     //Trampas
     trampa_caer: "res/trampas/trampa_caer.png",

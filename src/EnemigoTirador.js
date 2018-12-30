@@ -4,7 +4,7 @@ var EnemigoTirador = cc.Class.extend({
     sprite: null,
     vidas:1,
     shape: null,
-    delayDisparo: 50,
+    delayDisparo: 100,
     ctor: function (gameLayer, posicion) {
         this.gameLayer = gameLayer;
 
@@ -99,7 +99,7 @@ var EnemigoTirador = cc.Class.extend({
                         this.sprite.flippedX = true;
                         this.orientacion = -1;
                     }
-                    this.delayDisparo = 50;
+                    this.delayDisparo = 100;
                     return true;
                 }
             } else {
@@ -109,7 +109,7 @@ var EnemigoTirador = cc.Class.extend({
                         this.sprite.flippedX = false;
                         this.orientacion = 1;
                     }
-                    this.delayDisparo = 50;
+                    this.delayDisparo = 100;
                     return true;
                 }
             }

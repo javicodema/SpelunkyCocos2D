@@ -200,10 +200,10 @@ var Jugador = cc.Class.extend({
         var mitadAlto = this.sprite.getContentSize().height/2;
 
         this.shapeAbajo = new cp.PolyShape(this.body,
-            [ -mitadAncho, -mitadAlto, mitadAncho, -mitadAlto] ,
+            [ -mitadAncho, -mitadAlto, mitadAncho, -mitadAlto+20] ,
             cp.v(0,0) );
 
-        //this.shapeAbajo.setSensor(true);
+       // this.shapeAbajo.setSensor(true);
         this.shapeAbajo.setCollisionType(tipoJugAbajo);
         gameLayer.space.addShape(this.shapeAbajo);
 
@@ -341,7 +341,7 @@ var Jugador = cc.Class.extend({
     finTrepar: function() {
         if(this.estado == estadoTrepando){
             if(this.montura==null)this.estado = estadoCaminando;
-            this.estado=estadoMontadoCaminando;
+            else this.estado=estadoMontadoCaminando;
         }
     },
     impactado: function(){
@@ -402,7 +402,6 @@ var Jugador = cc.Class.extend({
         }
     }, montar: function(montura){
             this.estado = estadoMontado;
-            console.log(montura);
             this.montura=montura;
             this.potenciaSalto+=800;
             this.bonificadorVelocidad+=300;

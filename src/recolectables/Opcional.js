@@ -6,7 +6,7 @@ var Opcional = cc.Class.extend({
         this.gameLayer = gameLayer;
 
         // Crear Sprite
-        this.sprite = new cc.PhysicsSprite(res.llave); // conseguir sprite
+        this.sprite = new cc.PhysicsSprite(res.recolectable); // conseguir sprite
         // Cuerpo estatico, no le afectan las fuerzas, gravedad, etc.
         var body = new cp.StaticBody();
         posicion.x += this.sprite.getContentSize().width/2;
