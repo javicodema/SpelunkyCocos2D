@@ -4,7 +4,6 @@ var EnemigoPatrulla = cc.Class.extend({
     vidas:1,
     sprite:null,
     shape:null,
-    name:null,
     animacion:null,
     izquierda:null,
     derecha:null,
@@ -21,7 +20,6 @@ var EnemigoPatrulla = cc.Class.extend({
         this.sprite.setBody(this.body);
         // Se añade el cuerpo al espacio
         gameLayer.space.addBody(this.body);
-        this.name = this.body.p.y;
         // forma
         this.shape = new cp.BoxShape(this.body,
             this.sprite.getContentSize().width,

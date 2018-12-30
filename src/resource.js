@@ -23,7 +23,11 @@ var res = {
     animacion_rana_plist: "res/enemigoPatrulla/patrulla.plist",
     animacion_aguila_png: "res/enemigoPerseguidor/perseguidor.png",
     animacion_aguila_plist: "res/enemigoPerseguidor/perseguidor.plist",
+    horse_ani_png: "res/montura/horse.png",
+    horse_ani_plist: "res/montura/horse.plist",
+    idlehorse:"res/montura/idlehorse.png",
     disparo_png:"res/disparo_jugador2.png",
+    recolectable:"res/recolectables/recolectable.png",
 
     //Trampas
     trampa_caer: "res/trampas/trampa_caer.png",

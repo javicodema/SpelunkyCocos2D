@@ -26,6 +26,7 @@
         "src/Puerta.js",
         "src/recolectables/Llave.js",
         "src/TrampaRalentizar.js",
-        "src/recolectables/Opcional.js"
+        "src/recolectables/Opcional.js",
+        "src/Montura.js"
     ]
 }

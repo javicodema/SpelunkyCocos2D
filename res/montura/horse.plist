@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+	<dict>
+		<key>frames</key>
+		<dict>
+			<key>horse1.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{46,0},{39,32}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false/>
+				<key>sourceColorRect</key>
+				<string>{{6,4},{39,32}}</string>
+				<key>sourceSize</key>
+				<string>{50,38}</string>
+			</dict>
+
+			<key>horse2.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{45,97},{43,27}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false/>
+				<key>sourceColorRect</key>
+				<string>{{5,4},{43,27}}</string>
+				<key>sourceSize</key>
+				<string>{50,38}</string>
+			</dict>
+
+			<key>horse3.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{0,97},{44,28}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false/>
+				<key>sourceColorRect</key>
+				<string>{{5,4},{44,28}}</string>
+				<key>sourceSize</key>
+				<string>{50,38}</string>
+			</dict>
+
+			<key>horse4.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{0,65},{45,31}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false/>
+				<key>sourceColorRect</key>
+				<string>{{4,5},{45,31}}</string>
+				<key>sourceSize</key>
+				<string>{50,38}</string>
+			</dict>
+
+			<key>horse5.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{0,32},{45,32}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false/>
+				<key>sourceColorRect</key>
+				<string>{{4,4},{45,32}}</string>
+				<key>sourceSize</key>
+				<string>{50,38}</string>
+			</dict>
+
+			<key>horse6.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{0,0},{45,31}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false/>
+				<key>sourceColorRect</key>
+				<string>{{4,5},{45,31}}</string>
+				<key>sourceSize</key>
+				<string>{50,38}</string>
+			</dict>
+
+		</dict>
+
+		<key>metadata</key>
+		<dict>
+			<key>format</key>
+			<integer>2</integer>
+			<key>size</key>
+			<string>{128,128}</string>
+			<key>textureFileName</key>
+			<string>horse.png</string>
+			</dict>
+		</dict>
+</plist>
