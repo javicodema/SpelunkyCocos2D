@@ -16,6 +16,7 @@ var tipoLlave = 15;
 var tipoPuerta = 16;
 var tipoTrampaRalentizar = 17;
 var tipoOpcional = 18;
+var tipoMontura = 19;
 
 var GameLayer = cc.Layer.extend({
     space:null,
@@ -28,6 +29,7 @@ var GameLayer = cc.Layer.extend({
     formasEliminar:[],
     llaves:[],
     opcionales:[],
+    monturas:[],
     jugador: null,
     ctor:function () {
         this._super();
@@ -78,6 +80,8 @@ var GameLayer = cc.Layer.extend({
             null, null, null, this.escaleraIzquierda.bind(this));
         this.space.addCollisionHandler(tipoEscalera, tipoEnemigoDerecha,
             null, null, null, this.escaleraDerecha.bind(this));
+        this.space.addCollisionHandler(tipoJugador, tipoMontura,
+            null, null, this.collisionMonturaConJugador.bind(this), null);
 
         //Colisiones de la trampa de tirar encima
         this.space.addCollisionHandler(tipoJugador, tipoTriggerTirarEncima,
@@ -137,6 +141,13 @@ var GameLayer = cc.Layer.extend({
                    this.llaves[j].eliminar();
                    this.llaves.splice(j, 1);
                }
+            }
+
+            for (var j = 0; j < this.monturas.length; j++) {
+                if (this.monturas[j].shape == shape) {
+                    this.monturas[j].eliminar();
+                    this.monturas.splice(j, 1);
+                }
             }
 
             for (var j = 0; j < this.opcionales.length; j++) {
@@ -412,6 +423,13 @@ var GameLayer = cc.Layer.extend({
             this.opcionales.push(opc);
         }
 
+        var monturas = this.mapa.getObjectGroup("monturas");
+        var monturasArray = monturas.getObjects();
+        for (var i = 0; i < monturasArray.length; i++) {
+            var montura= new Montura( this,  cc.p(monturasArray[i]["x"],monturasArray[i]["y"]));
+            this.monturas.push(montura);
+        }
+
 		// Puerta
         var puerta = this.mapa.getObjectGroup("puerta").getObjects()[0];
         this.puerta = new Puerta(this, cc.p(puerta["x"],puerta["y"]))
@@ -453,6 +471,16 @@ var GameLayer = cc.Layer.extend({
         this.jugador.puntuacion+=50;
         capaControles.actualizarPuntos(this.jugador.puntuacion);
 
+    },collisionMonturaConJugador:function (arbiter, space) {
+        // Marcar la llave para eliminarla
+        var shapes = arbiter.getShapes();
+        // shapes[0] es el jugador
+        for (var j = 0; j < this.monturas.length; j++) {
+            if (this.monturas[j].shape == shapes[1]) {
+                this.jugador.montar(this.monturas[j])
+            }
+        }
+        this.formasEliminar.push(shapes[1]);
     },
     collisionDisparoConJugador: function (arbiter, space) {
         var shapes = arbiter.getShapes();

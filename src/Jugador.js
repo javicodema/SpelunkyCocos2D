@@ -5,6 +5,8 @@ var estadoMontado = 4;
 var estadoIdle = 5;
 var estadoAgachado = 6;
 var estadoTrepando = 7;
+var estadoMontadoCaminando = 8;
+var estadoMontadoSaltando = 9;
 
 var Jugador = cc.Class.extend({
     estado: estadoCaminando,
@@ -40,6 +42,7 @@ var Jugador = cc.Class.extend({
     ultimoSalto: 0,
     penaliacionRalentizado: 200,
     ralentizado: false,
+    montura:null,
     ctor:function (gameLayer, posicion) {
         this.gameLayer = gameLayer;
 
@@ -172,7 +175,8 @@ var Jugador = cc.Class.extend({
         // solo salta si está caminando o idle
         if( Date.now() - this.ultimoSalto > this.retardoSalto && this.saltosAcutales++ < this.maxSaltos){
             this.ultimoSalto = Date.now();
-            this.estado = estadoSaltando;
+            if(this.montura==null) this.estado = estadoSaltando;
+            else this.estado = estadoMontadoSaltando;
             this.body.vy = 0;
             this.body.applyImpulse(cp.v(0, this.potenciaSalto), cp.v(0, 0));
         }
@@ -258,10 +262,12 @@ var Jugador = cc.Class.extend({
         this.saltosAcutales=0
         if (this.estado != estadoCaminando || this.estado != estadoIdle) {
             if( this.body.vx > -1 && this.body.vx < 1){
-                this.estado = estadoIdle;
+                if(this.montura==null) this.estado = estadoIdle;
+                else this.estado=estadoMontado;
             }
             else{
-                this.estado = estadoCaminando;
+                if(this.montura==null) this.estado = estadoCaminando;
+                else this.estado=estadoMontadoCaminando;
             }
         }
     },
@@ -273,10 +279,14 @@ var Jugador = cc.Class.extend({
     ,
     finTrepar: function() {
         if(this.estado == estadoTrepando){
-            this.estado = estadoCaminando;
+            if(this.montura==null)this.estado = estadoCaminando;
+            else this.estado=estadoMontadoCaminando;
         }
     },
     impactado: function(){
+        if(this.montura!=null){
+            this.desmontar();
+        }
         if(this.estado != estadoImpactado){
             this.estado = estadoImpactado;
         }
@@ -326,17 +336,18 @@ var Jugador = cc.Class.extend({
     },
     finAnimacionImpactado: function() {
         if (this.estado == estadoImpactado) {
-            this.estado = estadoCaminando;
+            if(this.montura==null) this.estado = estadoCaminando;
+            else this.estado = estadoMontadoCaminando;
         }
-    }, montar: function(){
-        if(this.estado == estadoCaminando){
+    }, montar: function(montura){
             this.estado = estadoMontado;
-            //codigo
-        }
+            this.montura=montura;
+            this.potenciaSalto+=1000;
+            this.bonificadorVelocidad+=300;
     }, desmontar: function(){
-        if(this.estado == estadoMontado){
-            this.estado = estadoCaminando;
-        }
+        this.montura=null;
+        this.potenciaSalto-=1000;
+        this.bonificadorVelocidad-=300;
     },
     ralentizar: function(ralentizar){
         if( !this.ralentizado && ralentizar){
