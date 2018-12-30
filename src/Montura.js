@@ -6,7 +6,7 @@ var Montura = cc.Class.extend({
         this.gameLayer = gameLayer;
 
         // Crear Sprite - Cuerpo y forma
-        this.sprite = new cc.PhysicsSprite("#rana1.png");
+        this.sprite = new cc.PhysicsSprite(res.idlehorse);
         // Cuerpo estática , no le afectan las fuerzas
         // Cuerpo dinámico, SI le afectan las fuerzas
         this.body = new cp.Body(5,Infinity);

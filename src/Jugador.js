@@ -17,6 +17,8 @@ var Jugador = cc.Class.extend({
     aCaminar:null,
     aIdle: null,
     aMontado:null,
+    aMontadoCam:null,
+    aMontadoSal:null,
     aAgachado: null,
     aMovEscalera: null,
     gameLayer:null,
@@ -100,15 +102,42 @@ var Jugador = cc.Class.extend({
         this.aSaltarSubiendo  = new cc.RepeatForever(new cc.Animate(animacionSaltarSubiendo));
         this.aSaltarSubiendo.retain();
 
-        var framesAnimacionMontar = [];
-        for (var i = 1; i <= 4; i++) {
-            var str = "jugador_montar" + i + ".png";
-            var frame = cc.spriteFrameCache.getSpriteFrame(str);
-            framesAnimacionMontar.push(frame);
+        var framesAnimacionMontarCaminando = [];
+        for (var i =1; i <= 6; i++) {
+            if(i!=2){
+                var str = "horse" + i + ".png";
+                var frame = cc.spriteFrameCache.getSpriteFrame(str);
+                framesAnimacionMontarCaminando.push(frame);
+            }
         }
-        var animacionMontar = new cc.Animation(framesAnimacionMontar, 0.2);
+        var animacion = new cc.Animation(framesAnimacionMontarCaminando, 0.1);
+        var actionAnimacionBucle =
+            new cc.RepeatForever(new cc.Animate(animacion));
+
+        this.aMontadoCam = actionAnimacionBucle;
+        this.aMontadoCam.retain();
+
+        var framesAnimacionMontarS= [];
+        for (var i =2; i <= 2; i++) {
+            var str = "horse" + i + ".png";
+            var frame = cc.spriteFrameCache.getSpriteFrame(str);
+            framesAnimacionMontarS.push(frame);
+        }
+        var animacionMontS= new cc.Animation(framesAnimacionMontarS, 0.2);
+        this.aMontadoSal  =
+            new cc.RepeatForever(new cc.Animate(animacionMontS));
+
+        this.aMontadoSal.retain();
+
+        var framesAnimacionMontar= [];
+        for (var i =1; i <= 1; i++) {
+                var str = "horse" + i + ".png";
+                var frame = cc.spriteFrameCache.getSpriteFrame(str);
+                framesAnimacionMontar.push(frame);
+        }
+        var animacionMont= new cc.Animation(framesAnimacionMontar, 0.2);
         this.aMontado  =
-            new cc.RepeatForever(new cc.Animate(animacionMontar));
+            new cc.RepeatForever(new cc.Animate(animacionMont));
 
         this.aMontado.retain();
 
@@ -133,6 +162,17 @@ var Jugador = cc.Class.extend({
         this.aMovEscalera  =
             new cc.RepeatForever(new cc.Animate(animacionMovEscalera));
         this.aMovEscalera.retain();
+
+        var framesAnimacionImpactado = [];
+        for (var i = 1; i <= 2; i++) {
+            var str = "jugador_impactado" + i + ".png";
+            var frame = cc.spriteFrameCache.getSpriteFrame(str);
+            framesAnimacionImpactado.push(frame);
+        }
+        var animacionImpactado = new cc.Animation(framesAnimacionImpactado, 0.5);
+        this.aImpactado =
+            new cc.Repeat( new cc.Animate(animacionImpactado) , 2  );
+        this.aImpactado.retain();
 
         var framesAnimacionImpactado = [];
         for (var i = 1; i <= 2; i++) {
@@ -256,6 +296,27 @@ var Jugador = cc.Class.extend({
                     this.sprite.runAction(this.animacion);
                 }
                 break;
+            case estadoMontado:
+                if (this.animacion != this.aMontado){
+                    this.animacion = this.aMontado;
+                    this.sprite.stopAllActions();
+                    this.sprite.runAction(this.animacion);
+                }
+                break;
+            case estadoMontadoCaminando:
+                if (this.animacion != this.aMontadoCam){
+                    this.animacion = this.aMontadoCam;
+                    this.sprite.stopAllActions();
+                    this.sprite.runAction(this.animacion);
+                }
+                break;
+            case estadoMontadoSaltando:
+                if (this.animacion != this.aMontadoSal){
+                    this.animacion = this.aMontadoSal;
+                    this.sprite.stopAllActions();
+                    this.sprite.runAction(this.animacion);
+                }
+                break;
         }
     },
     tocaSuelo: function() {
@@ -280,12 +341,12 @@ var Jugador = cc.Class.extend({
     finTrepar: function() {
         if(this.estado == estadoTrepando){
             if(this.montura==null)this.estado = estadoCaminando;
-            else this.estado=estadoMontadoCaminando;
+            this.estado=estadoMontadoCaminando;
         }
     },
     impactado: function(){
         if(this.montura!=null){
-            this.desmontar();
+           this.desmontar();
         }
         if(this.estado != estadoImpactado){
             this.estado = estadoImpactado;
@@ -341,12 +402,13 @@ var Jugador = cc.Class.extend({
         }
     }, montar: function(montura){
             this.estado = estadoMontado;
+            console.log(montura);
             this.montura=montura;
-            this.potenciaSalto+=1000;
+            this.potenciaSalto+=800;
             this.bonificadorVelocidad+=300;
     }, desmontar: function(){
         this.montura=null;
-        this.potenciaSalto-=1000;
+        this.potenciaSalto-=800;
         this.bonificadorVelocidad-=300;
     },
     ralentizar: function(ralentizar){

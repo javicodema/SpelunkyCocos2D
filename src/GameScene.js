@@ -47,6 +47,7 @@ var GameLayer = cc.Layer.extend({
         cc.spriteFrameCache.addSpriteFrames(res.puerta_plist);
         cc.spriteFrameCache.addSpriteFrames(res.animacion_rana_plist);
         cc.spriteFrameCache.addSpriteFrames(res.animacion_aguila_plist);
+        cc.spriteFrameCache.addSpriteFrames(res.horse_ani_plist);
 
         // Inicializar Space
         this.space = new cp.Space();
@@ -508,14 +509,15 @@ var GameLayer = cc.Layer.extend({
     finCollisionSueloConJugador:function (arbiter, space) {
 
         //Si deja el suelo sin haber saltado (Ej: Caerse) no tiene doble salto.
-        if( this.jugador.estado != estadoSaltando ) {
+        if( this.jugador.estado != estadoSaltando && this.jugador.estado != estadoMontadoSaltando ) {
             this.jugador.saltosAcutales++
 
             //Evitar efecto de tobogan al dejar el suelo.
             this.jugador.body.vx = 0;
             this.jugador.body.vy = 0;
         }
-        this.jugador.estado = estadoSaltando;
+        if(this.jugador.montura==null) this.jugador.estado = estadoSaltando;
+        else this.jugador.estado = estadoMontadoSaltando;
 
     },jugadorSalto:function(arbiter,space){
         var shapes = arbiter.getShapes();
