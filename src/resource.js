@@ -47,7 +47,7 @@ var res = {
     tileset_1: "res/mapas/tileset.png",
     //tileset_2: "res/mapas/tileset2.png",
     mapa_prueba_tmx: "res/mapas/mapa1.tmx",
-    mapa_1_tmx:"res/mapas/mapaTiled1.tmx"
+    nivel1:"res/mapas/nivel1.tmx"
 };
 
 var g_resources = [];
