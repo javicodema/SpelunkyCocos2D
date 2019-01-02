@@ -27,6 +27,6 @@
         "src/recolectables/Llave.js",
         "src/TrampaRalentizar.js",
         "src/recolectables/Opcional.js",
-        "src/Montura.js"
+        "src/recolectables/Montura.js"
     ]
 }

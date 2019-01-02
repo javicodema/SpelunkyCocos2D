@@ -18,6 +18,8 @@ var tipoTrampaRalentizar = 17;
 var tipoOpcional = 18;
 var tipoMontura = 19;
 
+var nivelActual = 1;
+
 var GameLayer = cc.Layer.extend({
     space:null,
     puerta:null,
@@ -56,7 +58,7 @@ var GameLayer = cc.Layer.extend({
         this.depuracion = new cc.PhysicsDebugNode(this.space);
         this.addChild(this.depuracion, 10);
 
-        this.cargarMapa(res.mapa_1_tmx); //habria que meter el mapa como parametro
+        this.cargarMapa("res/mapas/nivel"+nivelActual+".tmx"); //habria que meter el mapa como parametro
         this.scheduleUpdate();
 
         // Zona de escuchadores de colisiones
@@ -224,7 +226,6 @@ var GameLayer = cc.Layer.extend({
 
 
         //Leer controles jugador
-        var capaControles = this.getParent().getChildByTag(idCapaControles);
         controles = capaControles.teclas_pulsadas;
 
         //Control de salto
@@ -298,8 +299,14 @@ var GameLayer = cc.Layer.extend({
 
         var jugadores = this.mapa.getObjectGroup("jugador");
         var jugadorArray = jugadores.getObjects();
-        this.jugador = new Jugador(this,
+        if(this.jugador==null)
+            this.jugador = new Jugador(this,
                 cc.p(jugadorArray[0]["x"],jugadorArray[0]["y"]));
+        else{
+            var jugadorAntiguo = this.jugador;
+            this.jugador = new Jugador(this, cc.p(jugadorArray[0]["x"],jugadorArray[0]["y"]));
+            this.jugador.actualizarStats(jugadorAntiguo);
+        }
 
         // Solicitar los objeto dentro de la capa Suelos
         var grupoSuelos = this.mapa.getObjectGroup("suelos");
@@ -328,7 +335,7 @@ var GameLayer = cc.Layer.extend({
         }
 
 
-        // Solicitar los objeto dentro de la capa Suelos
+        // Solicitar los objeto dentro de la capa escaleras
         var grupoEscaleras = this.mapa.getObjectGroup("escaleras");
         var escalerasArray = grupoEscaleras.getObjects();
         // Los objetos de la capa suelos se transforman a
@@ -671,7 +678,8 @@ var GameLayer = cc.Layer.extend({
     },
     collisionJugadorPuerta: function(arbitrer, space){
             if(this.jugador.llavesRecogidas>=3){
-                // Pasar de nivel
+                nivelActual++ // Habria que comprobar que no se supere el nivel maximo, pero en verdad como el ultimo nivel no tiene llaves pos da igual
+                this.cargarMapa("res/mapas/nivel"+nivelActual+".tmx");
             }
         },
 });

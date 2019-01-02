@@ -29,11 +29,9 @@ var Jugador = cc.Class.extend({
     llavesRecogidas:0,
     puntuacion:0,
     bombas:0,
-    llaves:0,
     arma:null,
     spriteSaltoBajando: null,
     spriteSaltoSubiendo: null,
-    bonificadorSalto:1,
     bonificadorVelocidad:200,
     velocidad: 300,
     velocidadTrepando:500,
@@ -419,5 +417,15 @@ var Jugador = cc.Class.extend({
             this.ralentizado = false;
             this.velocidad += this.penaliacionRalentizado;
         }
+    },
+    actualizarStats: function(jugador){
+        this.vidas = jugador.vidas;
+        this.bombas = jugador.bombas;
+        this.arma = jugador.arma;
+        this.montura = jugador.montura;
+        this.velocidad = jugador.velocidad;
+        this.bonificadorVelocidad = jugador.bonificadorVelocidad;
+        this.potenciaSalto = jugador.potenciaSalto;
+        this.maxSaltos = jugador.maxSaltos;
     }
     });
