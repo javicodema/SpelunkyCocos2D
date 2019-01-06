@@ -49,7 +49,10 @@ var res = {
     tileset_1: "res/mapas/tileset.png",
     //tileset_2: "res/mapas/tileset2.png",
     mapa_prueba_tmx: "res/mapas/mapa1.tmx",
-    nivel1:"res/mapas/nivel1.tmx"
+    nivel1:"res/mapas/nivel1.tmx",
+    nivel2:"res/mapas/nivel2.tmx",
+    nivel3:"res/mapas/nivel3.tmx",
+    nivel4:"res/mapas/nivel4.tmx",
 };
 
 var g_resources = [];

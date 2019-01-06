@@ -31,7 +31,8 @@
  <objectgroup name="escaleras"/>
  <objectgroup name="cuerdas"/>
  <objectgroup name="trampasCaer"/>
- <objectgroup name="triggersCaer"/>
+ <objectgroup name="trampasTirarEncima"/>
+ <objectgroup name="triggersTirarEncima"/>
  <objectgroup name="trampasDisparo"/>
  <objectgroup name="triggersDisparo"/>
  <objectgroup name="jugador"/>

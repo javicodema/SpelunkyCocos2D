@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="32" tileheight="32" nextobjectid="1">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="32" tileheight="32" nextobjectid="211">
  <tileset firstgid="1" name="tileset" tilewidth="32" tileheight="32" tilecount="252" columns="12">
   <image source="tileset.png" width="389" height="700"/>
  </tileset>
@@ -10,30 +10,331 @@
  </layer>
  <layer name="paredes" width="50" height="50">
   <data encoding="base64" compression="zlib">
-   eJztz1ENg0AUAMGngH9SFVQB4F9UT8Zcs5OsgH1n5t68Z/WZ/Z3Th6QPSx+WPix9WPqw9GHpw9KHpQ9LH5Y+LH1Y+rD0YenD0oelD0sflj4sfVj6sPRh+aeP7+rYvGv1AxvsGUc=
+   eJztmc9OwzAMxvMCZedqZ+AMEtoVdt/7X/owrFItGevz36Rsk/ZJ0RhrEv+S2LXbc2vt+8Hbz7Ud2+Nrbk+Oe9KT4750bxwvoEW0J8fEbDmA35HNp+JcPRxkJ7KRxv7aGpojanNkTyocl63Nmy1af4tDrv3FmOfUfBaPg58N2T62OT6Na7y+kWtP7Fpr7y0OWvNMOxvjSVX9AdlJHK/X9g5+z3JY6yLn6OHgY/XGK8lgzaX1J5E/8O9RjeSo9ichX5T+oK0L4ljA9ZNhR5QD2UD9uO/LVo27i3IdksfgnSuKdRqDFas8/9A4rJiYEZ9/VPzIcGjj96jCocXVvTkmNia3YSlyIHEOinOjOWZlzF4OzT/WdTs0vHacI6u9OOQcR/G3tR8V7cEhfSTK4cmKr6M41pbJEyscljgHzz0qHFaNYHF497GIIrkmV+VsWX6OJLm87/8lzT9k7nkLaTUiEtlOdaqs7TS/GiFrndZ9fQPNiiVWriZ9x6pzI9yj8xqSV3/QXq1tUuyI1i8ZX/dk3T+Q+DnLxELpX5GYqtkYiR3ct+WZicZ37ex5sU8y9ohzyFopwoH2gj/XqnJkYhXNeWuO1v5yWLGExxF0H+zlQLkx5/DODf9dq6Fb8/MS4tDq1t798HwAcaDn3FGOEXmbxRGJVzP7lM+HtdrWy9Wt+D7SP2R/+tQ4UJ/qfEjrWeDPryt5DeX58lyt/9uLg8dCdL+vPKskDn7OyUYrb+f37Kz4mqEzr+WdkfpRjuXtB782y5KNDdH90ergjB0ZllEccn88DhSv0Hwryy1rqRH7wVkqPhOV5SMjOao+g97HZPc1wqE9J+xhybzjHMXBlfFTbV0jeRg6rxaT9rxLSr4Dz86fySUrY1beY/8CbULWUA==
   </data>
  </layer>
  <layer name="detalles" width="50" height="50">
   <data encoding="base64" compression="zlib">
-   eJztwQENAAAAwqD3T20ON6AAAAAAAAAAAADg3wAnEAAB
+   eJztmV1uwyAMgEnIa7vnqrfYGfa+3v80m6UguciAHRvipPkkBEUo4B+MoSGch9+Dl4uLT2DaewEFYF0x+F0f0GttHmNRay3cGGqhM/yNuTBmqczZ+l2b75MBXVvponb2zuHdhyTn9g+aY6TdLHWj4RVkeU2us63EtaZ0UNqjFJKxCU2M9GAzLRydUWMi0SeZM6J2QmqLM+jfgh56aNni0n2d2r6aCu0z4iUf3XI2JHrmoxy086Rz/QjAWi1yipFQvpXuoBJg/JL1bbG9h/3WopVr5mvn5u0SPMVeTXzKSX4HvjRlfRJyXxyJhW1u/+WOypfiW5QutO+/Lf8Fm92I/u9AyxMLbQ5YPo0vUnajZMA8FfONpBazAGs5tviUxdnJlQP7CY41o6jFJ9BZL7+yjNWAdH+AbCB7XNtT8HHWPwIdY5OdttjDWtccHmt9LxRLv6JiCkbzLt7KsXrn2SPeDr3AiX2j46On/PaI4PvYa62p/Sj932CPmLYnnLteLS6N9GPNu7Y3uDEpl/lI/im9oyZ597zbYqx8O31nzn5jlqw+8/nwB7tGPG8=
   </data>
  </layer>
- <objectgroup name="suelos"/>
- <objectgroup name="llaves"/>
- <objectgroup name="armas"/>
- <objectgroup name="bombas"/>
- <objectgroup name="monturas"/>
- <objectgroup name="trampasRalentizar"/>
- <objectgroup name="opcionales"/>
- <objectgroup name="patrullas"/>
- <objectgroup name="perseguidores"/>
- <objectgroup name="disparadores"/>
- <objectgroup name="escaleras"/>
- <objectgroup name="cuerdas"/>
- <objectgroup name="trampasCaer"/>
- <objectgroup name="triggersCaer"/>
- <objectgroup name="trampasDisparo"/>
- <objectgroup name="triggersDisparo"/>
- <objectgroup name="jugador"/>
- <objectgroup name="puerta"/>
+ <objectgroup name="suelos">
+  <object id="167" x="30" y="34">
+   <polyline points="0,0 0.666667,893.333 32.6667,893.333 33.3333,796 95.3333,796.667 96.6667,864 224.667,863.333 225.333,959.333 288.667,962 288.667,922 318.667,924 322.667,890 609.333,894 609.333,927.333 513.333,927.333 512.667,1024.67 480.667,1023.33 480.667,1214.67 419.333,1215.33 418,1178 290,1182.67 289.333,1216 195.333,1216.67 195.333,1182.67 32,1183.33 35.3333,986.667 162.667,988.667 162.667,1026 68,1022.67 66.6667,1116.67 192.667,1116.67 192.667,927.333 2,926.667 1.33333,1276.67 64.6667,1277.33 64.6667,1310.67 98,1310.67 99.3333,1342 128.667,1342 129.333,1372.67 162,1374 161.333,1408 224.667,1408 225.333,1437.33 259.333,1437.33 257.333,1471.33 290.667,1470.67 290,1534.67 481.333,1535.33 480.667,1501.33 515.333,1502 514.667,1467.33"/>
+  </object>
+  <object id="168" x="541.333" y="1502">
+   <polyline points="0,0 353.333,1.33333 353.333,33.3333 448.667,34.6667 450.667,67.3333 1026,66 1026.67,-1470 -519.333,-1467.33"/>
+  </object>
+  <object id="169" x="125.333" y="382.667">
+   <polyline points="0,0 -1.33333,33.3333 -58.6667,32.6667 -61.3333,0 2,0.666667"/>
+  </object>
+  <object id="170" x="161.333" y="476.667">
+   <polyline points="0,0 0,32 60.6667,34.6667 61.3333,4 -2,2"/>
+  </object>
+  <object id="171" x="193.333" y="670.667">
+   <polyline points="0,0 0,30.6667 58.6667,32 60,0.666667 -0.666667,0.666667"/>
+  </object>
+  <object id="172" x="64.6667" y="672">
+   <polyline points="0,0 62.6667,0.666667 60,98.6667 -0.666667,99.3333 -1.33333,-2"/>
+  </object>
+  <object id="173" x="225.333" y="800">
+   <polyline points="0,0 2.66667,27.3333 56.6667,27.3333 61.3333,1.33333 0.666667,-0.666667"/>
+  </object>
+  <object id="174" x="352" y="831.333">
+   <polyline points="0,0 3.33333,31.3333 62,30.6667 61.3333,1.33333 -0.666667,-1.33333"/>
+  </object>
+  <object id="175" x="481.333" y="831.333">
+   <polyline points="0,0 2,31.3333 60.6667,30 62.6667,0 0.666667,0"/>
+  </object>
+  <object id="176" x="608" y="831.333">
+   <polyline points="0,0 4.66667,32 62.6667,32.6667 65.3333,-1.33333 -1.33333,-1.33333"/>
+  </object>
+  <object id="177" x="607.333" y="733.333">
+   <polyline points="0,0 0,32.6667 -62,34 -62,2 0.666667,0.666667"/>
+  </object>
+  <object id="178" x="288.667" y="479.333">
+   <polyline points="0,0 -1.33333,259.333 64,260 64,225.333 94.6667,226 94.6667,192.667 223.333,194.667 223.333,96 254,98 254,32 286.667,34 288,-30.6667 319.333,-30.6667 320.667,-62.6667 383.333,-60.6667 384.667,-126.667 703.333,-126.667 702.667,322 508,320.667 510,126.667 478.667,128 478.667,354.667 766,355.333 767.333,322 862,322.667 863.333,356 1119.33,354 1116.67,253.333 1086,256 1086,30 1023.33,30.6667 1022.67,-0.666667 992,0 990,-32 800,-31.3333 798.667,0 766.667,0.666667 766,32 736,31.3333 735.333,-126 1119.33,-125.333 1118.67,-163.333 1054.67,-159.333 1054.67,-195.333 1026,-193.333 1026,-227.333 990.667,-226.667 990,-160.667 704.667,-160.667 704.667,-221.333 863.333,-224 864,-253.333 990,-253.333 991.333,-287.333 832,-288.667 831.333,-256.667 670.667,-255.333 669.333,-194 639.333,-192.667 638.667,-159.333 254,-158.667 254,-224.667 160,-225.333 159.333,-160 -63.3333,-160 -62.6667,-60.6667 190.667,-60 190.667,65.3333 31.3333,65.3333 32.6667,0.666667 -1.33333,0"/>
+  </object>
+  <object id="179" x="544" y="1119.33">
+   <polyline points="0,0 2,32.6667 61.3333,32.6667 64,-2 -1.33333,-0.666667"/>
+  </object>
+  <object id="180" x="736.667" y="414.667">
+   <polyline points="0,0 2.66667,32 59.3333,32 62.6667,-1.33333 -2.66667,0"/>
+  </object>
+  <object id="181" x="862.667" y="382.667">
+   <polyline points="0,0 4.66667,32.6667 64.6667,30.6667 64.6667,-0.666667 0.666667,0"/>
+  </object>
+  <object id="182" x="737.333" y="512">
+   <polyline points="0,0 2,27.3333 60.6667,30.6667 62,0.666667 0,0"/>
+  </object>
+  <object id="183" x="831.333" y="478.667">
+   <polyline points="0,0 6,29.3333 62,30 64.6667,1.33333 0,0.666667"/>
+  </object>
+  <object id="184" x="897.333" y="541.333">
+   <polyline points="0,0 3.33333,33.3333 63.3333,33.3333 63.3333,3.33333 0,1.33333"/>
+  </object>
+  <object id="187" x="864.667" y="606.667">
+   <polyline points="0,0 3.33333,32 60,33.3333 63.3333,-2.66667 -2,0.666667"/>
+  </object>
+  <object id="188" x="639.333" y="1024">
+   <polyline points="0,0 -0.666667,224.667 -32,226 -32,254 -62.6667,255.333 -63.3333,286.667 -159.333,289.333 -158,385.333 258,385.333 258,287.333 128,287.333 127.333,222.667 94.6667,223.333 98,-2 0.666667,-1.33333"/>
+  </object>
+  <object id="189" x="929.333" y="1311.33">
+   <polyline points="0,0 1.33333,28.6667 60,31.3333 61.3333,1.33333 0.666667,-2"/>
+  </object>
+  <object id="190" x="964" y="1469.33">
+   <polyline points="0,0 -2.66667,-30 56.6667,-30.6667 57.3333,0 -0.666667,0"/>
+  </object>
+  <object id="191" x="1057.33" y="1376.67">
+   <polyline points="0,0 2,28.6667 58,28.6667 62.6667,-1.33333 1.33333,-1.33333"/>
+  </object>
+  <object id="192" x="1088" y="1217.33">
+   <polyline points="0,0 -0.666667,-259.333 -63.3333,-258.667 -66.6667,-289.333 -222.667,-288.667 -222.667,-261.333 -254.667,-257.333 -254.667,-227.333 -287.333,-224.667 -286.667,-191.333 -66,-190 -63.3333,-128 -31.3333,-128 -33.3333,-33.3333 -225.333,-34 -224,-68 -256.667,-66 -256,-99.3333 -288,-97.3333 -288.667,0 -0.666667,-0.666667"/>
+  </object>
+  <object id="193" x="1474" y="382.667">
+   <polyline points="0,0 2.66667,33.3333 57.3333,32.6667 59.3333,0 -0.666667,0"/>
+  </object>
+  <object id="194" x="1376" y="447.333">
+   <polyline points="0,0 4,32.6667 59.3333,30.6667 63.3333,1.33333 0.666667,-0.666667"/>
+  </object>
+  <object id="195" x="1472" y="512">
+   <polyline points="0,0 4,29.3333 62,28.6667 61.3333,0 0.666667,0"/>
+  </object>
+  <object id="196" x="1410.67" y="576">
+   <polyline points="0,0 0,29.3333 57.3333,30 60.6667,1.33333 0,-0.666667"/>
+  </object>
+  <object id="197" x="1472" y="639.333">
+   <polyline points="0,0 2.66667,32 62,31.3333 64,-1.33333 0,-0.666667"/>
+  </object>
+  <object id="198" x="1440.67" y="702.667">
+   <polyline points="0,0 4.66667,31.3333 60.6667,30 62,2.66667 1.33333,0"/>
+  </object>
+  <object id="199" x="1472.67" y="798">
+   <polyline points="0,0 4,30.6667 60,31.3333 64,0.666667 2.66667,-2"/>
+  </object>
+  <object id="200" x="1185.33" y="894.667">
+   <polyline points="0,0 4,32.6667 219.333,30 221.333,-2.66667 -1.33333,0"/>
+  </object>
+  <object id="201" x="1152.67" y="989.333">
+   <polyline points="0,0 3.33333,32 61.3333,32 61.3333,4 0.666667,0"/>
+  </object>
+  <object id="202" x="1279.33" y="992.667">
+   <polyline points="0,0 6,29.3333 64.6667,28 64.6667,-2 2,-0.666667"/>
+  </object>
+  <object id="203" x="1440" y="958.667">
+   <polyline points="0,0 2,33.3333 63.3333,30 63.3333,0.666667 0.666667,0"/>
+  </object>
+  <object id="204" x="1474" y="1088.67">
+   <polyline points="0,0 2,29.3333 60.6667,27.3333 61.3333,-2 -1.33333,-0.666667"/>
+  </object>
+  <object id="205" x="1440.67" y="1184.67">
+   <polyline points="0,0 2.66667,30 58.6667,28.6667 61.3333,-0.666667 0,0.666667"/>
+  </object>
+  <object id="206" x="1473.33" y="1281.33">
+   <polyline points="0,0 3.33333,30.6667 58,30.6667 62.6667,-2.66667 0,-2"/>
+  </object>
+  <object id="207" x="1440" y="1377.33">
+   <polyline points="0,0 4,28 61.3333,30 62.6667,-0.666667 0,-0.666667"/>
+  </object>
+  <object id="208" x="1472" y="1472">
+   <polyline points="0,0 2,30.6667 60.6667,32.6667 64.6667,-0.666667 0,-0.666667"/>
+  </object>
+  <object id="209" x="1152.67" y="1088.67">
+   <polyline points="0,0 2,255.333 32.6667,256 30.6667,31.3333 222.667,32 223.333,256 256.667,256 253.333,-3.33333 -0.666667,-0.666667"/>
+  </object>
+  <object id="210" x="1218" y="1249.33">
+   <polyline points="0,0 -3.33333,93.3333 122.667,92 126.667,-2 1.33333,-0.666667"/>
+  </object>
+ </objectgroup>
+ <objectgroup name="llaves">
+  <object id="38" x="415.667" y="482.333" width="30" height="30"/>
+  <object id="39" x="995.667" y="1125" width="30" height="30"/>
+  <object id="40" x="127.667" y="1091.67" width="30" height="30"/>
+ </objectgroup>
+ <objectgroup name="armas">
+  <object id="44" x="879.667" y="737" width="30" height="30"/>
+  <object id="80" x="1105" y="277" width="30" height="30"/>
+ </objectgroup>
+ <objectgroup name="bombas">
+  <object id="45" x="519.667" y="1269" width="30" height="30"/>
+  <object id="46" x="889" y="1125" width="30" height="30"/>
+  <object id="47" x="1269" y="1050.33" width="30" height="30"/>
+  <object id="48" x="1287.67" y="858.333" width="30" height="30"/>
+  <object id="49" x="115.667" y="978.333" width="30" height="30"/>
+  <object id="50" x="1198.33" y="266.333" width="30" height="30"/>
+  <object id="79" x="1021" y="273" width="30" height="30"/>
+ </objectgroup>
+ <objectgroup name="monturas">
+  <object id="51" x="79.6667" y="790.333" width="30" height="30"/>
+ </objectgroup>
+ <objectgroup name="trampasRalentizar">
+  <object id="82" x="31.4792" y="914.042" width="32.375" height="13.25"/>
+  <object id="83" x="160.313" y="882.125" width="32.375" height="13.25"/>
+  <object id="84" x="192.563" y="882.375" width="32.375" height="13.25"/>
+  <object id="85" x="64.5625" y="659.625" width="32.375" height="13.25"/>
+  <object id="86" x="257.063" y="980.625" width="32.375" height="13.25"/>
+  <object id="87" x="289.563" y="980.625" width="32.375" height="13.25"/>
+  <object id="88" x="191.813" y="1428.88" width="32.375" height="13.25"/>
+  <object id="89" x="225.313" y="1429.13" width="32.375" height="13.25"/>
+  <object id="90" x="320.313" y="1557.38" width="32.375" height="13.25"/>
+  <object id="91" x="352.813" y="1556.88" width="32.375" height="13.25"/>
+  <object id="92" x="480.313" y="1300.88" width="32.375" height="13.25"/>
+  <object id="93" x="384.313" y="308.125" width="32.375" height="13.25"/>
+  <object id="94" x="416.813" y="308.125" width="32.375" height="13.25"/>
+  <object id="95" x="864.063" y="786.875" width="32.375" height="13.25"/>
+  <object id="96" x="896.313" y="786.375" width="32.375" height="13.25"/>
+  <object id="97" x="672.813" y="1011.63" width="32.375" height="13.25"/>
+  <object id="98" x="705.063" y="1011.38" width="32.375" height="13.25"/>
+  <object id="99" x="640.563" y="1491.88" width="32.375" height="13.25"/>
+  <object id="100" x="672.313" y="1491.38" width="32.375" height="13.25"/>
+  <object id="101" x="767.063" y="1491.38" width="32.375" height="13.25"/>
+  <object id="102" x="799.813" y="1491.88" width="32.375" height="13.25"/>
+  <object id="103" x="1248.31" y="1557.13" width="32.375" height="13.25"/>
+  <object id="104" x="1184.06" y="1075.88" width="32.375" height="13.25"/>
+  <object id="105" x="960.313" y="916.625" width="32.375" height="13.25"/>
+  <object id="106" x="1216.56" y="881.625" width="32.375" height="13.25"/>
+  <object id="107" x="1088.81" y="435.125" width="32.375" height="13.25"/>
+  <object id="108" x="1119.81" y="435.125" width="32.375" height="13.25"/>
+  <object id="109" x="1216.06" y="434.125" width="32.375" height="13.25"/>
+  <object id="110" x="1056.31" y="306.625" width="32.375" height="13.25"/>
+  <object id="111" x="1216.31" y="306.875" width="32.375" height="13.25"/>
+  <object id="112" x="1248.06" y="306.125" width="32.375" height="13.25"/>
+  <object id="113" x="1376.06" y="882.875" width="32.375" height="13.25"/>
+  <object id="114" x="1343.06" y="1073.88" width="32.375" height="13.25"/>
+  <object id="115" x="1280.31" y="1557.13" width="32.375" height="13.25"/>
+  <object id="116" x="1504.81" y="1554.88" width="32.375" height="13.25"/>
+  <object id="117" x="1536.06" y="1553.88" width="32.375" height="13.25"/>
+ </objectgroup>
+ <objectgroup name="opcionales">
+  <object id="52" x="199.667" y="618.333" width="30" height="30"/>
+  <object id="53" x="235.667" y="754.333" width="30" height="30"/>
+  <object id="54" x="557" y="685" width="30" height="30"/>
+  <object id="55" x="758.333" y="463.667" width="30" height="30"/>
+  <object id="56" x="838.333" y="431.667" width="30" height="30"/>
+  <object id="57" x="913" y="498.333" width="30" height="30"/>
+  <object id="58" x="1039.67" y="435.667" width="30" height="30"/>
+  <object id="59" x="1141" y="383.667" width="30" height="30"/>
+  <object id="60" x="1238.33" y="381" width="30" height="30"/>
+  <object id="61" x="1318.33" y="435.667" width="30" height="30"/>
+  <object id="62" x="1413" y="507.667" width="30" height="30"/>
+  <object id="63" x="1494.33" y="581" width="30" height="30"/>
+  <object id="64" x="1485" y="750.333" width="30" height="30"/>
+  <object id="65" x="1449" y="897" width="30" height="30"/>
+  <object id="66" x="1451.67" y="1139.67" width="30" height="30"/>
+  <object id="67" x="1490.33" y="1234.33" width="30" height="30"/>
+  <object id="68" x="1450.33" y="1334.33" width="30" height="30"/>
+  <object id="69" x="1485" y="1427.67" width="30" height="30"/>
+  <object id="70" x="973" y="1394.33" width="30" height="30"/>
+  <object id="71" x="1071.67" y="1329" width="30" height="30"/>
+  <object id="72" x="937" y="1274.33" width="30" height="30"/>
+  <object id="73" x="578.333" y="1454.33" width="30" height="30"/>
+  <object id="74" x="842.333" y="1453" width="30" height="30"/>
+  <object id="75" x="366.333" y="797" width="30" height="30"/>
+  <object id="76" x="495.667" y="793" width="30" height="30"/>
+  <object id="77" x="619.667" y="786.333" width="30" height="30"/>
+  <object id="78" x="481" y="219.667" width="30" height="30"/>
+ </objectgroup>
+ <objectgroup name="patrullas">
+  <object id="118" x="605" y="275" width="30" height="30"/>
+  <object id="119" x="863" y="273" width="30" height="30"/>
+  <object id="120" x="1187" y="147" width="30" height="30"/>
+  <object id="121" x="351" y="497" width="30" height="30"/>
+  <object id="122" x="499" y="885" width="30" height="30"/>
+  <object id="123" x="421" y="1525" width="30" height="30"/>
+  <object id="124" x="715" y="1463" width="30" height="30"/>
+  <object id="125" x="893" y="889" width="30" height="30"/>
+  <object id="126" x="1329" y="855" width="30" height="30"/>
+  <object id="127" x="1309" y="1053" width="30" height="30"/>
+  <object id="128" x="1445" y="1523" width="30" height="30"/>
+ </objectgroup>
+ <objectgroup name="perseguidores">
+  <object id="129" x="869" y="569" width="30" height="30"/>
+  <object id="130" x="401" y="879" width="30" height="30"/>
+  <object id="131" x="61" y="1269" width="30" height="30"/>
+  <object id="132" x="557" y="1085" width="30" height="30"/>
+  <object id="133" x="1043" y="923" width="30" height="30"/>
+  <object id="134" x="1041" y="1515" width="30" height="30"/>
+ </objectgroup>
+ <objectgroup name="disparadores">
+  <object id="135" x="1359" y="279" width="30" height="30"/>
+  <object id="136" x="563" y="889" width="30" height="30"/>
+  <object id="137" x="801" y="1267" width="30" height="30"/>
+  <object id="138" x="1179" y="849" width="30" height="30"/>
+  <object id="139" x="129" y="1337" width="30" height="30"/>
+  <object id="140" x="915" y="1489" width="30" height="30"/>
+ </objectgroup>
+ <objectgroup name="escaleras">
+  <object id="142" x="127" y="480" width="29" height="414"/>
+  <object id="143" x="33" y="1023" width="26" height="289"/>
+  <object id="145" x="193" y="1022" width="26" height="130"/>
+  <object id="146" x="734" y="1026" width="29" height="223"/>
+  <object id="147" x="1184" y="1249" width="29" height="317"/>
+  <object id="148" x="1344" y="1249" width="28" height="314"/>
+  <object id="149" x="798" y="607" width="32" height="195"/>
+  <object id="150" x="959" y="610" width="31" height="188"/>
+ </objectgroup>
+ <objectgroup name="cuerdas">
+  <object id="151" x="337" y="1218" width="30" height="30"/>
+  <object id="152" x="625" y="421" width="30" height="30"/>
+ </objectgroup>
+ <objectgroup name="trampasCaer">
+  <object id="1" x="94.25" y="211.25" width="63.5" height="31.5"/>
+  <object id="2" x="217.25" y="118.25" width="63.5" height="31.5"/>
+  <object id="3" x="381.25" y="126.25" width="63.5" height="31.5"/>
+  <object id="4" x="535.25" y="97.25" width="63.5" height="31.5"/>
+  <object id="5" x="692.25" y="113.25" width="63.5" height="31.5"/>
+  <object id="6" x="856.25" y="93.25" width="63.5" height="31.5"/>
+  <object id="7" x="1004.25" y="126.25" width="63.5" height="31.5"/>
+  <object id="8" x="1188.25" y="91.25" width="63.5" height="31.5"/>
+  <object id="9" x="1330.25" y="147.25" width="63.5" height="31.5"/>
+  <object id="10" x="1456.25" y="226.25" width="63.5" height="31.5"/>
+  <object id="11" x="115" y="167" width="20" height="20"/>
+  <object id="12" x="238" y="77" width="20" height="20"/>
+  <object id="13" x="402" y="86" width="20" height="20"/>
+  <object id="14" x="553" y="56" width="20" height="20"/>
+  <object id="15" x="711" y="66" width="20" height="20"/>
+  <object id="16" x="877" y="53" width="20" height="20"/>
+  <object id="17" x="1024" y="84" width="20" height="20"/>
+  <object id="18" x="1210" y="48" width="20" height="20"/>
+  <object id="19" x="1350" y="98" width="20" height="20"/>
+  <object id="20" x="1474" y="189" width="20" height="20"/>
+ </objectgroup>
+ <objectgroup name="triggersTirarEncima" offsetx="-1" offsety="4">
+  <object id="29" x="1133.5" y="1503" width="50" height="60"/>
+  <object id="30" x="1218" y="1504.5" width="50" height="60"/>
+  <object id="31" x="1293" y="1504" width="50" height="60"/>
+  <object id="32" x="1376" y="1502.5" width="50" height="60"/>
+  <object id="156" x="933" y="1119" width="50" height="60"/>
+  <object id="157" x="168.833" y="820.333" width="50" height="60"/>
+  <object id="158" x="280.333" y="247.333" width="50" height="60"/>
+ </objectgroup>
+ <objectgroup name="trampasTirarEncima" offsetx="1" offsety="-1">
+  <object id="24" x="1142" y="1475" width="30" height="30"/>
+  <object id="26" x="1226" y="1476.5" width="30" height="30"/>
+  <object id="27" x="1300.5" y="1475" width="30" height="30"/>
+  <object id="28" x="1384" y="1475" width="30" height="30"/>
+  <object id="153" x="940.667" y="1091.33" width="30" height="30"/>
+  <object id="154" x="175.667" y="778.333" width="30" height="30"/>
+  <object id="155" x="287.667" y="211.667" width="30" height="30"/>
+ </objectgroup>
+ <objectgroup name="trampasDisparo">
+  <object id="33" x="1377" y="1345.5" width="30" height="30"/>
+  <object id="34" x="1153" y="1345.5" width="30" height="30"/>
+  <object id="159" x="1086.33" y="186.333" width="30" height="30"/>
+  <object id="160" x="1150.33" y="1051.67" width="30" height="30"/>
+  <object id="161" x="475.667" y="1533" width="30" height="30"/>
+ </objectgroup>
+ <objectgroup name="triggersDisparo">
+  <object id="35" x="1184" y="1344.5" width="90" height="30"/>
+  <object id="36" x="1286" y="1345" width="90" height="30"/>
+  <object id="162" x="363" y="1531.67" width="90" height="30"/>
+  <object id="163" x="977.667" y="187.667" width="90" height="30"/>
+  <object id="164" x="1189.67" y="1051.67" width="90" height="30"/>
+ </objectgroup>
+ <objectgroup name="jugador">
+  <object id="165" x="751.667" y="243.667" width="30" height="30"/>
+ </objectgroup>
+ <objectgroup name="puerta">
+  <object id="166" x="1248" y="1182.67" width="61.3333" height="62.6667"/>
+ </objectgroup>
 </map>
