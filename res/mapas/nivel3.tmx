@@ -13,4 +13,27 @@
    eJztz1ENg0AUAMGngH9SFVQB4F9UT8Zcs5OsgH1n5t68Z/WZ/Z3Th6QPSx+WPix9WPqw9GHpw9KHpQ9LH5Y+LH1Y+rD0YenD0oelD0sflj4sfVj6sPRh+aeP7+rYvGv1AxvsGUc=
   </data>
  </layer>
+ <layer name="detalles" width="50" height="50">
+  <data encoding="base64" compression="zlib">
+   eJztwQENAAAAwqD3T20ON6AAAAAAAAAAAADg3wAnEAAB
+  </data>
+ </layer>
+ <objectgroup name="suelos"/>
+ <objectgroup name="llaves"/>
+ <objectgroup name="armas"/>
+ <objectgroup name="bombas"/>
+ <objectgroup name="monturas"/>
+ <objectgroup name="trampasRalentizar"/>
+ <objectgroup name="opcionales"/>
+ <objectgroup name="patrullas"/>
+ <objectgroup name="perseguidores"/>
+ <objectgroup name="disparadores"/>
+ <objectgroup name="escaleras"/>
+ <objectgroup name="cuerdas"/>
+ <objectgroup name="trampasCaer"/>
+ <objectgroup name="triggersCaer"/>
+ <objectgroup name="trampasDisparo"/>
+ <objectgroup name="triggersDisparo"/>
+ <objectgroup name="jugador"/>
+ <objectgroup name="puerta"/>
 </map>

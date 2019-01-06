@@ -388,6 +388,18 @@ var GameLayer = cc.Layer.extend({
             }
         }
 
+        // Jefe
+        var grupoEnemigos = this.mapa.getObjectGroup("jefe");
+        if(grupoEnemigos!=null){
+            var enemigosArray = grupoEnemigos.getObjects();
+            for (var i = 0; i < enemigosArray.length; i++) {
+                var jefe = new EnemigoJefe(this,
+                    cc.p(enemigosArray[i]["x"],enemigosArray[i]["y"]));
+
+                this.enemigos.push(enemigo);
+            }
+        }
+
         // Enemigos
 
         var grupoEnemigos = this.mapa.getObjectGroup("patrullas");
