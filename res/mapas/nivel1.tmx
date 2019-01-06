@@ -5,7 +5,7 @@
  </tileset>
  <layer name="fondo" width="50" height="50">
   <data encoding="base64" compression="zlib">
-   eJztwwEJAAAMBKEr8v1rLsdAwVVTVVVVVVVVVVXV5w/xWhtE
+   eJyVlcGRpEAMBMcFDMAA/Hfw7klkZFazD2J3GEYtlaqS+/f73f+vC9cTn+/X52d8ft/jc7d8d7/q8571w+/veObCuZzF6vCv/fZdk5dpZ3Pd4/6Dq/p74kxeNRcv9mZ7WPPRJ9Sl5rKa9FP1YHulJx7co+42O3W68Nf2/X7eZqcXzeOWjfKM9Vj5M93sDJ5j51rdlTc7y7y/nuUzlnPyaN03DS3n5SnqYbkpj3zRwfxmrKtMGy8XA5nfpZ/1vXQxBtWeSlN739g7xPr/kimyprhqu6IO1ML2aDoa86wHm8GYY563vJaHbA72Z3ylLnY+d1t9mmb1TjD//yWTVoNz2F/Llc1uWTppbZxd/CuWVs4Wb1cGijWmH7PGe6uuZeSkH9lZ+lruSo96P9VeeM9yb3szLp0yRI/Unmum0/PWf7HUPMnfLX++++FOyZjaj/ndfsvaxts6z3xpzy2OkWf00smDNovNbfMsPlXm7LuqvX5TM9vujRHGk0vONSbU/sqLNtNJi+Kfecg8WpkphhgL3t8Zo9c7yXhO9qzccLbSwbhbO69dGC+NJTW/zXeaY51n2ps/vvRbe7YMFINMW+Nq7cX6rZ1aBs1DxtbFPctj9UwdrB/rjVrZjhbHOMNXDpoe717+ygbzg+VuMY2+ZR3bp+nJ/zkP+6DuxhbbGefmMzUDmV/vgi87tJzWnmw202mxy2rbfMWjOs+0sszZLJyTHmEmS8cTh8oj9HPl0jQpX1peTPfyVPVf+aHPuE9mnX6onJhHlt+ok51VDCmPmGbV26le7dtmsxybL9c5tj/j/+K2+Y+7Zv/WY2XUclA8pN9Y2zQqvS3PrGHeXLoVoziDabk4YzPabox59IFxa+lZO+RuzDsr25Yz+tlmOPVH/5Te5jGb0fqzPNsslT3ylV5bfF1a2g6Kq7ajr5yzd4zxzTxnv2Fd44+9F9hrZYzZuuK88of5rZhEPxjXTAubofi0cswdrncB80k/2syVW9Zmrfotc196m1Z8/uR1Zmn5r7x10ugLZ1mH7xbbRXGWfjJNqs5is+3E/P3VF6Yjdal3SOlUHHhQd+3asmZeMi2pQ/mzvG1zGv/Nk9wPz6z8FiOLH7ZDyxznLYYad9iHZam8ynrGgurHPG16m3+K7fQYfWI8WH2a5pZV66d4RX1LW9OyWGO7KOaRAabPiVGViZNvzT+1a2MaL5vn5PWvubKMsu4/OCkanA==
   </data>
  </layer>
  <layer name="paredes" width="50" height="50">
@@ -15,7 +15,7 @@
  </layer>
  <layer name="detalles" width="50" height="50">
   <data encoding="base64" compression="zlib">
-   eJzt2rEJAAAIA0E3dP9tbGxtReEOfoK0iYBd2QEAAAAAAAAAMPOxuMUePxS/WwHb
+   eJztmg0OwiAMhbvB/bz/bUyTVUmFAQH56d6XGLNNDZT2vQ5HZBsfvB8zBwI+vK4X6IOj39zm43PCWEbC8+N5usR1Hzm++zxYC1k/yW+sG7CKda0egfhBCxY1hmOivVCTuz6aUXof651qvgv2I5ZbqRoZqcuO7nNqdg/E8emhsRZADMpoqZ/VPAmAGtDT/xf2QvEkDfQ5D8cNPeyexHpB7ZdP0Z+S+9vdOOirYV6dH81J9uK7Oj3XueW3tL/CL/bHol7ORGpiZb/N7S21Iv83l2qN3neVscU8D9Sz0zMWqboJz++eDyXrEc63x/Mb4X5tWPs1dfq0++g3koMCug==
   </data>
  </layer>
  <objectgroup name="llaves">
@@ -104,22 +104,6 @@
   </object>
   <object id="161" x="289" y="415.667">
    <polyline points="0,0 2.66667,30.3333 58.6667,31.3333 62.3333,1 1,-0.666667"/>
-  </object>
- </objectgroup>
- <objectgroup name="agua">
-  <object id="31" x="64.1818" y="1087.73">
-   <polyline points="0,0 -0.181818,9 62.4545,10.0909 62.8182,-0.0909091 0.0909091,0.0909091"/>
-  </object>
- </objectgroup>
- <objectgroup name="lava">
-  <object id="32" x="256.75" y="1582">
-   <polyline points="0,0 0.5,12.25 383.5,12.5 383,-0.5 0.25,-0.5"/>
-  </object>
-  <object id="33" x="1087" y="1582">
-   <polyline points="0,0 0.5,13.25 192.5,12.5 192.5,0 0,0.25"/>
-  </object>
-  <object id="34" x="1216.88" y="1006.25">
-   <polyline points="0,0 -0.125,9.625 93.75,9.25 94.125,-0.375 0,0"/>
   </object>
  </objectgroup>
  <objectgroup name="trampasRalentizar" offsetx="-4.36364" offsety="0.0909091">

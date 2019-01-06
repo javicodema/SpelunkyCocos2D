@@ -15,8 +15,10 @@ var tipoTrampaCaer = 14;
 var tipoLlave = 15;
 var tipoPuerta = 16;
 var tipoTrampaRalentizar = 17;
-var tipoOpcional = 18;
+var tipoOpcional = 21;
 var tipoMontura = 19;
+var tipoArma = 20;
+var tipoBomba = 18;
 
 var nivelActual = 1;
 
@@ -28,8 +30,11 @@ var GameLayer = cc.Layer.extend({
     enemigos:[],
     tiradores:[],
     disparos:[],
+    armas:[],
+    bombas:[],
     formasEliminar:[],
     llaves:[],
+    cuerdas:[],
     opcionales:[],
     monturas:[],
     jugador: null,
@@ -120,6 +125,10 @@ var GameLayer = cc.Layer.extend({
 
         this.space.addCollisionHandler(tipoJugador, tipoOpcional,
             null, this.collisionJugadorConOpcional.bind(this), null, null);
+        this.space.addCollisionHandler(tipoJugador, tipoBomba,
+                    null, this.collisionBombaConJugador.bind(this), null, null);
+        this.space.addCollisionHandler(tipoJugador, tipoArma,
+                    null, this.collisionArmaConJugador.bind(this), null, null);
 
         return true;
     },
@@ -143,6 +152,20 @@ var GameLayer = cc.Layer.extend({
                if (this.llaves[j].shape == shape) {
                    this.llaves[j].eliminar();
                    this.llaves.splice(j, 1);
+               }
+            }
+
+            for (var j = 0; j < this.armas.length; j++) {
+               if (this.armas[j].shape == shape) {
+                   this.armas[j].eliminar();
+                   this.armas.splice(j, 1);
+               }
+            }
+
+            for (var j = 0; j < this.bombas.length; j++) {
+               if (this.bombas[j].shape == shape) {
+                   this.bombas[j].eliminar();
+                   this.bombas.splice(j, 1);
                }
             }
 
@@ -337,110 +360,170 @@ var GameLayer = cc.Layer.extend({
 
         // Solicitar los objeto dentro de la capa escaleras
         var grupoEscaleras = this.mapa.getObjectGroup("escaleras");
-        var escalerasArray = grupoEscaleras.getObjects();
-        // Los objetos de la capa suelos se transforman a
-        // formas estáticas de Chipmunk ( SegmentShape ).
-        for (var i = 0; i < escalerasArray.length; i++) {
-            var escalera = escalerasArray[i];
-            var bodyEscalera = new cp.Body(1000,1);
-            bodyEscalera.setPos( cc.p(escalera['x']+escalera['width']/2, escalera['y']+escalera['height']/2) )
-            var escaleraShape = new cp.BoxShape(bodyEscalera,escalera['width'], escalera['height']);
-            escaleraShape.setCollisionType( tipoEscalera );
-            escaleraShape.setElasticity(0.5);
-            escaleraShape.setFriction(1);
-            this.space.addShape( escaleraShape );
+        if(grupoEscaleras!=null){
+            var escalerasArray = grupoEscaleras.getObjects();
+            // Los objetos de la capa suelos se transforman a
+            // formas estáticas de Chipmunk ( SegmentShape ).
+            for (var i = 0; i < escalerasArray.length; i++) {
+                var escalera = escalerasArray[i];
+                var bodyEscalera = new cp.Body(1000,1);
+                bodyEscalera.setPos( cc.p(escalera['x']+escalera['width']/2, escalera['y']+escalera['height']/2) )
+                var escaleraShape = new cp.BoxShape(bodyEscalera,escalera['width'], escalera['height']);
+                escaleraShape.setCollisionType( tipoEscalera );
+                escaleraShape.setElasticity(0.5);
+                escaleraShape.setFriction(1);
+                this.space.addShape( escaleraShape );
+            }
+        }
+
+        //Cuerdas
+        var grupoCuerdas = this.mapa.getObjectGroup("cuerdas");
+        if(grupoCuerdas!=null){
+            var cuerdasArray = grupoCuerdas.getObjects();
+            // Los objetos de la capa suelos se transforman a
+            // formas estáticas de Chipmunk ( SegmentShape ).
+            for (var i = 0; i < cuerdasArray.length; i++) {
+                var cuerda = cuerdasArray[i];
+                //TODO Las cuerdas man
+            }
         }
 
         // Enemigos
 
         var grupoEnemigos = this.mapa.getObjectGroup("patrullas");
-        var enemigosArray = grupoEnemigos.getObjects();
-        for (var i = 0; i < enemigosArray.length; i++) {
-            var enemigo = new EnemigoPatrulla(this,
-                cc.p(enemigosArray[i]["x"],enemigosArray[i]["y"]));
+        if(grupoEnemigos!=null){
+            var enemigosArray = grupoEnemigos.getObjects();
+            for (var i = 0; i < enemigosArray.length; i++) {
+                var enemigo = new EnemigoPatrulla(this,
+                    cc.p(enemigosArray[i]["x"],enemigosArray[i]["y"]));
 
-            this.enemigos.push(enemigo);
+                this.enemigos.push(enemigo);
+            }
         }
 
         grupoEnemigos = this.mapa.getObjectGroup("disparadores");
-        enemigosArray = grupoEnemigos.getObjects();
-        for (var i = 0; i < enemigosArray.length; i++) {
-            var enemigo = new EnemigoTirador(this,
-                cc.p(enemigosArray[i]["x"],enemigosArray[i]["y"]));
+        if(grupoEnemigos!=null){
+            enemigosArray = grupoEnemigos.getObjects();
+            for (var i = 0; i < enemigosArray.length; i++) {
+                var enemigo = new EnemigoTirador(this,
+                    cc.p(enemigosArray[i]["x"],enemigosArray[i]["y"]));
 
-            this.tiradores.push(enemigo);
+                this.tiradores.push(enemigo);
+            }
         }
 
         grupoEnemigos = this.mapa.getObjectGroup("perseguidores");
-        enemigosArray = grupoEnemigos.getObjects();
-        for (var i = 0; i < enemigosArray.length; i++) {
-            var enemigo = new EnemigoPerseguidor(this,
-                cc.p(enemigosArray[i]["x"],enemigosArray[i]["y"]));
+        if(grupoEnemigos!=null){
+            enemigosArray = grupoEnemigos.getObjects();
+            for (var i = 0; i < enemigosArray.length; i++) {
+                var enemigo = new EnemigoPerseguidor(this,
+                    cc.p(enemigosArray[i]["x"],enemigosArray[i]["y"]));
 
-            this.enemigos.push(enemigo);
+                this.enemigos.push(enemigo);
+            }
         }
 
+        //Armas
+        grupoArmas = this.mapa.getObjectGroup("armas");
+        if(grupoArmas!=null){
+            armasArray = grupoArmas.getObjects();
+            for (var i = 0; i < armasArray.length; i++) {
+                var arma = new Arma(this,
+                    cc.p(armasArray[i]["x"],armasArray[i]["y"]));
+
+                this.armas.push(arma);
+            }
+        }
+
+        //bombas
+        grupoBombas = this.mapa.getObjectGroup("bombas");
+        if(grupoBombas!=null){
+            bombasArray = grupoBombas.getObjects();
+            for (var i = 0; i < bombasArray.length; i++) {
+                var bomba = new Bomba(this,
+                    cc.p(bombasArray[i]["x"],bombasArray[i]["y"]));
+
+                this.bombas.push(bomba);
+            }
+        }
 
         //Trampas tirar encima
         var grupoTrampasTirar = this.mapa.getObjectGroup("trampasTirarEncima");
         var grupoTriggersTirar = this.mapa.getObjectGroup("triggersTirarEncima");
-        var trampasArray = grupoTrampasTirar.getObjects();
-        var triggersArray = grupoTriggersTirar.getObjects();
-        for (var i = 0; i < trampasArray.length; i++) {
-            var numero = trampasArray[i].name.substring(2);
-            var trigger = triggersArray.find( tr => tr.name == 'ttg'+ numero)
-            var trampaTirarEncima = new TrampaTirarEncima( this,  cc.p(trampasArray[i]["x"],trampasArray[i]["y"]), trigger );
+        if(grupoTrampasTirar!=null && grupoTriggersTirar!=null){
+            var trampasArray = grupoTrampasTirar.getObjects();
+            var triggersArray = grupoTriggersTirar.getObjects();
+            for (var i = 0; i < trampasArray.length; i++) {
+                var numero = trampasArray[i].name.substring(2);
+                var trigger = triggersArray.find( tr => tr.name == 'ttg'+ numero)
+                var trampaTirarEncima = new TrampaTirarEncima( this,  cc.p(trampasArray[i]["x"],trampasArray[i]["y"]), trigger );
+            }
         }
 
         //Trampas disparo
         var grupoTrampasDisparo = this.mapa.getObjectGroup("trampasDisparo");
         var grupoTriggersDisparo = this.mapa.getObjectGroup("triggersDisparo");
-        var trampasArray = grupoTrampasDisparo.getObjects();
-        var triggersArray = grupoTriggersDisparo.getObjects();
-        for (var i = 0; i < trampasArray.length; i++) {
-            var numero = trampasArray[i].name.substring(2);
-            var trigger = triggersArray.find( tr => tr.name == 'tgd'+ numero)
-            var trampaDisparo= new TrampaDisparo( this,  cc.p(trampasArray[i]["x"],trampasArray[i]["y"]), trigger );
+        if(grupoTrampasDisparo!=null && grupoTriggersDisparo!=null){
+            var trampasArray = grupoTrampasDisparo.getObjects();
+            var triggersArray = grupoTriggersDisparo.getObjects();
+            for (var i = 0; i < trampasArray.length; i++) {
+                var numero = trampasArray[i].name.substring(2);
+                var trigger = triggersArray.find( tr => tr.name == 'tgd'+ numero)
+                var trampaDisparo= new TrampaDisparo( this,  cc.p(trampasArray[i]["x"],trampasArray[i]["y"]), trigger );
+            }
         }
 
         //Trampas caer
         var grupoTrampasCaer = this.mapa.getObjectGroup("trampasCaer");
-        var trampasArray = grupoTrampasCaer.getObjects();
-        for (var i = 0; i < trampasArray.length; i++) {
-            var trampaCaer= new TrampaCaer( this,  cc.p(trampasArray[i]["x"],trampasArray[i]["y"]));
+        if(grupoTrampasCaer!=null){
+            var trampasArray = grupoTrampasCaer.getObjects();
+            for (var i = 0; i < trampasArray.length; i++) {
+                var trampaCaer= new TrampaCaer( this,  cc.p(trampasArray[i]["x"],trampasArray[i]["y"]));
+            }
         }
 
         //Trampas ralentizar
         var grupoTrampasRalentizar = this.mapa.getObjectGroup("trampasRalentizar");
-        var trampasArray = grupoTrampasRalentizar.getObjects();
-        for (var i = 0; i < trampasArray.length; i++) {
-            var trampaRalentizar= new TrampaRalentizar( this,  cc.p(trampasArray[i]["x"],trampasArray[i]["y"]), trampasArray[i].width, trampasArray[i].height);
+            if(grupoTrampasRalentizar!=null){
+            var trampasArray = grupoTrampasRalentizar.getObjects();
+            for (var i = 0; i < trampasArray.length; i++) {
+                var trampaRalentizar= new TrampaRalentizar( this,  cc.p(trampasArray[i]["x"],trampasArray[i]["y"]), trampasArray[i].width, trampasArray[i].height);
+            }
         }
+
 		// Llaves
         var llaves = this.mapa.getObjectGroup("llaves");
-        var llavesArray = llaves.getObjects();
-        for (var i = 0; i < llavesArray.length; i++) {
-            var llave= new Llave( this,  cc.p(llavesArray[i]["x"],llavesArray[i]["y"]));
-            this.llaves.push(llave);
+        if(llaves!=null){
+            var llavesArray = llaves.getObjects();
+            for (var i = 0; i < llavesArray.length; i++) {
+                var llave= new Llave( this,  cc.p(llavesArray[i]["x"],llavesArray[i]["y"]));
+                this.llaves.push(llave);
+            }
 		}
+
         // Opcionales
         var opcionales = this.mapa.getObjectGroup("opcionales");
-        var opcionalesArray = opcionales.getObjects();
-        for (var i = 0; i < opcionalesArray.length; i++) {
-            var opc= new Opcional( this,  cc.p(opcionalesArray[i]["x"],opcionalesArray[i]["y"]));
-            this.opcionales.push(opc);
+        if(opcionales!=null){
+            var opcionalesArray = opcionales.getObjects();
+            for (var i = 0; i < opcionalesArray.length; i++) {
+                var opc= new Opcional( this,  cc.p(opcionalesArray[i]["x"],opcionalesArray[i]["y"]));
+                this.opcionales.push(opc);
+            }
         }
 
         var monturas = this.mapa.getObjectGroup("monturas");
-        var monturasArray = monturas.getObjects();
-        for (var i = 0; i < monturasArray.length; i++) {
-            var montura= new Montura( this,  cc.p(monturasArray[i]["x"],monturasArray[i]["y"]));
-            this.monturas.push(montura);
+        if(monturas!=null){
+            var monturasArray = monturas.getObjects();
+            for (var i = 0; i < monturasArray.length; i++) {
+                var montura= new Montura( this,  cc.p(monturasArray[i]["x"],monturasArray[i]["y"]));
+                this.monturas.push(montura);
+            }
         }
 
 		// Puerta
         var puerta = this.mapa.getObjectGroup("puerta").getObjects()[0];
-        this.puerta = new Puerta(this, cc.p(puerta["x"],puerta["y"]))
+        if(puerta!=null)
+            this.puerta = new Puerta(this, cc.p(puerta["x"],puerta["y"]))
     },collisionEnemigoConJugador: function (arbiter, space) {
         var shapes = arbiter.getShapes();
         for (var j = 0; j < this.enemigos.length; j++) {
@@ -456,6 +539,13 @@ var GameLayer = cc.Layer.extend({
     },
     finCollisionEnemigoConJugador:function (arbiter, space) {
         this.jugador.impactado();
+    },collisionBombaConJugador:function (arbiter,space){
+        // Marcar la bomba para eliminarla
+            var shapes = arbiter.getShapes();
+            // shapes[0] es el jugador
+            this.formasEliminar.push(shapes[1]);
+
+            //TODO Darle la bomba al jugador
     },
     collisionJugadorConLlave:function (arbiter, space) {
         // Marcar la llave para eliminarla
@@ -468,6 +558,15 @@ var GameLayer = cc.Layer.extend({
         capaControles.actualizarLlaves(this.jugador.llavesRecogidas);
         this.jugador.puntuacion+=30;
         capaControles.actualizarPuntos(this.jugador.puntuacion);
+
+    },
+    collisionArmaConJugador:function(arbiter, space){
+        // Marcar el arma para eliminarla
+        var shapes = arbiter.getShapes();
+        // shapes[0] es el jugador
+        this.formasEliminar.push(shapes[1]);
+
+        //TODO Darle el arma al jugador
 
     },collisionJugadorConOpcional:function (arbiter, space) {
         // Marcar la llave para eliminarla

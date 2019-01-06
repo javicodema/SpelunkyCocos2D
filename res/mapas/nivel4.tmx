@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="25" height="15" tilewidth="32" tileheight="32" nextobjectid="5">
+ <tileset firstgid="1" name="tileset" tilewidth="32" tileheight="32" tilecount="252" columns="12">
+  <image source="tileset.png" width="389" height="700"/>
+ </tileset>
+ <layer name="fondo" width="25" height="15">
+  <data encoding="base64" compression="zlib">
+   eJyNlMENBDEIA9NCCnAB6b/B++QkNDte7SNKBJgABrLW2vece+eevyxDd4Z9gJn2EWzgn375znhTH9HTz17PuKduw98Wf8F/xBqe8gMsYzcZMVaXGZNxRr8RDOvFnBs/LX/LkTd5tHqRY+PG/mJezNv6utmTy6az/rc/LM55v/lpfWvyN75sPjmTzI+9TZz1yNt8t15h/LRtebR5M/7brNicNA5sD1Hedt+X+n/Zh7YbWfMfhN8q3A==
+  </data>
+ </layer>
+ <layer name="paredes" width="25" height="15">
+  <data encoding="base64" compression="zlib">
+   eJxzYmBgcKAhdgRiaQbaAslRO0btGLVj0NjBC8R8UMxPIztAbFMopqbf6GWHEQMijGiBDYEYACCjDAE=
+  </data>
+ </layer>
+ <layer name="detalles" width="25" height="15">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjIKhB/yheBRgBwC2YACf
+  </data>
+ </layer>
+ <objectgroup name="jugador">
+  <object id="1" x="111.667" y="389.667" width="30" height="30"/>
+ </objectgroup>
+ <objectgroup name="jefe" offsetx="-132" offsety="2.66667">
+  <object id="2" x="597" y="309.667" width="30" height="30"/>
+ </objectgroup>
+ <objectgroup name="suelo">
+  <object id="3" x="31.3333" y="32">
+   <polyline points="0,0 -2,414.667 736.667,414 737.333,-4.66667 -6,2"/>
+  </object>
+ </objectgroup>
+</map>
