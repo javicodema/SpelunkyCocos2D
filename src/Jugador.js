@@ -43,6 +43,8 @@ var Jugador = cc.Class.extend({
     penaliacionRalentizado: 200,
     ralentizado: false,
     montura:null,
+    puntoAnclaje: null,
+    puntoAnclaje2: null,
     ctor:function (gameLayer, posicion) {
         this.gameLayer = gameLayer;
 
@@ -52,6 +54,7 @@ var Jugador = cc.Class.extend({
         this.body = new cp.Body(5, cp.momentForBox(1,
             this.sprite.getContentSize().width,
             this.sprite.getContentSize().height));
+
         this.body.setPos(posicion);
         //body.w_limit = 0.02;
         this.body.setAngle(0);
