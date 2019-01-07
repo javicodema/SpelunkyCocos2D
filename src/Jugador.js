@@ -262,6 +262,7 @@ var Jugador = cc.Class.extend({
                 }
                 break;
             case estadoSaltando:
+                console.log("saltando")
                 if( this.body.vy > 0 ){
                     if (this.animacion != this.aSaltarSubiendo){
                         this.animacion = this.aSaltarSubiendo
@@ -285,6 +286,7 @@ var Jugador = cc.Class.extend({
                 }
                 break;
             case estadoAgachado:
+                console.log("agachado")
                 if (this.animacion != this.aAgachado){
                     this.animacion = this.aAgachado
                     this.sprite.stopAllActions();
@@ -297,7 +299,7 @@ var Jugador = cc.Class.extend({
                     this.sprite.stopAllActions();
                 }
 
-                if( Math.abs(this.body.vy) > 1 && this.aniacionTreparActiva != false) {
+                if( Math.abs(this.body.vy) > 1 && this.animacionTreparActiva != false) {
                     //Esta parado
                     this.sprite.runAction(this.animacion);
                     this.animacionTreparActiva = true;
@@ -370,7 +372,7 @@ var Jugador = cc.Class.extend({
         }*/
     },
     agachado: function(){
-        if(this.estado != estadoAgachado){
+        if(this.estado != estadoAgachado&&this.body.vy<=0){
             this.estado = estadoAgachado;
         }
     },
