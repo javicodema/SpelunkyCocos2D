@@ -17,13 +17,27 @@ var Cuerda = cc.Class.extend({
 
         this.body.setPos(posicion)
 
-        var centroGravedad = new cc.p(posicion.x, posicion.y);
-        centroGravedad.y += this.sprite.getContentSize().height;
-        //this.body.p = centroGravedad;
+
         this.body.setAngle(0);
 
+        /*
+        var verts = [];
+        verts.push( new cp.v( posicion.x-this.sprite.getContentSize().width/2, posicion.y-this.sprite.getContentSize().height/2 ) );
+        verts.push( new cp.v( posicion.x-this.sprite.getContentSize().width/2, posicion.y+this.sprite.getContentSize().height/2 ) );
+        verts.push( new cp.v( posicion.x+this.sprite.getContentSize().width/2, posicion.y+this.sprite.getContentSize().height/2 ) );
+        verts.push( new cp.v( posicion.x+this.sprite.getContentSize().width/2, posicion.y-this.sprite.getContentSize().height/2 ) );
 
+        console.log(verts)
+        var momento = cp.momentForPoly(10, verts, new cp.v( 0, -this.sprite.getContentSize().height/2  )  );
+        console.log(momento)
+        this.body.setMoment(momento );
+        */
+
+        this.sprite.set
         this.sprite.setBody(this.body);
+
+
+
         // Se añade el cuerpo al espacio
         //gameLayer.space.addBody(this.body);
 
