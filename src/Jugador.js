@@ -45,6 +45,7 @@ var Jugador = cc.Class.extend({
     montura:null,
     delayDisparo:0,
     orientacion:1,
+    armaPintada: false,
     ctor:function (gameLayer, posicion) {
         this.gameLayer = gameLayer;
 
@@ -229,6 +230,13 @@ var Jugador = cc.Class.extend({
         }
         if(this.body.vx==0&&this.estado==estadoMontadoCaminando){
             this.estado=estadoMontado;
+        }
+
+        if(this.arma==null && this.armaPintada == true ){
+            var capaControles =
+                this.getParent().getChildByTag(idCapaControles);
+            capaControles.borrarArma();
+            this.armaPintada=false;
         }
 
         //Cambiar la orientación del PJ
@@ -440,6 +448,10 @@ var Jugador = cc.Class.extend({
     },
     armar: function(){
         this.arma=new Object();
+        var capaControles =
+            this.gameLayer.getParent().getChildByTag(idCapaControles);
+        capaControles.pintarArma();
+        this.armaPintada=true;
     },
     disparar: function(){
         this.delayDisparo=50;

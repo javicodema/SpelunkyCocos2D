@@ -3,11 +3,13 @@ var ControlesLayer = cc.Layer.extend({
     etiquetaBombas:null,
     etiquetaPuntos:null,
     etiquetaLlaves:null,
+    size:null,
+    spriteArma:null,
     tecladas_pulsadas: null,
     ctor:function () {
         this._super();
-        var size = cc.winSize;
-
+        this.size = cc.winSize;
+        var size = this.size;
         this.teclas_pulsadas = []
 
         this.etiquetaPuntos = new cc.LabelTTF("Puntos: 0", "Helvetica", 20);
@@ -175,6 +177,14 @@ var ControlesLayer = cc.Layer.extend({
         this.etiquetaPuntos.setString("Puntos: "+puntos);
     }, actualizarLlaves:function(llaves){
         this.etiquetaLlaves.setString("Llaves: "+llaves+"/3");
+    }, pintarArma:function() {
+        this.spriteArma= new cc.Sprite(res.arma);
+        // Asigno posición central
+        this.spriteArma.setPosition(cc.p(this.size.width - 90, this.size.height - 40));
+        // Añado Sprite a la escena
+        this.addChild(this.spriteArma);
+    },borrarArma:function(){
+        this.spriteArma = null;
     }
 
 });
