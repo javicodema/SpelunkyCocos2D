@@ -280,6 +280,10 @@ var GameLayer = cc.Layer.extend({
                 this.jugador.agachado();
             }
         }
+        else{
+            if(this.jugador.estado==estadoAgachado) this.jugador.notAgachado();
+        }
+
         if( controles.arriba ){
             if( this.jugador.estado == estadoTrepando ){
                 this.jugador.treparArriba();

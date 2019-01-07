@@ -9,7 +9,7 @@ var estadoMontadoCaminando = 8;
 var estadoMontadoSaltando = 9;
 
 var Jugador = cc.Class.extend({
-    estado: estadoCaminando,
+    estado: estadoIdle,
     shapeAbajo:null,
     animacion:null,
     aSaltarBajando:null,
@@ -224,6 +224,13 @@ var Jugador = cc.Class.extend({
     ,actualizar: function (){
         this.delayDisparo--;
 
+        if(this.body.vx==0&&this.estado==estadoCaminando){
+            this.estado=estadoIdle;
+        }
+        if(this.body.vx==0&&this.estado==estadoMontadoCaminando){
+            this.estado=estadoMontado;
+        }
+
         //Cambiar la orientación del PJ
         if( this.body.vx > 0 ) {
             this.orientacion = 1;
@@ -325,15 +332,9 @@ var Jugador = cc.Class.extend({
     },
     tocaSuelo: function() {
         this.saltosAcutales=0
-        if (this.estado != estadoCaminando || this.estado != estadoIdle) {
-            if( this.body.vx > -1 && this.body.vx < 1){
+        if (this.estado != estadoCaminando && this.estado != estadoIdle && this.estado != estadoAgachado) {
                 if(this.montura==null) this.estado = estadoIdle;
                 else this.estado=estadoMontado;
-            }
-            else{
-                if(this.montura==null) this.estado = estadoCaminando;
-                else this.estado=estadoMontadoCaminando;
-            }
         }
     },
     trepar: function() {
@@ -364,6 +365,9 @@ var Jugador = cc.Class.extend({
         if(this.estado != estadoAgachado){
             this.estado = estadoAgachado;
         }
+    },
+    notAgachado: function(){
+        this.estado = estadoIdle;
     },
     moverIzquierda: function(){
         if( this.estado==estadoAgachado && Math.abs(this.body.vx) < this.velocidad + this.bonificadorVelocidad ){
