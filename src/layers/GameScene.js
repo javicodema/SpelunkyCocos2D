@@ -256,6 +256,21 @@ var GameLayer = cc.Layer.extend({
             this.jugador.saltar();
         }
 
+        if(controles.ataque){
+            if(this.jugador.arma!=null && this.jugador.delayDisparo<=0){
+                if(this.jugador.orientacion==1){
+                    var disparo =  new Disparo(this,
+                        cc.p(this.jugador.body.p.x+30,this.jugador.body.p.y+10),-this.jugador.orientacion);
+                    this.jugador.disparar();
+                } else{
+                    var disparo =  new Disparo(this,
+                        cc.p(this.jugador.body.p.x-30,this.jugador.body.p.y+10),-this.jugador.orientacion);
+                    this.jugador.disparar();
+                }
+                this.disparos.push(disparo);
+            }
+        }
+
         //Controles de movimiento
         if( controles.abajo ){
             if( this.jugador.estado == estadoTrepando ){
@@ -577,8 +592,7 @@ var GameLayer = cc.Layer.extend({
         var shapes = arbiter.getShapes();
         // shapes[0] es el jugador
         this.formasEliminar.push(shapes[1]);
-
-        //TODO Darle el arma al jugador
+        this.jugador.armar();
 
     },collisionJugadorConOpcional:function (arbiter, space) {
         // Marcar la llave para eliminarla

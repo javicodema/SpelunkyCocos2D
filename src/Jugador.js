@@ -43,6 +43,8 @@ var Jugador = cc.Class.extend({
     penaliacionRalentizado: 200,
     ralentizado: false,
     montura:null,
+    delayDisparo:0,
+    orientacion:1,
     ctor:function (gameLayer, posicion) {
         this.gameLayer = gameLayer;
 
@@ -220,12 +222,16 @@ var Jugador = cc.Class.extend({
         }
     }
     ,actualizar: function (){
+        this.delayDisparo--;
+
         //Cambiar la orientación del PJ
         if( this.body.vx > 0 ) {
+            this.orientacion = 1;
             this.sprite.scaleX = 1;
         }
         else if ( this.body.vx < 0 ){
             this.sprite.scaleX = -1
+            this.orientacion = -1;
         }
 
         switch ( this.estado ){
@@ -427,5 +433,11 @@ var Jugador = cc.Class.extend({
         this.bonificadorVelocidad = jugador.bonificadorVelocidad;
         this.potenciaSalto = jugador.potenciaSalto;
         this.maxSaltos = jugador.maxSaltos;
+    },
+    armar: function(){
+        this.arma=new Object();
+    },
+    disparar: function(){
+        this.delayDisparo=50;
     }
     });
