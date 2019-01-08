@@ -29,6 +29,9 @@ var res = {
     disparo_png:"res/disparo_jugador2.png",
     recolectable:"res/recolectables/recolectable.png",
 
+    //Cuerda
+    cuerda:"res/cuerda.png",
+
     //Trampas
     trampa_caer: "res/trampas/trampa_caer.png",
     trampa_tirar_encima: "res/trampas/trampa_tirar_encima.png",

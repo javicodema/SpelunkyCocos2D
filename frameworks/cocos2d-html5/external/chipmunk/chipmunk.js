@@ -147,11 +147,11 @@ cp.momentForPoly = function(m, verts, offset)
 	var sum1 = 0;
 	var sum2 = 0;
 	var len = verts.length;
-	for(var i=0; i<len; i+=2){
-		var v1x = verts[i] + offset.x;
-	 	var v1y = verts[i+1] + offset.y;
-		var v2x = verts[(i+2)%len] + offset.x;
-		var v2y = verts[(i+3)%len] + offset.y;
+	for(var i=0; i<len/4; i+=2){
+		var v1x = verts[i].x + offset.x;
+	 	var v1y = verts[i+1].y + offset.y;
+		var v2x = verts[(i+2)%len].x + offset.x;
+		var v2y = verts[(i+3)%len].y + offset.y;
 
 		var a = vcross2(v2x, v2y, v1x, v1y);
 		var b = vdot2(v1x, v1y, v1x, v1y) + vdot2(v1x, v1y, v2x, v2y) + vdot2(v2x, v2y, v2x, v2y);
@@ -159,8 +159,9 @@ cp.momentForPoly = function(m, verts, offset)
 		sum1 += a*b;
 		sum2 += a;
 	}
-	
-	return (m*sum1)/(6*sum2);
+	var moment = (m*sum1)/(6*sum2);
+
+	return moment;
 };
 
 cp.areaForPoly = function(verts)

@@ -19,6 +19,7 @@ var tipoOpcional = 21;
 var tipoMontura = 19;
 var tipoArma = 20;
 var tipoBomba = 18;
+var tipoCuerda = 22;
 
 var nivelActual = 1;
 
@@ -128,7 +129,12 @@ var GameLayer = cc.Layer.extend({
         this.space.addCollisionHandler(tipoJugador, tipoBomba,
                     null, this.collisionBombaConJugador.bind(this), null, null);
         this.space.addCollisionHandler(tipoJugador, tipoArma,
-                    null, this.collisionArmaConJugador.bind(this), null, null);
+            this.collisionCuerdaJugador.bind(this), null, null, null);
+
+
+        //Colision con cuerdas
+        this.space.addCollisionHandler(tipoJugador, tipoCuerda,
+            null, this.collisionCuerdaJugador.bind(this), null, this.finCollisionCuerdaJugador.bind(this));
 
         return true;
     },
@@ -142,6 +148,10 @@ var GameLayer = cc.Layer.extend({
         this.jugador.actualizar();
         for (var j = 0; j < this.disparos.length; j++) {
             this.disparos[j].body.vy=0;
+        }
+
+        for (var j = 0; j < this.cuerdas.length; j++) {
+            this.cuerdas[j].update();
         }
 
 
@@ -253,6 +263,15 @@ var GameLayer = cc.Layer.extend({
 
         //Control de salto
         if( controles.saltar ){
+            if( this.jugador.estado != this.jugador.estadoTrepando && this.jugador.puntoAnclaje!= null ){
+                this.space.addPostStepCallback( () => {
+                    console.log("borrado")
+                    this.space.removeConstraint(this.jugador.puntoAnclaje)
+                    this.space.removeConstraint(this.jugador.puntoAnclaje2)
+                    this.jugador.puntoAnclaje = null;
+                    this.jugador.puntoAnclaje2 = null;
+                } );
+            }
             this.jugador.saltar();
         }
 
@@ -403,7 +422,8 @@ var GameLayer = cc.Layer.extend({
             // formas estáticas de Chipmunk ( SegmentShape ).
             for (var i = 0; i < cuerdasArray.length; i++) {
                 var cuerda = cuerdasArray[i];
-                //TODO Las cuerdas man
+                var nuevaCuerda = new Cuerda(this, cc.p(cuerda['x'], cuerda['y']), 1)
+                this.cuerdas.push( nuevaCuerda );
             }
         }
 
@@ -804,6 +824,41 @@ var GameLayer = cc.Layer.extend({
     },
     finColisionTrampaRalentizar: function(arbitrer, space){
         this.jugador.ralentizar(false);
+    },
+    collisionCuerdaJugador: function(arbitrer, space){
+
+        if(this.jugador.puntoAnclaje == null){
+            this.jugador.puntoAnclaje = pinjoint;
+            collision_p = arbitrer.contacts[0].p;
+            var pinjoint = new cp.SlideJoint(arbitrer.body_a, arbitrer.body_b, arbitrer.body_a.p, collision_p, 0, 2);
+            var pinjoint2 = new cp.PivotJoint(arbitrer.body_a, arbitrer.body_b, collision_p, collision_p);
+            pinjoint.errorBias = 0.99;
+            pinjoint2.errorBias = 0.99;
+
+            space.addPostStepCallback( () => {
+                console.log("creado")
+                space.addConstraint(pinjoint)
+                space.addConstraint(pinjoint2)
+            } );
+            this.jugador.saltosAcutales = 0;
+            this.jugador.trepar();
+            this.jugador.puntoAnclaje = pinjoint;
+            this.jugador.puntoAnclaje2 = pinjoint2;
+        }
+
+    },
+    finCollisionCuerdaJugador: function(arbitrer, space){
+        if( this.jugador.estado != this.jugador.estadoTrepando && this.jugador.puntoAnclaje!= null ){
+            this.space.addPostStepCallback( () => {
+                console.log("borrado")
+                this.space.removeConstraint(this.jugador.puntoAnclaje)
+                this.space.removeConstraint(this.jugador.puntoAnclaje2)
+                this.jugador.puntoAnclaje = null;
+                this.jugador.puntoAnclaje2 = null;
+
+            } );
+            this.jugador.estado = this.jugador.estadoSaltando
+        }
     },
     collisionJugadorPuerta: function(arbitrer, space){
             if(this.jugador.llavesRecogidas>=3){
