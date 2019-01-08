@@ -20,6 +20,7 @@ var tipoMontura = 19;
 var tipoArma = 20;
 var tipoBomba = 18;
 var tipoCuerda = 22;
+var tipoBombaJugador = 40;
 
 var nivelActual = 1;
 
@@ -146,8 +147,15 @@ var GameLayer = cc.Layer.extend({
 
         this.space.step(dt);
         this.jugador.actualizar();
+
         for (var j = 0; j < this.disparos.length; j++) {
-            this.disparos[j].body.vy=0;
+            var disparo = this.disparos[j];
+            disparo.body.vy = 0;
+            if( this.disparos[j].rango != undefined ){
+                if( Math.abs(disparo.origen.x - disparo.body.p.x) > disparo.rango ){
+                    this.formasEliminar.push(disparo.shape);
+                }
+            }
         }
 
         for (var j = 0; j < this.cuerdas.length; j++) {
@@ -265,7 +273,6 @@ var GameLayer = cc.Layer.extend({
         if( controles.saltar ){
             if( this.jugador.estado != this.jugador.estadoTrepando && this.jugador.puntoAnclaje!= null ){
                 this.space.addPostStepCallback( () => {
-                    console.log("borrado")
                     this.space.removeConstraint(this.jugador.puntoAnclaje)
                     this.space.removeConstraint(this.jugador.puntoAnclaje2)
                     this.jugador.puntoAnclaje = null;
@@ -288,6 +295,11 @@ var GameLayer = cc.Layer.extend({
                 }
                 this.disparos.push(disparo);
             }
+        }
+
+        if( controles.lanzar_objeto ){
+            this.jugador.soltarBomba();
+            capaControles.actualizarBombas( this.jugador.nBombas );
         }
 
         //Controles de movimiento
@@ -596,7 +608,11 @@ var GameLayer = cc.Layer.extend({
             // shapes[0] es el jugador
             this.formasEliminar.push(shapes[1]);
 
-            //TODO Darle la bomba al jugador
+            this.jugador.nBombas++;
+
+            var capaControles = this.getParent().getChildByTag(idCapaControles);
+            capaControles.actualizarBombas( this.jugador.nBombas );
+
     },
     collisionJugadorConLlave:function (arbiter, space) {
         // Marcar la llave para eliminarla
@@ -836,7 +852,6 @@ var GameLayer = cc.Layer.extend({
             pinjoint2.errorBias = 0.99;
 
             space.addPostStepCallback( () => {
-                console.log("creado")
                 space.addConstraint(pinjoint)
                 space.addConstraint(pinjoint2)
             } );
@@ -850,7 +865,6 @@ var GameLayer = cc.Layer.extend({
     finCollisionCuerdaJugador: function(arbitrer, space){
         if( this.jugador.estado != this.jugador.estadoTrepando && this.jugador.puntoAnclaje!= null ){
             this.space.addPostStepCallback( () => {
-                console.log("borrado")
                 this.space.removeConstraint(this.jugador.puntoAnclaje)
                 this.space.removeConstraint(this.jugador.puntoAnclaje2)
                 this.jugador.puntoAnclaje = null;
