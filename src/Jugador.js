@@ -266,7 +266,6 @@ var Jugador = cc.Class.extend({
                 }
                 break;
             case estadoSaltando:
-                console.log("saltando")
                 if( this.body.vy > 0 ){
                     if (this.animacion != this.aSaltarSubiendo){
                         this.animacion = this.aSaltarSubiendo
@@ -290,7 +289,6 @@ var Jugador = cc.Class.extend({
                 }
                 break;
             case estadoAgachado:
-                console.log("agachado")
                 if (this.animacion != this.aAgachado){
                     this.animacion = this.aAgachado
                     this.sprite.stopAllActions();

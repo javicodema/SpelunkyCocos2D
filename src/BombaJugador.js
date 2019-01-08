@@ -51,6 +51,12 @@ var BombaJugador = cc.Class.extend({
             var izquierda = new Disparo(this.gameLayer, spawn2 ,-1);
             var derecha = new Disparo(this.gameLayer, spawn1, 1);
 
+            izquierda.origen = cc.p(spawn2.x, spawn2.y);
+            derecha.origen = cc.p(spawn1.x, spawn1.y)
+
+            izquierda.rango = 40;
+            derecha.rango = 40;
+
             this.gameLayer.disparos.push( derecha )
             this.gameLayer.disparos.push( izquierda )
 

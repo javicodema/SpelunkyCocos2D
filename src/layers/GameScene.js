@@ -147,8 +147,15 @@ var GameLayer = cc.Layer.extend({
 
         this.space.step(dt);
         this.jugador.actualizar();
+
         for (var j = 0; j < this.disparos.length; j++) {
-            this.disparos[j].body.vy=0;
+            var disparo = this.disparos[j];
+            disparo.body.vy = 0;
+            if( this.disparos[j].rango != undefined ){
+                if( Math.abs(disparo.origen.x - disparo.body.p.x) > disparo.rango ){
+                    this.formasEliminar.push(disparo.shape);
+                }
+            }
         }
 
         for (var j = 0; j < this.cuerdas.length; j++) {
