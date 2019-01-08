@@ -130,7 +130,7 @@ var GameLayer = cc.Layer.extend({
         this.space.addCollisionHandler(tipoJugador, tipoBomba,
                     null, this.collisionBombaConJugador.bind(this), null, null);
         this.space.addCollisionHandler(tipoJugador, tipoArma,
-            this.collisionCuerdaJugador.bind(this), null, null, null);
+            this.collisionArmaConJugador.bind(this), null, null, null);
 
 
         //Colision con cuerdas
