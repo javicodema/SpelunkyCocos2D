@@ -48,6 +48,7 @@ var Jugador = cc.Class.extend({
     delayDisparo:0,
     orientacion:1,
     armaPintada: false,
+    nBombas: 0,
     ctor:function (gameLayer, posicion) {
         this.gameLayer = gameLayer;
 
@@ -460,5 +461,14 @@ var Jugador = cc.Class.extend({
     },
     disparar: function(){
         this.delayDisparo=50;
+    },
+    soltarBomba: function(){
+        if(this.nBombas > 0){
+            this.nBombas--;
+            spawn = cc.p(this.body.p.x, this.body.p.y)
+            spawn.x +=  this.orientacion==0? 30:-30;
+
+            var bomba = new BombaJugador( this.gameLayer, spawn);
+        }
     }
     });

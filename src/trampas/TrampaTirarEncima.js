@@ -51,6 +51,7 @@ var TrampaTirarEncima = cc.Class.extend({
             trigger['height']);
 
         this.triggerShape.setCollisionType(tipoTriggerTirarEncima);
+        this.triggerShape.setSensor(true)
         // forma dinamica1
         gameLayer.space.addStaticShape(this.triggerShape);
 
