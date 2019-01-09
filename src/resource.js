@@ -57,6 +57,9 @@ var res = {
     nivel1:"res/mapas/nivel1.tmx",
     nivel2:"res/mapas/nivel2.tmx",
     nivel3:"res/mapas/nivel3.tmx",
+
+    // Efectos
+    efecto_puerta: "res/efecto_puerta.wav",
 };
 
 var g_resources = [];
