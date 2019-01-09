@@ -28,7 +28,6 @@ var Jugador = cc.Class.extend({
     vidas:5,
     llavesRecogidas:0,
     puntuacion:0,
-    bombas:0,
     arma:null,
     spriteSaltoBajando: null,
     spriteSaltoSubiendo: null,
@@ -442,8 +441,9 @@ var Jugador = cc.Class.extend({
     },
     actualizarStats: function(jugador){
         this.vidas = jugador.vidas;
-        this.bombas = jugador.bombas;
+        this.bBombas = jugador.bombas;
         this.arma = jugador.arma;
+        this.armaPintada = jugador.armaPintada;
         this.montura = jugador.montura;
         this.velocidad = jugador.velocidad;
         this.bonificadorVelocidad = jugador.bonificadorVelocidad;

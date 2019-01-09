@@ -22,7 +22,6 @@
         "src/enemigos/EnemigoPatrulla.js",
         "src/enemigos/EnemigoTirador.js",
         "src/enemigos/EnemigoPerseguidor.js",
-        "src/enemigos/EnemigoJefe.js",
         "src/mapa/trampas/TrampaTirarEncima.js",
         "src/mapa/trampas/TrampaDisparo.js",
         "src/mapa/trampas/TrampaCaer.js",

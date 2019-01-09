@@ -373,14 +373,7 @@ var GameLayer = cc.Layer.extend({
 
         var jugadores = this.mapa.getObjectGroup("jugador");
         var jugadorArray = jugadores.getObjects();
-        if(this.jugador==null)
-            this.jugador = new Jugador(this,
-                cc.p(jugadorArray[0]["x"],jugadorArray[0]["y"]));
-        else{
-            var jugadorAntiguo = this.jugador;
-            this.jugador = new Jugador(this, cc.p(jugadorArray[0]["x"],jugadorArray[0]["y"]));
-            this.jugador.actualizarStats(jugadorAntiguo);
-        }
+        this.jugador = new Jugador(this, cc.p(jugadorArray[0]["x"],jugadorArray[0]["y"]));
 
         // Solicitar los objeto dentro de la capa Suelos
         var grupoSuelos = this.mapa.getObjectGroup("suelos");
@@ -437,18 +430,6 @@ var GameLayer = cc.Layer.extend({
                 var cuerda = cuerdasArray[i];
                 var nuevaCuerda = new Cuerda(this, cc.p(cuerda['x'], cuerda['y']), 1)
                 this.cuerdas.push( nuevaCuerda );
-            }
-        }
-
-        // Jefe
-        var grupoEnemigos = this.mapa.getObjectGroup("jefe");
-        if(grupoEnemigos!=null){
-            var enemigosArray = grupoEnemigos.getObjects();
-            for (var i = 0; i < enemigosArray.length; i++) {
-                var jefe = new EnemigoJefe(this,
-                    cc.p(enemigosArray[i]["x"],enemigosArray[i]["y"]));
-
-                this.enemigos.push(enemigo);
             }
         }
 
@@ -879,7 +860,8 @@ var GameLayer = cc.Layer.extend({
             if(this.jugador.llavesRecogidas>=3 && nivelActual<nivelMaximo){
                 nivelActual++ // Habria que comprobar que no se supere el nivel maximo, pero en verdad como el ultimo nivel no tiene llaves pos da igual
                 var puntos = this.getParent().getChildByTag(idCapaControles).etiquetaPuntos.getString();;
-                cc.director.runScene(new NextLevelLayer(puntos));
+                var jugadorAntiguo = this.jugador;
+                cc.director.runScene(new NextLevelLayer(puntos,jugadorAntiguo));
             }
         },
 });
