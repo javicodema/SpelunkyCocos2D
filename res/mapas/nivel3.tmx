@@ -233,14 +233,12 @@
   <object id="26" x="40.25" y="176.25" width="63.5" height="31.5"/>
  </objectgroup>
  <objectgroup name="trampasTirarEncima">
-  <object id="140" name="tt2" x="910.955" y="348.355" width="31.4228" height="31.29"/>
   <object id="141" name="tt1" x="1296.29" y="515.022" width="31.4228" height="31.29"/>
   <object id="142" name="tt3" x="1007.62" y="882.355" width="31.4228" height="31.29"/>
   <object id="143" name="tt4" x="320.289" y="1151.02" width="31.4228" height="31.29"/>
   <object id="144" name="tt5" x="847.289" y="1282.02" width="31.4228" height="31.29"/>
  </objectgroup>
  <objectgroup name="triggersTirarEncima">
-  <object id="145" name="ttg2" x="898.759" y="380.597" width="57.1485" height="77.4729"/>
   <object id="146" name="ttg1" x="1284.43" y="559.264" width="57.1485" height="77.4729"/>
   <object id="147" name="ttg3" x="995.926" y="945.764" width="57.1485" height="77.4729"/>
   <object id="148" name="ttg4" x="310.092" y="1192.6" width="57.1485" height="77.4729"/>
