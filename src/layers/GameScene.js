@@ -23,6 +23,7 @@ var tipoCuerda = 22;
 var tipoBombaJugador = 40;
 
 var nivelActual = 1;
+var nivelMaximo = 3;
 
 var GameLayer = cc.Layer.extend({
     space:null,

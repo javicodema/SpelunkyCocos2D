@@ -55,7 +55,6 @@ var res = {
     nivel1:"res/mapas/nivel1.tmx",
     nivel2:"res/mapas/nivel2.tmx",
     nivel3:"res/mapas/nivel3.tmx",
-    nivel4:"res/mapas/nivel4.tmx",
 };
 
 var g_resources = [];
