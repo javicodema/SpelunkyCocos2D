@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="32" tileheight="32" nextobjectid="211">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="32" tileheight="32" nextobjectid="221">
  <tileset firstgid="1" name="tileset" tilewidth="32" tileheight="32" tilecount="252" columns="12">
   <image source="tileset.png" width="389" height="700"/>
  </tileset>
@@ -233,6 +233,16 @@
   <object id="76" x="495.667" y="793" width="30" height="30"/>
   <object id="77" x="619.667" y="786.333" width="30" height="30"/>
   <object id="78" x="481" y="219.667" width="30" height="30"/>
+  <object id="211" x="1470.33" y="169" width="30" height="30"/>
+  <object id="212" x="1334.33" y="93" width="30" height="30"/>
+  <object id="213" x="1203.67" y="45" width="30" height="30"/>
+  <object id="214" x="865" y="78.3333" width="30" height="30"/>
+  <object id="215" x="705" y="66.3333" width="30" height="30"/>
+  <object id="216" x="545" y="82.3333" width="30" height="30"/>
+  <object id="217" x="398.333" y="77" width="30" height="30"/>
+  <object id="218" x="234.333" y="71.6667" width="30" height="30"/>
+  <object id="219" x="106.333" y="163.667" width="30" height="30"/>
+  <object id="220" x="1017" y="78.3333" width="30" height="30"/>
  </objectgroup>
  <objectgroup name="patrullas">
   <object id="118" x="605" y="275" width="30" height="30"/>
@@ -281,55 +291,45 @@
   <object id="1" x="94.25" y="211.25" width="63.5" height="31.5"/>
   <object id="2" x="217.25" y="118.25" width="63.5" height="31.5"/>
   <object id="3" x="381.25" y="126.25" width="63.5" height="31.5"/>
-  <object id="4" x="535.25" y="97.25" width="63.5" height="31.5"/>
+  <object id="4" x="533.917" y="131.917" width="63.5" height="31.5"/>
   <object id="5" x="692.25" y="113.25" width="63.5" height="31.5"/>
-  <object id="6" x="856.25" y="93.25" width="63.5" height="31.5"/>
+  <object id="6" x="852.25" y="125.25" width="63.5" height="31.5"/>
   <object id="7" x="1004.25" y="126.25" width="63.5" height="31.5"/>
   <object id="8" x="1188.25" y="91.25" width="63.5" height="31.5"/>
   <object id="9" x="1330.25" y="147.25" width="63.5" height="31.5"/>
   <object id="10" x="1456.25" y="226.25" width="63.5" height="31.5"/>
-  <object id="11" x="115" y="167" width="20" height="20"/>
-  <object id="12" x="238" y="77" width="20" height="20"/>
-  <object id="13" x="402" y="86" width="20" height="20"/>
-  <object id="14" x="553" y="56" width="20" height="20"/>
-  <object id="15" x="711" y="66" width="20" height="20"/>
-  <object id="16" x="877" y="53" width="20" height="20"/>
-  <object id="17" x="1024" y="84" width="20" height="20"/>
-  <object id="18" x="1210" y="48" width="20" height="20"/>
-  <object id="19" x="1350" y="98" width="20" height="20"/>
-  <object id="20" x="1474" y="189" width="20" height="20"/>
  </objectgroup>
  <objectgroup name="triggersTirarEncima" offsetx="-1" offsety="4">
-  <object id="29" x="1133.5" y="1503" width="50" height="60"/>
-  <object id="30" x="1218" y="1504.5" width="50" height="60"/>
-  <object id="31" x="1293" y="1504" width="50" height="60"/>
-  <object id="32" x="1376" y="1502.5" width="50" height="60"/>
-  <object id="156" x="933" y="1119" width="50" height="60"/>
-  <object id="157" x="168.833" y="820.333" width="50" height="60"/>
-  <object id="158" x="280.333" y="247.333" width="50" height="60"/>
+  <object id="29" name="ttg4" x="1133.5" y="1503" width="50" height="60"/>
+  <object id="30" name="ttg5" x="1218" y="1504.5" width="50" height="60"/>
+  <object id="31" name="ttg6" x="1293" y="1504" width="50" height="60"/>
+  <object id="32" name="ttg7" x="1376" y="1502.5" width="50" height="60"/>
+  <object id="156" name="ttg3" x="933" y="1119" width="50" height="60"/>
+  <object id="157" name="ttg2" x="168.833" y="820.333" width="50" height="60"/>
+  <object id="158" name="ttg1" x="280.333" y="247.333" width="50" height="60"/>
  </objectgroup>
  <objectgroup name="trampasTirarEncima" offsetx="1" offsety="-1">
-  <object id="24" x="1142" y="1475" width="30" height="30"/>
-  <object id="26" x="1226" y="1476.5" width="30" height="30"/>
-  <object id="27" x="1300.5" y="1475" width="30" height="30"/>
-  <object id="28" x="1384" y="1475" width="30" height="30"/>
-  <object id="153" x="940.667" y="1091.33" width="30" height="30"/>
-  <object id="154" x="175.667" y="778.333" width="30" height="30"/>
-  <object id="155" x="287.667" y="211.667" width="30" height="30"/>
+  <object id="24" name="tt4" x="1142" y="1475" width="30" height="30"/>
+  <object id="26" name="tt5" x="1226" y="1476.5" width="30" height="30"/>
+  <object id="27" name="tt6" x="1300.5" y="1475" width="30" height="30"/>
+  <object id="28" name="tt7" x="1384" y="1475" width="30" height="30"/>
+  <object id="153" name="tt3" x="940.667" y="1091.33" width="30" height="30"/>
+  <object id="154" name="tt2" x="175.667" y="778.333" width="30" height="30"/>
+  <object id="155" name="tt1" x="287.667" y="211.667" width="30" height="30"/>
  </objectgroup>
  <objectgroup name="trampasDisparo">
-  <object id="33" x="1377" y="1345.5" width="30" height="30"/>
-  <object id="34" x="1153" y="1345.5" width="30" height="30"/>
-  <object id="159" x="1086.33" y="186.333" width="30" height="30"/>
-  <object id="160" x="1150.33" y="1051.67" width="30" height="30"/>
-  <object id="161" x="475.667" y="1533" width="30" height="30"/>
+  <object id="33" name="td5" x="1377" y="1345.5" width="30" height="30"/>
+  <object id="34" name="td4" x="1153" y="1345.5" width="30" height="30"/>
+  <object id="159" name="td1" x="1086.33" y="186.333" width="30" height="30"/>
+  <object id="160" name="td2" x="1150.33" y="1051.67" width="30" height="30"/>
+  <object id="161" name="td3" x="475.667" y="1533" width="30" height="30"/>
  </objectgroup>
  <objectgroup name="triggersDisparo">
-  <object id="35" x="1184" y="1344.5" width="90" height="30"/>
-  <object id="36" x="1286" y="1345" width="90" height="30"/>
-  <object id="162" x="363" y="1531.67" width="90" height="30"/>
-  <object id="163" x="977.667" y="187.667" width="90" height="30"/>
-  <object id="164" x="1189.67" y="1051.67" width="90" height="30"/>
+  <object id="35" name="tgd4" x="1184" y="1344.5" width="90" height="30"/>
+  <object id="36" name="tgd5" x="1286" y="1345" width="90" height="30"/>
+  <object id="162" name="tgd3" x="363" y="1531.67" width="90" height="30"/>
+  <object id="163" name="tgd1" x="977.667" y="187.667" width="90" height="30"/>
+  <object id="164" name="tgd2" x="1189.67" y="1051.67" width="90" height="30"/>
  </objectgroup>
  <objectgroup name="jugador">
   <object id="165" x="751.667" y="243.667" width="30" height="30"/>
