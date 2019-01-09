@@ -244,11 +244,11 @@ var Jugador = cc.Class.extend({
         }
 
         //Cambiar la orientación del PJ
-        if( this.body.vx > 0 ) {
+        if( this.body.vx > 1 ) {
             this.orientacion = 1;
             this.sprite.scaleX = 1;
         }
-        else if ( this.body.vx < 0 ){
+        else if ( this.body.vx < -1 ){
             this.sprite.scaleX = -1
             this.orientacion = -1;
         }
