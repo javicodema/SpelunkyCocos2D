@@ -5,7 +5,7 @@
  </tileset>
  <layer name="fondo" width="50" height="50">
   <data encoding="base64" compression="zlib">
-   eJyVlcGRpEAMBMcFDMAA/Hfw7klkZFazD2J3GEYtlaqS+/f73f+vC9cTn+/X52d8ft/jc7d8d7/q8571w+/veObCuZzF6vCv/fZdk5dpZ3Pd4/6Dq/p74kxeNRcv9mZ7WPPRJ9Sl5rKa9FP1YHulJx7co+42O3W68Nf2/X7eZqcXzeOWjfKM9Vj5M93sDJ5j51rdlTc7y7y/nuUzlnPyaN03DS3n5SnqYbkpj3zRwfxmrKtMGy8XA5nfpZ/1vXQxBtWeSlN739g7xPr/kimyprhqu6IO1ML2aDoa86wHm8GYY563vJaHbA72Z3ylLnY+d1t9mmb1TjD//yWTVoNz2F/Llc1uWTppbZxd/CuWVs4Wb1cGijWmH7PGe6uuZeSkH9lZ+lruSo96P9VeeM9yb3szLp0yRI/Unmum0/PWf7HUPMnfLX++++FOyZjaj/ndfsvaxts6z3xpzy2OkWf00smDNovNbfMsPlXm7LuqvX5TM9vujRHGk0vONSbU/sqLNtNJi+Kfecg8WpkphhgL3t8Zo9c7yXhO9qzccLbSwbhbO69dGC+NJTW/zXeaY51n2ps/vvRbe7YMFINMW+Nq7cX6rZ1aBs1DxtbFPctj9UwdrB/rjVrZjhbHOMNXDpoe717+ygbzg+VuMY2+ZR3bp+nJ/zkP+6DuxhbbGefmMzUDmV/vgi87tJzWnmw202mxy2rbfMWjOs+0sszZLJyTHmEmS8cTh8oj9HPl0jQpX1peTPfyVPVf+aHPuE9mnX6onJhHlt+ok51VDCmPmGbV26le7dtmsxybL9c5tj/j/+K2+Y+7Zv/WY2XUclA8pN9Y2zQqvS3PrGHeXLoVoziDabk4YzPabox59IFxa+lZO+RuzDsr25Yz+tlmOPVH/5Te5jGb0fqzPNsslT3ylV5bfF1a2g6Kq7ajr5yzd4zxzTxnv2Fd44+9F9hrZYzZuuK88of5rZhEPxjXTAubofi0cswdrncB80k/2syVW9Zmrfotc196m1Z8/uR1Zmn5r7x10ugLZ1mH7xbbRXGWfjJNqs5is+3E/P3VF6Yjdal3SOlUHHhQd+3asmZeMi2pQ/mzvG1zGv/Nk9wPz6z8FiOLH7ZDyxznLYYad9iHZam8ynrGgurHPG16m3+K7fQYfWI8WH2a5pZV66d4RX1LW9OyWGO7KOaRAabPiVGViZNvzT+1a2MaL5vn5PWvubKMsu4/OCkanA==
+   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
   </data>
  </layer>
  <layer name="paredes" width="50" height="50">
@@ -155,13 +155,13 @@
  <objectgroup name="bombas">
   <object id="76" x="149" y="1050" width="20" height="20"/>
   <object id="77" x="115" y="634" width="20" height="20"/>
-  <object id="78" x="1119" y="622" width="20" height="20"/>
+  <object id="78" x="1068" y="634" width="20" height="20"/>
   <object id="79" x="880" y="732" width="20" height="20"/>
   <object id="80" x="1461" y="1270" width="20" height="20"/>
   <object id="81" x="983" y="1337" width="20" height="20"/>
  </objectgroup>
  <objectgroup name="monturas">
-  <object id="82" x="1157" y="949" width="20" height="20"/>
+  <object id="82" x="1148" y="634" width="20" height="20"/>
  </objectgroup>
  <objectgroup name="patrullas">
   <object id="83" x="1061" y="503" width="20" height="20"/>

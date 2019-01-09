@@ -95,6 +95,10 @@ var GameLayer = cc.Layer.extend({
             null, null, null, this.escaleraDerecha.bind(this));
         this.space.addCollisionHandler(tipoJugador, tipoMontura,
             null, null, this.collisionMonturaConJugador.bind(this), null);
+        this.space.addCollisionHandler(tipoDisparo, tipoMontura,
+            null, null, this.collisionMonturaConDisparo.bind(this), null);
+        this.space.addCollisionHandler(tipoDisparo, tipoEscalera,
+            null, null, this.collisionEscaleraConDisparo.bind(this), null);
 
         //Colisiones de la trampa de tirar encima
         this.space.addCollisionHandler(tipoJugador, tipoTriggerTirarEncima,
@@ -658,6 +662,14 @@ var GameLayer = cc.Layer.extend({
         var shapes = arbiter.getShapes();
         this.formasEliminar.push(shapes[0]);
         this.formasEliminar.push(shapes[1]);
+    },
+    collisionMonturaConDisparo: function (arbiter, space) {
+        var shapes = arbiter.getShapes();
+        this.formasEliminar.push(shapes[0]);
+    },
+    collisionEscaleraConDisparo: function (arbiter, space) {
+        var shapes = arbiter.getShapes();
+        this.formasEliminar.push(shapes[0]);
     },
     collisionSueloConJugador: function (arbiter, space) {
         this.jugador.tocaSuelo();
