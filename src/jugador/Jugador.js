@@ -303,17 +303,7 @@ var Jugador = cc.Class.extend({
                 if (this.animacion != this.aMovEscalera){
                     this.animacion = this.aMovEscalera
                     this.sprite.stopAllActions();
-                }
-
-                if( Math.abs(this.body.vy) > 1 && this.animacionTreparActiva != false) {
-                    //Esta parado
                     this.sprite.runAction(this.animacion);
-                    this.animacionTreparActiva = true;
-
-                }else {
-                    //bajando o subiendo
-                    this.sprite.stopAllActions();
-                    this.animacionTreparActiva = false;
                 }
                 break;
             case estadoIdle:
@@ -348,7 +338,7 @@ var Jugador = cc.Class.extend({
     },
     tocaSuelo: function() {
         this.saltosAcutales=0
-        if (this.estado != estadoCaminando && this.estado != estadoIdle && this.estado != estadoAgachado) {
+        if (this.estado != estadoCaminando && this.estado != estadoIdle && this.estado != estadoAgachado ) {
                 if(this.montura==null) this.estado = estadoIdle;
                 else this.estado=estadoMontado;
         }
