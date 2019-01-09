@@ -63,8 +63,8 @@ var GameLayer = cc.Layer.extend({
         this.space = new cp.Space();
         this.space.gravity = cp.v(0, -500);
         // Depuración
-        this.depuracion = new cc.PhysicsDebugNode(this.space);
-        this.addChild(this.depuracion, 10);
+        //this.depuracion = new cc.PhysicsDebugNode(this.space);
+        //this.addChild(this.depuracion, 10);
 
         this.cargarMapa("res/mapas/nivel"+nivelActual+".tmx"); //habria que meter el mapa como parametro
         if(jugadorAntiguo!=null)
