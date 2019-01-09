@@ -22,9 +22,6 @@
   <object id="1" x="403" y="376" width="30" height="30"/>
   <object id="4" x="1457" y="497" width="30" height="30"/>
   <object id="5" x="466" y="1204" width="30" height="30"/>
-  <object id="163" x="1280" y="1515" width="30" height="30"/>
-  <object id="164" x="1336" y="1511" width="30" height="30"/>
-  <object id="165" x="1202" y="1463" width="30" height="30"/>
  </objectgroup>
  <objectgroup name="suelos">
   <object id="6" x="28.5" y="34.5">

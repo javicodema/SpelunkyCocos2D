@@ -859,8 +859,8 @@ var GameLayer = cc.Layer.extend({
         }
     },
     collisionJugadorPuerta: function(arbitrer, space){
-            if(this.jugador.llavesRecogidas>=3 && nivelActual<nivelMaximo){
-                nivelActual++ // Habria que comprobar que no se supere el nivel maximo, pero en verdad como el ultimo nivel no tiene llaves pos da igual
+            if(this.jugador.llavesRecogidas>=3 && nivelActual<nivelMaximo){ // por simplicidad si el jugador esta en el nivel máximo no saldrá jamás de ahí
+                nivelActual++
                 var puntos = this.getParent().getChildByTag(idCapaControles).etiquetaPuntos.getString();;
                 jugadorAntiguo = this.jugador;
                 cc.director.runScene(new NextLevelLayer(puntos));
