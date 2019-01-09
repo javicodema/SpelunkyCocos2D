@@ -67,6 +67,8 @@ var GameLayer = cc.Layer.extend({
         this.addChild(this.depuracion, 10);
 
         this.cargarMapa("res/mapas/nivel"+nivelActual+".tmx"); //habria que meter el mapa como parametro
+        if(jugadorAntiguo!=null)
+            this.jugador.actualizarStats(jugadorAntiguo);
         this.scheduleUpdate();
 
         // Zona de escuchadores de colisiones
@@ -860,8 +862,8 @@ var GameLayer = cc.Layer.extend({
             if(this.jugador.llavesRecogidas>=3 && nivelActual<nivelMaximo){
                 nivelActual++ // Habria que comprobar que no se supere el nivel maximo, pero en verdad como el ultimo nivel no tiene llaves pos da igual
                 var puntos = this.getParent().getChildByTag(idCapaControles).etiquetaPuntos.getString();;
-                var jugadorAntiguo = this.jugador;
-                cc.director.runScene(new NextLevelLayer(puntos,jugadorAntiguo));
+                jugadorAntiguo = this.jugador;
+                cc.director.runScene(new NextLevelLayer(puntos));
             }
         },
 });

@@ -1,9 +1,9 @@
+var jugadorAntiguo;
 var NextLevelLayer = cc.Layer.extend({
-    ctor:function (puntuacion, jugadorAntiguo) {
+    ctor:function (puntuacion) {
     this._super();
     var size = cc.winSize;
     var spriteFondoTitulo= new cc.Sprite(res.level_sprite);
-    this.jugadorAntiguo = jugadorAntiguo;
     // Asigno posición central
     spriteFondoTitulo.setPosition(cc.p(size.width / 2, size.height / 2));
     // Lo escalo porque es más pequeño que la pantalla
@@ -46,15 +46,15 @@ var NextLevelLayer = cc.Layer.extend({
 
     },
     pulsarBotonArma : function(){
-        this.jugadorAntiguo.armar();
+        jugadorAntiguo.pendienteDeArmar=true;
         cc.director.runScene(new GameScene());
     },
     pulsarBotonVida : function(){
-        this.jugadorAntiguo.vidas++;
+        jugadorAntiguo.vidas++;
         cc.director.runScene(new GameScene());
     },
     pulsarBotonVelocidad : function(){
-        this.jugadorAntiguo.bonificadorVelocidad+=100;
+        jugadorAntiguo.bonificadorVelocidad+=100;
         cc.director.runScene(new GameScene());
 
     }

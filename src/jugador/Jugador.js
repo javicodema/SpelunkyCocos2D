@@ -48,6 +48,7 @@ var Jugador = cc.Class.extend({
     orientacion:1,
     armaPintada: false,
     nBombas: 0,
+    pendienteDeArmar:false,
     ctor:function (gameLayer, posicion) {
         this.gameLayer = gameLayer;
 
@@ -227,6 +228,10 @@ var Jugador = cc.Class.extend({
     }
     ,actualizar: function (){
         this.delayDisparo--;
+        if(this.pendienteDeArmar){
+            this.armar();
+            this.pendienteDeArmar=false;
+        }
 
         if(this.body.vx==0&&this.estado==estadoCaminando){
             this.estado=estadoIdle;
@@ -440,10 +445,9 @@ var Jugador = cc.Class.extend({
         }
     },
     actualizarStats: function(jugador){
+        this.pendienteDeArmar = jugador.pendienteDeArmar;
         this.vidas = jugador.vidas;
-        this.bBombas = jugador.bombas;
-        this.arma = jugador.arma;
-        this.armaPintada = jugador.armaPintada;
+        this.nBombas = jugador.nBombas;
         this.montura = jugador.montura;
         this.velocidad = jugador.velocidad;
         this.bonificadorVelocidad = jugador.bonificadorVelocidad;
