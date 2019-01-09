@@ -863,6 +863,8 @@ var GameLayer = cc.Layer.extend({
                 nivelActual++
                 var puntos = this.getParent().getChildByTag(idCapaControles).etiquetaPuntos.getString();;
                 jugadorAntiguo = this.jugador;
+                var efecto = new Audio( res.efecto_puerta );
+                efecto.play();
                 cc.director.runScene(new NextLevelLayer(puntos));
             }
         },
