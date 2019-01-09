@@ -876,16 +876,16 @@ var GameLayer = cc.Layer.extend({
         }
     },
     collisionJugadorPuerta: function(arbitrer, space){
-            if(this.jugador.llavesRecogidas>=3){
+            if(this.jugador.llavesRecogidas>=3 && nivelActual<nivelMaximo){
                 nivelActual++ // Habria que comprobar que no se supere el nivel maximo, pero en verdad como el ultimo nivel no tiene llaves pos da igual
-                this.cargarMapa("res/mapas/nivel"+nivelActual+".tmx");
+                var puntos = this.getParent().getChildByTag(idCapaControles).etiquetaPuntos.getString();;
+                cc.director.runScene(new NextLevelLayer(puntos));
             }
         },
 });
 
 var idCapaJuego = 1;
 var idCapaControles = 2;
-
 
 var GameScene = cc.Scene.extend({
     onEnter:function () {

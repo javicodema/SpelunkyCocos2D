@@ -1,6 +1,10 @@
 var res = {
     menu_sprite:"res/menu_sprite.png",
+    level_sprite:"res/level_sprite.png",
     boton_jugar_png : "res/boton_jugar.png",
+    boton_arma_png : "res/boton_arma.png",
+    boton_vida_png : "res/boton_vida.png",
+    boton_velocidad_png : "res/boton_velocidad.png",
 
     //Animaciones jugador
     jugador_caminar_png : "res/jugador/jugador_caminar.png",
@@ -47,11 +51,9 @@ var res = {
     puerta_png: "res/puerta.png",
     puerta_plist: "res/puerta.plist",
 
-    //De aquí abajo son de prueba
-    tiles32_png: "res/mapas/tiles32.png",
+    //Mapas
+
     tileset_1: "res/mapas/tileset.png",
-    //tileset_2: "res/mapas/tileset2.png",
-    mapa_prueba_tmx: "res/mapas/mapa1.tmx",
     nivel1:"res/mapas/nivel1.tmx",
     nivel2:"res/mapas/nivel2.tmx",
     nivel3:"res/mapas/nivel3.tmx",

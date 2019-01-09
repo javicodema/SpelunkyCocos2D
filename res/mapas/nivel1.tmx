@@ -1,29 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="32" tileheight="32" nextobjectid="163">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="32" tileheight="32" nextobjectid="166">
  <tileset firstgid="1" name="tileset" tilewidth="32" tileheight="32" tilecount="252" columns="12">
   <image source="tileset.png" width="389" height="700"/>
  </tileset>
- <layer id="1" name="fondo" width="50" height="50">
+ <layer name="fondo" width="50" height="50">
   <data encoding="base64" compression="zlib">
    eJyVlcGRpEAMBMcFDMAA/Hfw7klkZFazD2J3GEYtlaqS+/f73f+vC9cTn+/X52d8ft/jc7d8d7/q8571w+/veObCuZzF6vCv/fZdk5dpZ3Pd4/6Dq/p74kxeNRcv9mZ7WPPRJ9Sl5rKa9FP1YHulJx7co+42O3W68Nf2/X7eZqcXzeOWjfKM9Vj5M93sDJ5j51rdlTc7y7y/nuUzlnPyaN03DS3n5SnqYbkpj3zRwfxmrKtMGy8XA5nfpZ/1vXQxBtWeSlN739g7xPr/kimyprhqu6IO1ML2aDoa86wHm8GYY563vJaHbA72Z3ylLnY+d1t9mmb1TjD//yWTVoNz2F/Llc1uWTppbZxd/CuWVs4Wb1cGijWmH7PGe6uuZeSkH9lZ+lruSo96P9VeeM9yb3szLp0yRI/Unmum0/PWf7HUPMnfLX++++FOyZjaj/ndfsvaxts6z3xpzy2OkWf00smDNovNbfMsPlXm7LuqvX5TM9vujRHGk0vONSbU/sqLNtNJi+Kfecg8WpkphhgL3t8Zo9c7yXhO9qzccLbSwbhbO69dGC+NJTW/zXeaY51n2ps/vvRbe7YMFINMW+Nq7cX6rZ1aBs1DxtbFPctj9UwdrB/rjVrZjhbHOMNXDpoe717+ygbzg+VuMY2+ZR3bp+nJ/zkP+6DuxhbbGefmMzUDmV/vgi87tJzWnmw202mxy2rbfMWjOs+0sszZLJyTHmEmS8cTh8oj9HPl0jQpX1peTPfyVPVf+aHPuE9mnX6onJhHlt+ok51VDCmPmGbV26le7dtmsxybL9c5tj/j/+K2+Y+7Zv/WY2XUclA8pN9Y2zQqvS3PrGHeXLoVoziDabk4YzPabox59IFxa+lZO+RuzDsr25Yz+tlmOPVH/5Te5jGb0fqzPNsslT3ylV5bfF1a2g6Kq7ajr5yzd4zxzTxnv2Fd44+9F9hrZYzZuuK88of5rZhEPxjXTAubofi0cswdrncB80k/2syVW9Zmrfotc196m1Z8/uR1Zmn5r7x10ugLZ1mH7xbbRXGWfjJNqs5is+3E/P3VF6Yjdal3SOlUHHhQd+3asmZeMi2pQ/mzvG1zGv/Nk9wPz6z8FiOLH7ZDyxznLYYad9iHZam8ynrGgurHPG16m3+K7fQYfWI8WH2a5pZV66d4RX1LW9OyWGO7KOaRAabPiVGViZNvzT+1a2MaL5vn5PWvubKMsu4/OCkanA==
   </data>
  </layer>
- <layer id="2" name="paredes" width="50" height="50">
+ <layer name="paredes" width="50" height="50">
   <data encoding="base64" compression="zlib">
    eJzVmk1OJDEMhXMBhg2b1ixmBaxBQqyYGVDvoNW9gfk5O4chkSrSk+UX25WkaZ5k0apKpfIlTuK4eEop/T4he8x2n+0p+Mz3bPsTss3CEWnXZimv6Szbt8XOSZkZQo7IM6x8uXe3WKTOXvVyXCj3To1jt5j2zFfwK2wLWmnXe7L96l6pc7Y0DmwLWimDHOW3ZL6B8rdJ7w/ZNyN0WP5uV3Kwsl6LjNmPFWzaers9Agfz6dHjF+GQ/eDhsPpl1JzzcuyVZ/dK+TqHTpFDY2DtrPHQTA5tL7A4kOEy27Wo6ya12zWDQ+4FuwZHjc88dbXadTBYIhxa3+FewDhQOBZSsl0yZmAspew2+bVx3Lc4UIwJ+0eupxpL1Kd6OFrjIGW1kXGUd1yBsfchBz5zDfcrR90ztfG2mOQe6+XwKjIeLbF42SvpW8fksOKKaMyBMVJkjiOHFs/WdQw50H964q1of1vzBDms2FeK+YGHb/R5pcbyLQ62XjIOa3/D8r3zSsoTl7O4QtuzLBbPucsrbS6wvI8296x9EefthVK3Zkn89ojVI9tqnc+PeTZfK4sjGgd9llocxW8sBrleemKMGWpxSI1ee0aKcXxGP1t91MqxeMdD5kxnCOON52yv2d6y/cn2ktr5lYhfzVbPOfgrc8hYsOy9D9l+LvYrHTcvXTVjPDy57mh8YeVCZ3NY9fecSXD96MmvVL/C972LZ2o91ve8EbG8lV9hazPGidUYB9OmwYjmXU9a+RWWJ9D8qsVR7mlxtEcsR8LOf5GxXMNxUEyT3Duj3y1HcGB8KDnWKsJh5VekfzEOptkc2L56Tiuy4u6RHFY8jO/RcoI9GsHh2TvknFsr9i2ccURybtrZW5qcc0xW7M7+N4FxeM72qXFdyjOvPHnxKMdoRetkTJZf4RwdwSFjwt46a9u072q7pMdXaPJc9jfbv2z/G9dfGvWteQ/Wx76rlesfeXznyQ==
   </data>
  </layer>
- <layer id="3" name="detalles" width="50" height="50">
+ <layer name="detalles" width="50" height="50">
   <data encoding="base64" compression="zlib">
    eJztmg0OwiAMhbvB/bz/bUyTVUmFAQH56d6XGLNNDZT2vQ5HZBsfvB8zBwI+vK4X6IOj39zm43PCWEbC8+N5usR1Hzm++zxYC1k/yW+sG7CKda0egfhBCxY1hmOivVCTuz6aUXof651qvgv2I5ZbqRoZqcuO7nNqdg/E8emhsRZADMpoqZ/VPAmAGtDT/xf2QvEkDfQ5D8cNPeyexHpB7ZdP0Z+S+9vdOOirYV6dH81J9uK7Oj3XueW3tL/CL/bHol7ORGpiZb/N7S21Iv83l2qN3neVscU8D9Sz0zMWqboJz++eDyXrEc63x/Mb4X5tWPs1dfq0++g3koMCug==
   </data>
  </layer>
- <objectgroup id="4" name="llaves">
+ <objectgroup name="llaves">
   <object id="1" x="403" y="376" width="30" height="30"/>
   <object id="4" x="1457" y="497" width="30" height="30"/>
   <object id="5" x="466" y="1204" width="30" height="30"/>
+  <object id="163" x="1280" y="1515" width="30" height="30"/>
+  <object id="164" x="1336" y="1511" width="30" height="30"/>
+  <object id="165" x="1202" y="1463" width="30" height="30"/>
  </objectgroup>
- <objectgroup id="5" name="suelos">
+ <objectgroup name="suelos">
   <object id="6" x="28.5" y="34.5">
    <polyline points="0,0 0,404 2.5,701 66.5,702.5 66,769.5 0,768.5 3,1052.5 35,1053 34.5,1063 98.5,1064 99,1053 162,1053.5 162,1279.5 131,1279.5 131.5,1083 2.5,1083.5 4,1149.5 99.5,1150 99.5,1182 2.5,1182.5 1.5,1532.5 228,1534 226.981,1608.75 610.872,1608.1 612,1534 1058.5,1534 1057.56,1607.82 1251.06,1608.47 1252,1533 1348,1533 1348,1469 1474.5,1470.5 1474,1533 1541,1533.5 1541,733.5 1411,734 1410.5,767 1251.5,767 1251.5,731.5 1380.5,733 1380.5,604 1539,604.5 1539.5,447 1314.5,446 1315.5,671 1283.5,670.5 1284,411 1348,412.5 1349,348 1475,350 1475,413.5 1539.5,414 1540.5,0 1218,-0.5 1218.5,190.5 1123.5,190 1124.5,-1.5 0.5,-0.5"/>
   </object>
@@ -106,7 +109,7 @@
    <polyline points="0,0 2.66667,30.3333 58.6667,31.3333 62.3333,1 1,-0.666667"/>
   </object>
  </objectgroup>
- <objectgroup id="6" name="trampasRalentizar" offsetx="-4.36364" offsety="0.0909091">
+ <objectgroup name="trampasRalentizar" offsetx="-4.36364" offsety="0.0909091">
   <object id="35" x="607.875" y="498.625" width="32.375" height="13.25"/>
   <object id="36" x="323.869" y="626.364" width="32.375" height="13.25"/>
   <object id="38" x="291.688" y="626.25" width="32.375" height="13.25"/>
@@ -128,7 +131,7 @@
   <object id="54" x="1507.88" y="1554.44" width="32.375" height="13.25"/>
   <object id="55" x="1540.5" y="1554.44" width="32.375" height="13.25"/>
  </objectgroup>
- <objectgroup id="7" name="opcionales">
+ <objectgroup name="opcionales">
   <object id="56" x="1338.25" y="122" width="20" height="20"/>
   <object id="57" x="1381" y="101.5" width="20" height="20"/>
   <object id="58" x="1414" y="101.25" width="20" height="20"/>
@@ -149,10 +152,10 @@
   <object id="73" x="1238" y="945" width="20" height="20"/>
   <object id="74" x="1270" y="944" width="20" height="20"/>
  </objectgroup>
- <objectgroup id="8" name="armas">
+ <objectgroup name="armas">
   <object id="75" x="1432" y="346" width="20" height="20"/>
  </objectgroup>
- <objectgroup id="9" name="bombas">
+ <objectgroup name="bombas">
   <object id="76" x="149" y="1050" width="20" height="20"/>
   <object id="77" x="115" y="634" width="20" height="20"/>
   <object id="78" x="1119" y="622" width="20" height="20"/>
@@ -160,10 +163,10 @@
   <object id="80" x="1461" y="1270" width="20" height="20"/>
   <object id="81" x="983" y="1337" width="20" height="20"/>
  </objectgroup>
- <objectgroup id="10" name="monturas">
+ <objectgroup name="monturas">
   <object id="82" x="1157" y="949" width="20" height="20"/>
  </objectgroup>
- <objectgroup id="11" name="patrullas">
+ <objectgroup name="patrullas">
   <object id="83" x="1061" y="503" width="20" height="20"/>
   <object id="84" x="710.584" y="263.326" width="20" height="20"/>
   <object id="85" x="439" y="185" width="20" height="20"/>
@@ -176,19 +179,19 @@
   <object id="92" x="362" y="1089" width="20" height="20"/>
   <object id="93" x="599" y="871" width="20" height="20"/>
  </objectgroup>
- <objectgroup id="12" name="perseguidores">
+ <objectgroup name="perseguidores">
   <object id="94" x="439" y="604" width="20" height="20"/>
   <object id="95" x="755" y="1117" width="20" height="20"/>
   <object id="96" x="729" y="1543" width="20" height="20"/>
  </objectgroup>
- <objectgroup id="13" name="disparadores">
+ <objectgroup name="disparadores">
   <object id="97" x="577" y="1116" width="20" height="20"/>
   <object id="98" x="717" y="1379" width="20" height="20"/>
   <object id="99" x="1000" y="1539" width="20" height="20"/>
   <object id="100" x="182" y="1543" width="20" height="20"/>
   <object id="101" x="219" y="928" width="20" height="20"/>
  </objectgroup>
- <objectgroup id="14" name="escaleras">
+ <objectgroup name="escaleras">
   <object id="146" x="31.0384" y="224.323" width="31.7438" height="511.428"/>
   <object id="148" x="1536.54" y="160.221" width="31.5188" height="288.266"/>
   <object id="149" x="1375.01" y="639.569" width="31.5188" height="128.702"/>
@@ -196,40 +199,40 @@
   <object id="151" x="350.766" y="1247.04" width="32.3606" height="192.43"/>
   <object id="153" x="800.944" y="1408.25" width="27.0683" height="158.939"/>
  </objectgroup>
- <objectgroup id="15" name="cuerdas">
+ <objectgroup name="cuerdas">
   <object id="110" x="869" y="806" width="20" height="20"/>
   <object id="113" x="583" y="1444" width="20" height="20"/>
   <object id="114" x="1286" y="1346" width="20" height="20"/>
   <object id="115" x="1191" y="229" width="20" height="20"/>
   <object id="162" x="406" y="16" width="20" height="20"/>
  </objectgroup>
- <objectgroup id="16" name="triggersDisparo">
+ <objectgroup name="triggersDisparo">
   <object id="140" name="tgd4" x="767.158" y="258.716" width="155.233" height="26.0391"/>
   <object id="141" name="tgd3" x="1187.78" y="955.433" width="152.228" height="32.0481"/>
   <object id="142" name="tgd2" x="674.011" y="1124.69" width="155.233" height="23.0346"/>
   <object id="143" name="tgd1" x="516.55" y="1535.21" width="152.228" height="27.0406"/>
  </objectgroup>
- <objectgroup id="17" name="trampasDisparo">
+ <objectgroup name="trampasDisparo">
   <object id="116" name="td4" x="928.563" y="256.471" width="30.9707" height="29.7782"/>
   <object id="117" name="td1" x="672.501" y="1536.45" width="29.9865" height="29.9865"/>
   <object id="118" name="td2" x="832.613" y="1120.45" width="29.7114" height="29.0178"/>
   <object id="119" name="td3" x="1345.55" y="961.11" width="28.9031" height="28.458"/>
  </objectgroup>
- <objectgroup id="18" name="triggersTirarEncima">
+ <objectgroup name="triggersTirarEncima">
   <object id="135" name="ttg4" x="982.338" y="1184.45" width="52.8041" height="60.9978"/>
   <object id="137" name="ttg1" x="55.5353" y="160.233" width="50.9832" height="60.9978"/>
   <object id="138" name="ttg3" x="686.801" y="1312.99" width="65.012" height="92.6889"/>
   <object id="139" name="ttg2" x="276.415" y="1041.21" width="57.1485" height="77.4729"/>
   <object id="144" name="ttg5" x="631.412" y="1074.96" width="45.8557" height="75.9744"/>
  </objectgroup>
- <objectgroup id="19" name="trampasTirarEncima">
+ <objectgroup name="trampasTirarEncima">
   <object id="120" name="tt4" x="991.744" y="1152.13" width="31.4679" height="30.5122"/>
   <object id="121" name="tt3" x="704.18" y="1280.53" width="31.7139" height="30.4124"/>
   <object id="122" name="tt2" x="288.404" y="1008.69" width="31.4228" height="31.29"/>
   <object id="123" name="tt5" x="638.235" y="1043.22" width="31.6876" height="30.5473"/>
   <object id="124" name="tt1" x="64.6904" y="128.134" width="31.0126" height="30.8159"/>
  </objectgroup>
- <objectgroup id="20" name="trampasCaer">
+ <objectgroup name="trampasCaer">
   <object id="126" x="288.25" y="1560.05" width="63.5" height="31.5"/>
   <object id="127" x="415.974" y="1559.28" width="63.5" height="31.5"/>
   <object id="129" x="545.276" y="1559.5" width="63.5" height="31.5"/>
@@ -237,10 +240,10 @@
   <object id="131" x="991.583" y="1021.92" width="63.5" height="31.5"/>
   <object id="154" x="362.711" y="156.387" width="63.5" height="31.5"/>
  </objectgroup>
- <objectgroup id="21" name="jugador">
+ <objectgroup name="jugador">
   <object id="132" x="241.183" y="67.352" width="30" height="30"/>
  </objectgroup>
- <objectgroup id="22" name="puerta">
+ <objectgroup name="puerta">
   <object id="133" x="1408.33" y="1440" width="63.6667" height="64"/>
  </objectgroup>
 </map>

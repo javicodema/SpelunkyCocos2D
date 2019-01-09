@@ -15,9 +15,10 @@
         "src/app.js",
         "src/jugador/Jugador.js",
         "src/jugador/Disparo.js",
-        "src/jugador/BombaJugador.js"
+        "src/jugador/BombaJugador.js",
         "src/layers/GameScene.js",
         "src/layers/ControlesLayer.js",
+        "src/layers/NextLevelLayer.js",
         "src/enemigos/EnemigoPatrulla.js",
         "src/enemigos/EnemigoTirador.js",
         "src/enemigos/EnemigoPerseguidor.js",
