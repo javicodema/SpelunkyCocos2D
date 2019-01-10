@@ -44,7 +44,7 @@ var res = {
 
     //Recolectables
     llave: "res/recolectables/llave.png",
-    arma: "res/recolectables/arma.png",
+    arma: "res/recolectables/Arma.png",
     bomba: "res/recolectables/bomba.png",
 
     //Puerta
